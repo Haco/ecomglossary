@@ -1,0 +1,15 @@
+
+plugin.tx_ecomglossary {
+	view {
+		# cat=plugin.tx_ecomglossary/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:ecomglossary/Resources/Private/Templates/
+		# cat=plugin.tx_ecomglossary/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:ecomglossary/Resources/Private/Partials/
+		# cat=plugin.tx_ecomglossary/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:ecomglossary/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_ecomglossary//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

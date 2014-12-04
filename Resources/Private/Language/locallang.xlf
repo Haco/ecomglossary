@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-12-04T09:53:27Z" product-name="ecomglossary">
+		<header/>
+		<body>
+			<trans-unit id="tx_ecomglossary_domain_model_term">
+				<source>Term</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.term_type">
+				<source>Term Type</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.short_description">
+				<source>Short Description</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.external_link">
+				<source>External Link</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
