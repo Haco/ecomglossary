@@ -12,4 +12,9 @@ plugin.tx_ecomglossary {
 		# cat=plugin.tx_ecomglossary//a; type=string; label=Default storage PID
 		storagePid =
 	}
+
+	settings {
+		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Amount of entries per page, in the list view
+		termsPerPage = 15
+	}
 }

@@ -4,7 +4,7 @@
 	<f:flashMessages renderMode="div" />
 
 	<f:debug>{_all}</f:debug>
-	<div class="tx_ecomglossary-list">
+	<div class="tx_ecomglossary-list-view">
 
 		<div class="tx_ecomglossary-header">
 			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true">
@@ -21,7 +21,7 @@
 						<f:link.action action="list" arguments="{filterByLetter:letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
 					</f:for>
 					<div class="tx_ecomglossary-view-all-btn">
-						<f:link.action action="list" class="btn">Show all entries</f:link.action>
+						<f:link.action action="list" class="btn" noCacheHash="true" noCache="true">Show all entries</f:link.action>
 					</div>
 				</div>
 			</f:if>
@@ -29,28 +29,23 @@
 		<hr>
 		<f:if condition="{terms->f:count()} > 0">
 			<f:then>
-				<table  class="tx_ecomglossary" >
-					<tr>
-						<th><f:translate key="tx_ecomglossary_domain_model_term.title" /></th>
-						<th><f:translate key="tx_ecomglossary_domain_model_term.term_type" /></th>
-						<th><f:translate key="tx_ecomglossary_domain_model_term.short_description" /></th>
-						<th><f:translate key="tx_ecomglossary_domain_model_term.description" /></th>
-						<th><f:translate key="tx_ecomglossary_domain_model_term.external_link" /></th>
-					</tr>
-
-					<f:for each="{terms}" as="term">
-						<tr>
-							<td><f:link.action action="show" arguments="{term : term}"> {term.title}</f:link.action></td>
-							<td><f:link.action action="show" arguments="{term : term}"> {term.termType}</f:link.action></td>
-							<td><f:link.action action="show" arguments="{term : term}"> {term.shortDescription}</f:link.action></td>
-							<td><f:link.action action="show" arguments="{term : term}"> {term.description}</f:link.action></td>
-							<td><f:link.action action="show" arguments="{term : term}"> {term.externalLink}</f:link.action></td>
-						</tr>
-					</f:for>
-				</table>
+				<div class="tx_ecomglossary-term-listing">
+					<f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: settings.termsPerPage, insertAbove: 1, insertBelow: 0}">
+						<ul>
+							<f:for each="{paginatedTerms}" as="term">
+								<li>
+									<f:link.action action="show" arguments="{term : term}"> {term.title}</f:link.action>
+									<f:link.action action="show" arguments="{term : term}"> {term.termType}</f:link.action>
+									<f:link.action action="show" arguments="{term : term}"> {term.shortDescription}</f:link.action>
+									<f:link.action action="show" arguments="{term : term}"> {term.externalLink}</f:link.action>
+								</li>
+							</f:for>
+						</ul>
+					</f:widget.paginate>
+				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="list" class="btn">Show all entries</f:link.action>
+				<f:link.action action="list" class="btn" noCache="true" noCacheHash="true">Show all entries</f:link.action>
 			</f:else>
 		</f:if>
 	</div>
