@@ -57,9 +57,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 */
 	public function listAction($filterByLetter = '') {
 		$terms = $this->termRepository->findAll();
-
 		// All available letters (for letter navigation)
-		$availableLetters = ($terms->count() > 0) ? $this->generateLetterArrayFromList($this->objectToArray($terms,'uid', 'title')) : '';
+		$availableLetters = ($terms->count() > 0) ? $this->generateLetterArrayFromList($this->objectToArray($terms,'uid', 'title'), $this->settings['showEmptyLetters']) : '';
 
 		// Search for term
 		if($this->request->hasArgument('searchTerm')) {
@@ -125,7 +124,6 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 				}
 			}
 		}
-
 		return $return;
 	}
 
@@ -133,18 +131,36 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * Generates a letter list from A-Z 0-9 out of the term repository
 	 *
 	 * @param array $list
+	 * @param bool $mergeWithEmptyLetters
 	 * @return array
 	 */
-	public function generateLetterArrayFromList($list) {
+	public function generateLetterArrayFromList($list, $mergeWithEmptyLetters = true) {
+		$letterList = array();
+		// Generate list with already available letters
 		foreach($list as $uid => $title) {
 			$firstLetter = ucfirst(substr($this->toASCII($title),0,1));
 			if(preg_match('/[^A-Za-z0-9]/', $firstLetter)) {
 				continue;
 			}
-			$letterList[] = $firstLetter;
+			if (array_key_exists($firstLetter, $letterList)) {
+				continue;
+			}
+			$letterList[$firstLetter] = 'hasResult';
 		}
-		sort($letterList);
-		return array_unique($letterList);
+
+		if ($mergeWithEmptyLetters == true) {
+			// Generate full alphabeth
+			// and merge with array of already available letters
+			$alphas = range('A', 'Z');
+			foreach($alphas as $value) {
+				if (array_key_exists($value, $letterList)) {
+					continue;
+				}
+				$letterList[$value] = 'empty';
+			}
+		}
+		ksort($letterList);
+		return $letterList;
 	}
 
 	/**

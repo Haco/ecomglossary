@@ -14,7 +14,9 @@ plugin.tx_ecomglossary {
 	}
 
 	settings {
-		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Amount of entries per page, in the list view
+		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Pagebrowser List view: Number of entries per page.
 		termsPerPage = 15
+		# cat=plugin.tx_ecomglossary/settings/a; type=boolean; label=Letter Navigation: Even show the letters without results.
+		showEmptyLetters = 1
 	}
 }

@@ -68,6 +68,13 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $externalLink = '';
 
 	/**
+	 * sources
+	 *
+	 * @var string
+	 */
+	protected $sources = '';
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -160,6 +167,25 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setExternalLink($externalLink) {
 		$this->externalLink = $externalLink;
+	}
+
+	/**
+	 * Returns the sources
+	 *
+	 * @return string $sources
+	 */
+	public function getSources() {
+		return $this->sources;
+	}
+
+	/**
+	 * Sets the sources
+	 *
+	 * @param string $sources
+	 * @return void
+	 */
+	public function setSources($sources) {
+		$this->sources = $sources;
 	}
 
 }

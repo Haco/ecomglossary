@@ -9,6 +9,7 @@ CREATE TABLE tx_ecomglossary_domain_model_term (
 	title varchar(255) DEFAULT '' NOT NULL,
 	term_type int(11) DEFAULT '0' NOT NULL,
 	short_description text NOT NULL,
+	sources text NOT NULL,
 	description text NOT NULL,
 	external_link varchar(255) DEFAULT '' NOT NULL,
 

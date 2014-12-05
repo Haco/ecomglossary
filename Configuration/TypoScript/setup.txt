@@ -10,6 +10,7 @@ plugin.tx_ecomglossary {
 	}
 	settings {
 		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
+		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.

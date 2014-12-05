@@ -1,4 +1,4 @@
-
+{namespace ecomvh=Ecom\Ecomglossary\ViewHelpers}
 <table class="tx-ecomglossary" >
 	<tr>
 		<td>
@@ -38,6 +38,18 @@
 		</td>
 		<td>
 		{term.externalLink}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_ecomglossary_domain_model_term.sources" />
+		</td>
+		<td>
+			<ecomvh:utility.explode content="{term.sources}" glue="PHP_EOL" as="sources">
+				<f:for each="{sources}" as="source">
+					<ecomvh:link.typolink configuration="{parameter: source}" />
+				</f:for>
+			</ecomvh:utility.explode>
 		</td>
 	</tr>
 </table>

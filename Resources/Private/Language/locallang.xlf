@@ -10,7 +10,19 @@
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="tx_ecomglossary_domain_model_term.term_type">
-				<source>Term Type</source>
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.1">
+				<source>Language</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.2">
+				<source>Definition</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.3">
+				<source>Acronym</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.4">
+				<source>Abbreviation</source>
 			</trans-unit>
 			<trans-unit id="tx_ecomglossary_domain_model_term.short_description">
 				<source>Short Description</source>
@@ -20,6 +32,9 @@
 			</trans-unit>
 			<trans-unit id="tx_ecomglossary_domain_model_term.external_link">
 				<source>External Link</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.sources">
+				<source>Sources</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -19,7 +19,10 @@
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_ecomglossary_domain_model_term.external_link">
-				<source>External Link</source>
+				<source>External Link (Overwrites Description)</source>
+			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.sources">
+				<source>Link to Sources (Separated by line)</source>
 			</trans-unit>
 		</body>
 	</file>
