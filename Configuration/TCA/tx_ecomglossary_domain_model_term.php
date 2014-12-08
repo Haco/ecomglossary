@@ -5,12 +5,10 @@ if (!defined ('TYPO3_MODE')) {
 
 return array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term',
+		'title' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
-		'sortby' => 'title',
-		'default_sortby' => 'ORDER BY title DESC, term_type DESC',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
 
