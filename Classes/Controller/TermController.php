@@ -27,6 +27,10 @@ namespace Ecom\Ecomglossary\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
 /**
  * TermController
  */
@@ -39,16 +43,6 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @inject
 	 */
 	protected $termRepository = NULL;
-
-
-	/**
-	 * initializeAction
-	 *
-	 * @return
-	 */
-	public function initializeAction() {
-
-	}
 
 	/**
 	 * action list
@@ -66,11 +60,10 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			// Delete non-word chars
 			$searchTerm = preg_replace('/[^A-z0-9\-\/ßÄäÜüÖö]/', '', $searchTerm);
 			// Get Results by searchTerm
-			$terms = ($this->termRepository->findBySearchTerm($searchTerm)->count() > 0) ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage('No terms found. You searched for: ' . $searchTerm, 'Search Result', \TYPO3\CMS\Core\Messaging\AbstractMessage::NOTICE);
+			$terms = ($this->termRepository->findBySearchTerm($searchTerm)->count() > 0) ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
 		}
-
 		// Filter by letter
 		if (is_string($filterByLetter) && strlen($filterByLetter) == 1) {
 			$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
@@ -78,8 +71,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 		$this->view->assignMultiple(array(
 			'terms' => $terms,
+			'filterByLetter' => $filterByLetter,
 			'letterList' => $availableLetters,
-			'debug' => $debug
 		));
 	}
 
@@ -90,6 +83,17 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function showAction(\Ecom\Ecomglossary\Domain\Model\Term $term) {
+		// Prevent access to a single term (show action) if
+		// the term uses an external Link as description. Redirects directly to the external Link
+		if ($term->getExternalLink() != '') {
+			/**
+			 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer
+			 */
+			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
+			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
+
+			$this->redirectToUri($linkToExternalDescription);
+		}
 		$this->view->assign('term', $term);
 	}
 
@@ -104,23 +108,22 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	public function objectToArray($object, $propertyKey = 'uid', $propertyValue = 'name') {
 		// Return if object ist not instance of countable
 		if (!$object instanceof \Countable) return FALSE;
-
 		$return = array();
 		if ($object->count()) {
 			$tableName = preg_replace('/^ecom/i', 'tx', strtolower(str_ireplace('\\', '_', get_class($object->getFirst()))));
 			foreach ($object as $objectObject) {
-				if (!\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertyGettable($objectObject, $propertyKey) || (is_string($propertyValue) && !\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertyGettable($objectObject, $propertyValue))) continue; // Check if property chosen for key exists
+				if (!ObjectAccess::isPropertyGettable($objectObject, $propertyKey) || (is_string($propertyValue) && !ObjectAccess::isPropertyGettable($objectObject, $propertyValue))) continue; // Check if property chosen for key exists
 				if (is_array($propertyValue)) {
 					$values = array();
 					foreach ($propertyValue as $singlePropertyValue) {
-						if (!\TYPO3\CMS\Extbase\Reflection\ObjectAccess::isPropertyGettable($objectObject, $singlePropertyValue)) continue; // Check if property chosen for value exists
-						$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $singlePropertyValue . '.' . \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue), $this->extensionName);
-						$values[] = $translation ? $translation : \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue);
+						if (!ObjectAccess::isPropertyGettable($objectObject, $singlePropertyValue)) continue; // Check if property chosen for value exists
+						$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $singlePropertyValue . '.' . ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue), $this->extensionName);
+						$values[] = $translation ? $translation : ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue);
 					}
-					$return[\TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = implode(', ', $values);
+					$return[ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = implode(', ', $values);
 				} else {
-					$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $propertyValue . '.' . \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $propertyValue), $this->extensionName);
-					$return[\TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = $translation ? $translation : \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getPropertyPath($objectObject, $propertyValue);
+					$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $propertyValue . '.' . ObjectAccess::getPropertyPath($objectObject, $propertyValue), $this->extensionName);
+					$return[ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = $translation ? $translation : ObjectAccess::getPropertyPath($objectObject, $propertyValue);
 				}
 			}
 		}
@@ -147,10 +150,11 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			}
 			$letterList[$firstLetter] = 'hasResult';
 		}
-
+		// Fill up array with the empty letters which are not currently used in DB
+		// For different styling via CSS, it adds the "empty"-value. (Editable in FLUID Condition => List view)
 		if ($mergeWithEmptyLetters == true) {
-			// Generate full alphabeth
-			// and merge with array of already available letters
+			// Generate the complete alphabeth
+			// And merge with array of already available letters
 			$alphas = range('A', 'Z');
 			foreach($alphas as $value) {
 				if (array_key_exists($value, $letterList)) {
@@ -159,6 +163,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 				$letterList[$value] = 'empty';
 			}
 		}
+		// Sort array A-Z
 		ksort($letterList);
 		return $letterList;
 	}

@@ -18,5 +18,9 @@ plugin.tx_ecomglossary {
 		termsPerPage = 15
 		# cat=plugin.tx_ecomglossary/settings/a; type=boolean; label=Letter Navigation: Even show the letters without results.
 		showEmptyLetters = 1
+		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Short Description: Max characters until crop (List View).
+		shortDescMaxChars = 100
+		# cat=plugin.tx_ecomglossary/settings/a; type=string; label=Short Description: Append string after crop (List View).
+		shortDescAppend = ...
 	}
 }

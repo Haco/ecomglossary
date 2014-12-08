@@ -1,55 +1,24 @@
 {namespace ecomvh=Ecom\Ecomglossary\ViewHelpers}
-<table class="tx-ecomglossary" >
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.title" />
-		</td>
-		<td>
-		{term.title}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.term_type" />
-		</td>
-		<td>
-		{term.termType}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.short_description" />
-		</td>
-		<td>
-		{term.shortDescription}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.description" />
-		</td>
-		<td>
+<article>
+	<header>
+		<h1>{term.title}</h1>
+		<f:if condition="{term.termType}">
+			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></span>
+		</f:if>
+	</header>
+	<hr>
+	<div class="tx_ecomglossary-term-description">
 		{term.description}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.external_link" />
-		</td>
-		<td>
-		{term.externalLink}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<f:translate key="tx_ecomglossary_domain_model_term.sources" />
-		</td>
-		<td>
-			<ecomvh:utility.explode content="{term.sources}" glue="PHP_EOL" as="sources">
-				<f:for each="{sources}" as="source">
-					<ecomvh:link.typolink configuration="{parameter: source}" />
+	</div>
+	<hr>
+	<div class="tx_ecomglossary-term-sources">
+		<p><f:translate key="tx_ecomglossary_domain_model_term.sources" /></p>
+		<f:if condition="{term.sources}">
+			<ul class="list">
+				<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
+					<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
 				</f:for>
-			</ecomvh:utility.explode>
-		</td>
-	</tr>
-</table>
+			</ul>
+		</f:if>
+	</div>
+</article>

@@ -9,6 +9,8 @@ return array(
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
+		'sortby' => 'title',
+		'default_sortby' => 'ORDER BY title DESC, term_type DESC',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
 
@@ -31,10 +33,10 @@ return array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, term_type, short_description,external_link, description;;;richtext:rte_transform[mode=ts_links], sources, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links], sources, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'header_palette' => array('showitem' => 'title, external_link,--linebreak--,term_type', 'canNotCollapse' => 1),
 	),
 	'columns' => array(
 
@@ -142,7 +144,6 @@ return array(
 				),
 				'size' => 1,
 				'maxitems' => 1,
-				'eval' => ''
 			),
 		),
 		'short_description' => array(
@@ -180,7 +181,7 @@ return array(
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.external_link',
 			'config' => array(
 				'type' => 'input',
-				'size' => 30,
+				'size' => 15,
 				'eval' => 'trim',
 				'wizards' => array(
 					'_PADDING' => 2,

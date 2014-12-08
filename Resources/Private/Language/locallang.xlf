@@ -34,7 +34,26 @@
 				<source>External Link</source>
 			</trans-unit>
 			<trans-unit id="tx_ecomglossary_domain_model_term.sources">
-				<source>Sources</source>
+				<source>List of references:</source>
+			</trans-unit>
+
+			<trans-unit id="search.placeholder">
+				<source>Enter your search term...</source>
+			</trans-unit>
+			<trans-unit id="error.noTerms">
+				<source>No terms found. You searched for:</source>
+			</trans-unit>
+			<trans-unit id="error.searchResult">
+				<source>Search Result</source>
+			</trans-unit>
+			<trans-unit id="filterTerms">
+				<source>Filter terms by character:</source>
+			</trans-unit>
+			<trans-unit id="showAllEntries">
+				<source>Show all entries</source>
+			</trans-unit>
+			<trans-unit id="filterBy">
+				<source>Filter by:</source>
 			</trans-unit>
 		</body>
 	</file>

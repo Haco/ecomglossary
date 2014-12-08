@@ -33,6 +33,16 @@ namespace Ecom\Ecomglossary\Domain\Repository;
 class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
+	 * Default Ordering
+	 *
+	 * @var array
+	 */
+	protected $defaultOrderings = array(
+		'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+		'term_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+	);
+
+	/**
 	 * @param string $letter
 	 *
 	 * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface

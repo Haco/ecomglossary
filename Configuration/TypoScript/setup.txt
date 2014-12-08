@@ -11,6 +11,8 @@ plugin.tx_ecomglossary {
 	settings {
 		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
 		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
+		shortDescMaxChars = {$plugin.tx_ecomglossary.settings.shortDescMaxChars}
+		shortDescAppend = {$plugin.tx_ecomglossary.settings.shortDescAppend}
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
@@ -18,36 +20,7 @@ plugin.tx_ecomglossary {
 	}
 }
 
-plugin.tx_ecomglossary._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
 
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-ecomglossary table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-ecomglossary table th {
-		font-weight:bold;
-	}
-
-	.tx-ecomglossary table td {
-		vertical-align:top;
-	}
-
-	.typo3-messages .message-error {
-		color:red;
-	}
-
-	.typo3-messages .message-ok {
-		color:green;
-	}
-
-)
+page.includeCSS {
+	ecomglossaryCss = EXT:ecomglossary/Resources/Public/Stylesheets/Application.css
+}

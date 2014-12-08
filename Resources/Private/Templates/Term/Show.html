@@ -3,6 +3,8 @@
 <f:section name="main">
 	<f:flashMessages renderMode="div" />
 
-	<f:render partial="Term/Properties" arguments="{term:term}" />
-	<f:link.action action="list">Back to list</f:link.action>
+	<div class="tx_ecomglossary-show-view">
+		<f:render partial="Term/Properties" arguments="{term:term}" />
+		<f:link.action action="list"><i class="fa fa-angle-left"></i> <f:translate key="showAllEntries" /></f:link.action>
+	</div>
 </f:section>

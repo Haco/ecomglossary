@@ -4,18 +4,17 @@
 <f:section name="main">
 	<f:flashMessages renderMode="div" />
 
-	<f:debug>{_all}</f:debug>
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
 			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true">
 				<div>
-					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="Enter your search term..." value="{searchTerm}"/>
+					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
 					<f:form.submit class="btn submit" value="Search" />
 				</div>
 			</f:form>
 			<f:if condition="{letterList}">
-				<div class="tx_ecomglossary-letter-navigation">
-					<span class="tx_ecomglossary-letter-navigation-label">Filter terms by character:</span>
+				<div class="tx_ecomglossary-letter-navigation" role="navigation">
+					<span class="tx_ecomglossary-letter-navigation-label"><f:translate key="filterTerms" /></span>
 					<br>
 					<f:for each="{letterList}" as="result" key="letter">
 						<f:if condition="{0: result, 1:settings.showEmptyLetters} == {0: 'empty', 1: '1'}">
@@ -28,7 +27,7 @@
 						</f:if>
 					</f:for>
 					<div class="tx_ecomglossary-view-all-btn">
-						<f:link.action action="list" class="btn" noCacheHash="true" noCache="true">Show all entries</f:link.action>
+						<f:link.action action="list" class="btn" noCacheHash="true" noCache="true"><f:translate key="showAllEntries" /></f:link.action>
 					</div>
 				</div>
 			</f:if>
@@ -37,7 +36,10 @@
 		<f:if condition="{terms->f:count()} > 0">
 			<f:then>
 				<div class="tx_ecomglossary-term-listing">
-					<f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: settings.termsPerPage, insertAbove: 1, insertBelow: 0}">
+					<f:if condition="{0: filterByLetter} != {0: ''}">
+						<h2><f:translate key="filterBy" /> {filterByLetter}</h2>
+					</f:if>
+					<f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: settings.termsPerPage, insertAbove: 1, insertBelow: 1}">
 						<ul>
 							<f:for each="{paginatedTerms}" as="term">
 								<li>
@@ -47,7 +49,7 @@
 												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">{term.title}</ecomvh:link.typolink>
 											</f:then>
 											<f:else>
-												<f:link.action action="show" arguments="{term : term}"> {term.title}</f:link.action>
+												<f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
 											</f:else>
 										</f:if>
 										<f:if condition="{term.termType}">
@@ -56,7 +58,7 @@
 										</f:if>
 									</h3>
 									<f:if condition="{term.shortDescription}">
-										<p class="tx_ecomglossary-shortdesc">{term.shortDescription}</p>
+										<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</p>
 									</f:if>
 								</li>
 							</f:for>
@@ -65,7 +67,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="list" class="btn" noCache="true" noCacheHash="true">Show all entries</f:link.action>
+				<f:link.action action="list" class="btn" noCache="true" noCacheHash="true"><i class="fa fa-angle-left"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>
