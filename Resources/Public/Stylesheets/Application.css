@@ -42,7 +42,7 @@
 }
 
 .tx_ecomglossary-letter-navigation > a:hover {
-	color: black;
+	color: black !important;
 }
 
 .tx_ecomglossary-letter-navigation > a,
