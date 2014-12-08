@@ -13,16 +13,15 @@
 				</div>
 			</f:form>
 			<f:if condition="{letterList}">
+				<strong><f:translate key="filterTerms" /></strong>
 				<div class="tx_ecomglossary-letter-navigation" role="navigation">
-					<span class="tx_ecomglossary-letter-navigation-label"><f:translate key="filterTerms" /></span>
-					<br>
 					<f:for each="{letterList}" as="result" key="letter">
 						<f:if condition="{0: result, 1:settings.showEmptyLetters} == {0: 'empty', 1: '1'}">
 							<f:then>
 								<span class="tx_ecomglossary-empty-letter">{letter}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" arguments="{filterByLetter:letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
+								<f:link.action action="list" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
@@ -46,7 +45,7 @@
 									<h3>
 										<f:if condition="{term.externalLink}">
 											<f:then>
-												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">{term.title}</ecomvh:link.typolink>
+												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}" class="tx_ecomglossary-term-external">{term.title}</ecomvh:link.typolink> <small class="tx_ecomglossary-term-external-desc">[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small>
 											</f:then>
 											<f:else>
 												<f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
