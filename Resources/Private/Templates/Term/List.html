@@ -21,7 +21,7 @@
 								<span class="tx_ecomglossary-empty-letter">{letter}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
+								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
@@ -36,16 +36,16 @@
 			<f:then>
 				<div class="tx_ecomglossary-term-listing">
 					<f:if condition="{0: filterByLetter} != {0: ''}">
-						<h2><f:translate key="filterBy" /> {filterByLetter}</h2>
+						<strong><f:translate key="filterBy" /> {filterByLetter}</strong>
 					</f:if>
 					<f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: settings.termsPerPage, insertAbove: 1, insertBelow: 1}">
-						<ul>
+						<ul class="tx_ecomglossary-term-listing-terms">
 							<f:for each="{paginatedTerms}" as="term">
 								<li>
 									<h3>
 										<f:if condition="{term.externalLink}">
 											<f:then>
-												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}" class="tx_ecomglossary-term-external">{term.title}</ecomvh:link.typolink> <small class="tx_ecomglossary-term-external-desc">[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small>
+												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">{term.title} </ecomvh:link.typolink> <span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
 											</f:then>
 											<f:else>
 												<f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
@@ -66,7 +66,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="list" class="btn" noCache="true" noCacheHash="true"><i class="fa fa-angle-left"></i> <f:translate key="showAllEntries" /></f:link.action>
+				<f:link.action action="list" class="morelink-btn" noCache="true" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>

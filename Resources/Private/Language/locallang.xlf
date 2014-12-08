@@ -55,6 +55,9 @@
 			<trans-unit id="filterBy">
 				<source>Filter by:</source>
 			</trans-unit>
+			<trans-unit id="back">
+				<source>Back</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

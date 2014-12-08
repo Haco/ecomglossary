@@ -1,3 +1,195 @@
+/* ecom Glossary Application.css */
+
+.tx-ecomglossary hr {
+	margin: 1em 0;
+	display: block;
+	clear: both;
+}
+
+#tx_ecomglossary-searchform {
+	margin-bottom: 2em;
+}
+
+#tx_ecomglossary-searchform input#tx_ecomglossary-searchTerm {
+	background: none repeat scroll 0% 0% #FFF;
+	color: #888 !important;
+	font-size: 11px;
+	padding: 9px 12px;
+	border: 1px solid #D7D7D7 !important;
+	margin: 0px;
+}
+
+#tx_ecomglossary-searchform input.btn.submit {
+	background: none repeat scroll 0% 0% #0083CB;
+	color: #FFF;
+	text-transform: uppercase;
+	padding: 10px;
+	border: medium none;
+	position: relative;
+	margin-left: -4px;
+}
+
+.tx_ecomglossary-letter-navigation {
+	margin-top: 0.5em;
+}
+
+.tx_ecomglossary-letter-navigation > a {
+	color: #0083cb;
+}
+
+.tx_ecomglossary-letter-navigation > a.active {
+	text-decoration: underline;
+}
+
+.tx_ecomglossary-letter-navigation > a:hover {
+	color: black;
+}
+
+.tx_ecomglossary-letter-navigation > a,
+.tx_ecomglossary-letter-navigation > span.tx_ecomglossary-empty-letter {
+	font-size: 1.2em;
+	margin-right: 0.6em;
+}
+
+.tx_ecomglossary-letter-navigation > span.tx_ecomglossary-empty-letter {
+	color: #BBB;
+	cursor: not-allowed;
+}
+
+.tx_ecomglossary-view-all-btn {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	text-align: center;
+	margin: 0px 0px 0px 5px;
+	padding: 0;
+	background: #0083cb;
+}
+
+.tx_ecomglossary-view-all-btn a {
+	color: white;
+	display: block;
+	padding: 3px;
+}
+
+.tx_ecomglossary-view-all-btn:hover a,
+.tx_ecomglossary-view-all-btn a:hover {
+	color: white !important;
+}
+
+.tx-ecomglossary a.morelink-btn i {
+	margin-right: 0.2em;
+}
+
+.tx_ecomglossary-term-listing ul li h3 {
+	font-size: 1.9em;
+	color: black;
+}
+
+.tx_ecomglossary-term-listing ul li h3 small {
+	font-size: 0.5em;
+}
+
+.tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc {
+	color: #888;
+	margin-left: 0.3em;
+	font-size: 0.5em;
+}
+
+.tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc i {
+	margin-left: 0.3em;
+}
+
+.tx_ecomglossary-term-listing ul.tx_ecomglossary-term-listing-terms li {
+	margin: 1em 0px;
+	display: block;
+	clear: both;
+	border-bottom: 1px solid #D4D6D8;
+	box-shadow: 0px 1px 0px #FFF;
+	padding: 0.8em 0;
+}
+.tx_ecomglossary-term-listing ul.tx_ecomglossary-term-listing-terms li:last-child {
+	border-bottom: none;
+	box-shadow: none;
+	padding-bottom: 0.3em;
+}
+
+.tx_ecomglossary-show-view article {
+	margin-top: 1.5em;
+}
+
+.tx_ecomglossary-show-view article header h2 {
+	color: #0083cb;
+	font-size: 1.8em;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator {
+	margin: 2em 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator:after {
+	content: "";
+	display: block;
+	width: 100%;
+	clear: both;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li {
+	float: left;
+	line-height: 30px;
+	width: 30px;
+	background: #E7E9E8;
+	text-align: center;
+	margin-right: 0.5em;
+	padding: 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.next,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous {
+	text-indent: -100px;
+	overflow: hidden;
+	background: url(../images/sliderArrows.png);
+	background-position: -32px 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous {
+	background-position: -2px 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.next:hover {
+	background: url(../images/sliderArrows.png);
+	background-position: -32px 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev:hover,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous:hover {
+	background-image: url(../images/sliderArrows.png);
+	background-position: -2px 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li a {
+	display: block;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li:hover,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.current {
+	background: #0083CB;
+	color: white;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li:hover a,
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.current a {
+	color: #fff;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.first,
+.pagination li.last {
+	display: none;
+}
+
+
 .typo3-message {
 	margin-bottom: 4px;
 	padding: 12px;
@@ -22,7 +214,7 @@
 	list-style: disc; }
 
 .typo3-message .message-header {
-	font-size: 11px;
+	font-size: 1em;
 	font-weight: bold; }
 
 .message-notice {

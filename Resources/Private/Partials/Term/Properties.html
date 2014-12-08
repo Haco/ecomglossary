@@ -12,7 +12,7 @@
 	</div>
 	<hr>
 	<div class="tx_ecomglossary-term-sources">
-		<p><f:translate key="tx_ecomglossary_domain_model_term.sources" /></p>
+		<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
 		<f:if condition="{term.sources}">
 			<ul class="list">
 				<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
