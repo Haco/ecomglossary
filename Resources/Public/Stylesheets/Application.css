@@ -149,7 +149,7 @@
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous {
 	text-indent: -100px;
 	overflow: hidden;
-	background: url(../images/sliderArrows.png);
+	background: url(../Icons/sliderArrows.png);
 	background-position: -32px 0;
 }
 
@@ -159,13 +159,13 @@
 }
 
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.next:hover {
-	background: url(../images/sliderArrows.png);
+	background: url(../Icons/sliderArrows.png);
 	background-position: -32px 0;
 }
 
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev:hover,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous:hover {
-	background-image: url(../images/sliderArrows.png);
+	background-image: url(../Icons/sliderArrows.png);
 	background-position: -2px 0;
 }
 

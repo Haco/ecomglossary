@@ -131,10 +131,11 @@ return array(
 		'term_type' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.term_type',
+			'l10n_mode' => 'exclude',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
-					array('', 0),
+					array('', ''),
 					array('Language', 1),
 					array('Definition', 2),
 					array('Acronym (e.g. NATO)', 3),
@@ -176,11 +177,12 @@ return array(
 		),
 		'external_link' => array(
 			'exclude' => 1,
+			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.external_link',
 			'config' => array(
 				'type' => 'input',
 				'size' => 15,
-				'eval' => 'trim',
+				'eval' => 'trim,null',
 				'wizards' => array(
 					'_PADDING' => 2,
 					'link' => array(
@@ -199,12 +201,13 @@ return array(
 		),
 		'sources' => array(
 			'exclude' => 1,
+			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.sources',
 			'config' => array(
 				'type' => 'text',
 				'rows' => 8,
 				'cols' => 50,
-				'eval' => 'trim',
+				'eval' => 'trim,null',
 				'wizards' => array(
 					'_PADDING' => 5,
 					'link' => array(

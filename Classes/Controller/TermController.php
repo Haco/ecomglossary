@@ -52,7 +52,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	public function listAction($filterByLetter = '') {
 		$terms = $this->termRepository->findAll();
 		// All available letters (for letter navigation)
-		$availableLetters = ($terms->count() > 0) ? $this->generateLetterArrayFromList($this->objectToArray($terms,'uid', 'title'), $this->settings['showEmptyLetters']) : '';
+		$availableLetters = ($terms->count() > 0) ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
 
 		// Search for term
 		if($this->request->hasArgument('searchTerm')) {
@@ -98,50 +98,21 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	}
 
 	/**
-	 * Transform object to array with specified key-value-pairs
-	 *
-	 * @param $object
-	 * @param string $propertyKey
-	 * @param string $propertyValue
-	 * @return array
-	 */
-	public function objectToArray($object, $propertyKey = 'uid', $propertyValue = 'name') {
-		// Return if object ist not instance of countable
-		if (!$object instanceof \Countable) return FALSE;
-		$return = array();
-		if ($object->count()) {
-			$tableName = preg_replace('/^ecom/i', 'tx', strtolower(str_ireplace('\\', '_', get_class($object->getFirst()))));
-			foreach ($object as $objectObject) {
-				if (!ObjectAccess::isPropertyGettable($objectObject, $propertyKey) || (is_string($propertyValue) && !ObjectAccess::isPropertyGettable($objectObject, $propertyValue))) continue; // Check if property chosen for key exists
-				if (is_array($propertyValue)) {
-					$values = array();
-					foreach ($propertyValue as $singlePropertyValue) {
-						if (!ObjectAccess::isPropertyGettable($objectObject, $singlePropertyValue)) continue; // Check if property chosen for value exists
-						$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $singlePropertyValue . '.' . ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue), $this->extensionName);
-						$values[] = $translation ? $translation : ObjectAccess::getPropertyPath($objectObject, $singlePropertyValue);
-					}
-					$return[ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = implode(', ', $values);
-				} else {
-					$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($tableName . '.' . $propertyValue . '.' . ObjectAccess::getPropertyPath($objectObject, $propertyValue), $this->extensionName);
-					$return[ObjectAccess::getPropertyPath($objectObject, $propertyKey)] = $translation ? $translation : ObjectAccess::getPropertyPath($objectObject, $propertyValue);
-				}
-			}
-		}
-		return $return;
-	}
-
-	/**
 	 * Generates a letter list from A-Z 0-9 out of the term repository
 	 *
-	 * @param array $list
+	 * @param \Ecom\Ecomglossary\Domain\Model\Term $domainModelObject
 	 * @param bool $mergeWithEmptyLetters
 	 * @return array
 	 */
-	public function generateLetterArrayFromList($list, $mergeWithEmptyLetters = true) {
+	public function generateLetterArrayFromList($domainModelObject, $mergeWithEmptyLetters = true) {
 		$letterList = array();
 		// Generate list with already available letters
-		foreach($list as $uid => $title) {
-			$firstLetter = ucfirst(substr($this->toASCII($title),0,1));
+		foreach($domainModelObject as $object) {
+			/**
+			 * @var \Ecom\Ecomglossary\Domain\Model\Term $object;
+			 */
+			$title = $object->getTitle();
+			$firstLetter = ucfirst(substr($this->convertUTF8toASCII($title),0,1));
 			if(preg_match('/[^A-Za-z0-9]/', $firstLetter)) {
 				continue;
 			}
@@ -175,7 +146,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return string
 	 *
 	 */
-	public function toASCII($str) {
+	public function convertUTF8toASCII($str) {
 		return strtr(utf8_decode($str),
 			utf8_decode('ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ'),
 			'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy');
