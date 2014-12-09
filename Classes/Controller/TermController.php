@@ -46,33 +46,34 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 	/**
 	 * action list
+	 *
 	 * @param string $filterByLetter
 	 * @return void
 	 */
 	public function listAction($filterByLetter = '') {
 		$terms = $this->termRepository->findAll();
 		// All available letters (for letter navigation)
-		$availableLetters = ($terms->count() > 0) ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
+		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
 
 		// Search for term
-		if($this->request->hasArgument('searchTerm')) {
+		if ( $this->request->hasArgument('searchTerm') ) {
 			$searchTerm = $this->request->getArgument('searchTerm');
 			// Delete non-word chars
 			$searchTerm = preg_replace('/[^A-z0-9\-\/ßÄäÜüÖö]/', '', $searchTerm);
 			// Get Results by searchTerm
-			$terms = ($this->termRepository->findBySearchTerm($searchTerm)->count() > 0) ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+			$terms = $this->termRepository->findBySearchTerm($searchTerm)->count() ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
 		}
 		// Filter by letter
-		if (is_string($filterByLetter) && strlen($filterByLetter) == 1) {
+		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 ) {
 			$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
 		}
 
 		$this->view->assignMultiple(array(
 			'terms' => $terms,
 			'filterByLetter' => $filterByLetter,
-			'letterList' => $availableLetters,
+			'letterList' => $availableLetters
 		));
 	}
 
@@ -107,28 +108,23 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	public function generateLetterArrayFromList($domainModelObject, $mergeWithEmptyLetters = true) {
 		$letterList = array();
 		// Generate list with already available letters
-		foreach($domainModelObject as $object) {
-			/**
-			 * @var \Ecom\Ecomglossary\Domain\Model\Term $object;
-			 */
+		foreach ( $domainModelObject as $object ) {
+			/** @var \Ecom\Ecomglossary\Domain\Model\Term $object */
 			$title = $object->getTitle();
 			$firstLetter = ucfirst(substr($this->convertUTF8toASCII($title),0,1));
-			if(preg_match('/[^A-Za-z0-9]/', $firstLetter)) {
-				continue;
-			}
-			if (array_key_exists($firstLetter, $letterList)) {
+			if ( preg_match('/[^A-Za-z0-9]/', $firstLetter) || array_key_exists($firstLetter, $letterList) ) {
 				continue;
 			}
 			$letterList[$firstLetter] = 'hasResult';
 		}
 		// Fill up array with the empty letters which are not currently used in DB
 		// For different styling via CSS, it adds the "empty"-value. (Editable in FLUID Condition => List view)
-		if ($mergeWithEmptyLetters == true) {
+		if ( $mergeWithEmptyLetters ) {
 			// Generate the complete alphabeth
 			// And merge with array of already available letters
 			$alphas = range('A', 'Z');
-			foreach($alphas as $value) {
-				if (array_key_exists($value, $letterList)) {
+			foreach ( $alphas as $value ) {
+				if ( array_key_exists($value, $letterList) ) {
 					continue;
 				}
 				$letterList[$value] = 'empty';
@@ -144,7 +140,6 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 *
 	 * @param $str
 	 * @return string
-	 *
 	 */
 	public function convertUTF8toASCII($str) {
 		return strtr(utf8_decode($str),
