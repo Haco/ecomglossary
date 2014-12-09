@@ -66,6 +66,7 @@ class TypolinkViewHelper extends AbstractViewHelper {
 	 * @return mixed
 	 */
 	public function render() {
-		return $GLOBALS['TSFE']->cObj->typoLink($this->renderChildren(), $this->arguments['configuration']);
+		$linkParamsExploded = \TYPO3\CMS\Core\Utility\GeneralUtility::unQuoteFilenames($this->arguments['configuration']['parameter'], TRUE);
+		return $GLOBALS['TSFE']->cObj->typoLink($this->renderChildren() ?: $linkParamsExploded[3], $this->arguments['configuration']);
 	}
 }
