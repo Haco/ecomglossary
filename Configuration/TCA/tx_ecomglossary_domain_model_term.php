@@ -11,7 +11,7 @@ return array(
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
-
+		'hideAtCopy' => TRUE,
 		'versioningWS' => 2,
 		'versioning_followPages' => TRUE,
 
@@ -84,6 +84,7 @@ return array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
+				'default' => 1
 			),
 		),
 		'starttime' => array(
@@ -122,6 +123,7 @@ return array(
 		'title' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.title',
+			'l10n_mode' => 'prefixLangTitle',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,

@@ -25,6 +25,7 @@ namespace Ecom\Ecomglossary\ViewHelpers\Link;
  * This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
  * ### TypolinkViewhelper
  *
@@ -53,12 +54,14 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @subpackage ViewHelpers\Link
  */
 class TypolinkViewHelper extends AbstractViewHelper {
+
 	/**
 	 * Initializes the arguments for the ViewHelper
 	 */
 	public function initializeArguments() {
 		$this->registerArgument('configuration', 'array', 'The typoLink configuration', TRUE);
 	}
+
 	/**
 	 * @return mixed
 	 */

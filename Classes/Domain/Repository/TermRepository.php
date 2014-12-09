@@ -48,7 +48,7 @@ class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findByLeadingLetter($letter = '') {
-		if (!preg_match('/^\w$/is', $letter)) {
+		if ( !preg_match('/^\w$/is', $letter) ) {
 			return NULL;
 		}
 
@@ -65,7 +65,7 @@ class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findBySearchTerm($term = '') {
-		if (!is_string($term) || trim($term) === '') {
+		if ( !is_string($term) || trim($term) === '' ) {
 			return $this->findAll();
 		}
 
