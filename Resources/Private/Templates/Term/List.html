@@ -58,12 +58,19 @@
 									</h3>
 									<f:if condition="{term.shortDescription}">
 										<f:then>
-											<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</p>
+											<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}
+												<f:if condition="{term.externalLink}">
+													<f:then><ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">[<f:translate key="learnMore" default="Learn more" />]</ecomvh:link.typolink></f:then>
+													<f:else><f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action></f:else>
+												</f:if>
+											</p>
 										</f:then>
 										<f:else>
-											<p class="tx_ecomglossary-shortdesc">
-												<f:format.raw>{term.description -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</f:format.raw>
-											</p>
+											<f:if condition="{0: term.externalLink} == {0: ''}">
+												<f:if condition="{term.description}">
+													<p class="tx_ecomglossary-shortdesc"><f:format.raw>{term.description -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</f:format.raw> <f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action></p>
+												</f:if>
+											</f:if>
 										</f:else>
 									</f:if>
 								</li>

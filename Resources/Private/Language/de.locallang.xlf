@@ -85,6 +85,10 @@
 			<source>Title</source>
 			<target>Titel</target>
 		</trans-unit>
+		<trans-unit id="learnMore" approved="yes" xml:space="preserve">
+			<source>Learn more</source>
+			<target>Erfahren Sie mehr</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
