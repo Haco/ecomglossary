@@ -5,10 +5,13 @@
 		<f:if condition="{term.termType}">
 			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></span>
 		</f:if>
+		<f:if condition="{term.shortDescription}">
+			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
+		</f:if>
 	</header>
 	<hr>
 	<div class="tx_ecomglossary-term-description">
-		{term.description}
+		<f:format.html>{term.description}</f:format.html>
 	</div>
 	<f:if condition="{term.sources}">
 		<hr>

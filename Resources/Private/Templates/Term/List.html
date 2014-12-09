@@ -57,7 +57,14 @@
 										</f:if>
 									</h3>
 									<f:if condition="{term.shortDescription}">
-										<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</p>
+										<f:then>
+											<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</p>
+										</f:then>
+										<f:else>
+											<p class="tx_ecomglossary-shortdesc">
+												<f:format.raw>{term.description -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</f:format.raw>
+											</p>
+										</f:else>
 									</f:if>
 								</li>
 							</f:for>
