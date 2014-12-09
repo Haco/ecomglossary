@@ -10,15 +10,15 @@
 	<div class="tx_ecomglossary-term-description">
 		{term.description}
 	</div>
-	<hr>
-	<div class="tx_ecomglossary-term-sources">
-		<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
-		<f:if condition="{term.sources}">
+	<f:if condition="{term.sources}">
+		<hr>
+		<div class="tx_ecomglossary-term-sources">
+			<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
 			<ul class="list">
 				<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
 					<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
 				</f:for>
 			</ul>
-		</f:if>
-	</div>
+		</div>
+	</f:if>
 </article>
