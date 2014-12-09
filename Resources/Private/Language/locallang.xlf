@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-12-04T09:53:27Z" product-name="ecomglossary">
-		<header/>
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-12-09T10:15:05Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
 		<body>
-			<trans-unit id="tx_ecomglossary_domain_model_term">
-				<source>Term</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.term_type">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.1">
-				<source>Language</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.2">
-				<source>Definition</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.3">
-				<source>Acronym</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.term_type.4">
-				<source>Abbreviation</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.short_description">
-				<source>Short Description</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.external_link">
-				<source>External Link</source>
-			</trans-unit>
-			<trans-unit id="tx_ecomglossary_domain_model_term.sources">
-				<source>List of references:</source>
-			</trans-unit>
-
-			<trans-unit id="search.placeholder">
-				<source>Enter your search term...</source>
-			</trans-unit>
-			<trans-unit id="error.noTerms">
-				<source>No terms found. You searched for:</source>
-			</trans-unit>
-			<trans-unit id="error.searchResult">
-				<source>Search Result</source>
-			</trans-unit>
-			<trans-unit id="filterTerms">
-				<source>Filter terms by character:</source>
-			</trans-unit>
-			<trans-unit id="showAllEntries">
-				<source>Show all entries</source>
-			</trans-unit>
-			<trans-unit id="filterBy">
-				<source>Filter by:</source>
-			</trans-unit>
-			<trans-unit id="back">
-				<source>Back</source>
-			</trans-unit>
-			<trans-unit id="error.forbiddenFilter.heading">
-				<source>Nice Try.</source>
-			</trans-unit>
-			<trans-unit id="error.forbiddenFilter">
-				<source>Only the characters [A-z] or [0-9] are allowed for the filter.</source>
-			</trans-unit>
+		<trans-unit id="back" xml:space="preserve">
+			<source>Back</source>
+		</trans-unit>
+		<trans-unit id="error.forbiddenFilter" xml:space="preserve">
+			<source>Only the characters [A-z] or [0-9] are allowed for the filter.</source>
+		</trans-unit>
+		<trans-unit id="error.forbiddenFilter.heading" xml:space="preserve">
+			<source>Nice Try.</source>
+		</trans-unit>
+		<trans-unit id="error.noTerms" xml:space="preserve">
+			<source>No terms found. You searched for:</source>
+		</trans-unit>
+		<trans-unit id="error.searchResult" xml:space="preserve">
+			<source>Search Result</source>
+		</trans-unit>
+		<trans-unit id="filterBy" xml:space="preserve">
+			<source>Active filter:</source>
+		</trans-unit>
+		<trans-unit id="filterTerms" xml:space="preserve">
+			<source>Filter terms by character:</source>
+		</trans-unit>
+		<trans-unit id="search.placeholder" xml:space="preserve">
+			<source>Enter your search term...</source>
+		</trans-unit>
+		<trans-unit id="showAllEntries" xml:space="preserve">
+			<source>Show all entries</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term" xml:space="preserve">
+			<source>Term</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.external_link" xml:space="preserve">
+			<source>External Link</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.short_description" xml:space="preserve">
+			<source>Short Description</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.sources" xml:space="preserve">
+			<source>List of references:</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.term_type" xml:space="preserve">
+			<source>Type</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.1" xml:space="preserve">
+			<source>Language</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.2" xml:space="preserve">
+			<source>Definition</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.3" xml:space="preserve">
+			<source>Acronym</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.4" xml:space="preserve">
+			<source>Abbreviation</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
