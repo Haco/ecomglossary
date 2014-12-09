@@ -184,7 +184,7 @@ return array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 15,
-				'eval' => 'trim,null',
+				'eval' => 'trim',
 				'wizards' => array(
 					'_PADDING' => 2,
 					'link' => array(
@@ -209,7 +209,7 @@ return array(
 				'type' => 'text',
 				'rows' => 8,
 				'cols' => 50,
-				'eval' => 'trim,null',
+				'eval' => 'trim',
 				'wizards' => array(
 					'_PADDING' => 5,
 					'link' => array(

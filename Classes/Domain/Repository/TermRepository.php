@@ -60,6 +60,30 @@ class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
+	 * Find all terms starting with a leading number (Range: 0-9)
+	 *
+	 * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAllWithLeadingNumber() {
+		$query = $this->createQuery();
+
+		return $query->matching(
+			$query->logicalOr(
+				$query->like('title', '0%', FALSE),
+				$query->like('title', '1%', FALSE),
+				$query->like('title', '2%', FALSE),
+				$query->like('title', '3%', FALSE),
+				$query->like('title', '4%', FALSE),
+				$query->like('title', '5%', FALSE),
+				$query->like('title', '6%', FALSE),
+				$query->like('title', '7%', FALSE),
+				$query->like('title', '8%', FALSE),
+				$query->like('title', '9%', FALSE)
+			)
+		)->execute();
+	}
+
+	/**
 	 * @param string $term
 	 *
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface

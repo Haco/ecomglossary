@@ -58,6 +58,12 @@
 			<trans-unit id="back">
 				<source>Back</source>
 			</trans-unit>
+			<trans-unit id="error.forbiddenFilter.heading">
+				<source>Nice Try.</source>
+			</trans-unit>
+			<trans-unit id="error.forbiddenFilter">
+				<source>Only the characters [A-z] or [0-9] are allowed for the filter.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

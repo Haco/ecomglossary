@@ -59,15 +59,22 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		if ( $this->request->hasArgument('searchTerm') ) {
 			$searchTerm = $this->request->getArgument('searchTerm');
 			// Delete non-word chars
-			$searchTerm = preg_replace('/[^A-z0-9\-\/ßÄäÜüÖö]/', '', $searchTerm);
+			$searchTerm = preg_replace('/[^A-z0-9\-\/ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
 			// Get Results by searchTerm
 			$terms = $this->termRepository->findBySearchTerm($searchTerm)->count() ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
 		}
-		// Filter by letter
-		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 ) {
+		// Filter by letter navigation
+		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter) ) {
+			// Find by single leading letter
 			$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
+		} elseif( $filterByLetter === '0-9' ) {
+			// Find all in 0-9 range
+			$terms = $this->termRepository->findAllWithLeadingNumber();
+		} elseif($filterByLetter != '') {
+			$this->addFlashMessage(LocalizationUtility::translate('error.forbiddenFilter','ecomglossary'), LocalizationUtility::translate('error.forbiddenFilter.heading','ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+			$filterByLetter = '';
 		}
 
 		$this->view->assignMultiple(array(
@@ -87,9 +94,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		// Prevent access to a single term (show action) if
 		// the term uses an external Link as description. Redirects directly to the external Link
 		if ($term->getExternalLink() != '') {
-			/**
-			 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer
-			 */
+			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
 			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
 
@@ -112,7 +117,10 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			/** @var \Ecom\Ecomglossary\Domain\Model\Term $object */
 			$title = $object->getTitle();
 			$firstLetter = ucfirst(substr($this->convertUTF8toASCII($title),0,1));
-			if ( preg_match('/[^A-Za-z0-9]/', $firstLetter) || array_key_exists($firstLetter, $letterList) ) {
+			if ( preg_match('/[^A-Za-z]/', $firstLetter) || array_key_exists($firstLetter, $letterList) ) {
+				if ( preg_match('/[0-9]/', $firstLetter) && !array_key_exists('0-9', $letterList)) {
+					$letterList['0-9'] = 'hasResult';
+				}
 				continue;
 			}
 			$letterList[$firstLetter] = 'hasResult';
@@ -128,6 +136,10 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 					continue;
 				}
 				$letterList[$value] = 'empty';
+			}
+			// Add the empty 0-9 range if not already exists
+			if (!array_key_exists('0-9', $letterList)) {
+				$letterList['0-9'] = 'empty';
 			}
 		}
 		// Sort array A-Z

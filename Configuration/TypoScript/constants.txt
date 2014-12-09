@@ -14,13 +14,13 @@ plugin.tx_ecomglossary {
 	}
 
 	settings {
-		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Pagebrowser List view: Number of entries per page.
+		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Pagebrowser terms per page: Sets the number of term entries per page.
 		termsPerPage = 15
-		# cat=plugin.tx_ecomglossary/settings/a; type=boolean; label=Letter Navigation: Even show the letters without results.
+		# cat=plugin.tx_ecomglossary/settings/a; type=boolean; label=Empty Letter Navigation: Even show the letters without term results.
 		showEmptyLetters = 1
-		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Short Description: Max characters until crop (List View).
-		shortDescMaxChars = 100
-		# cat=plugin.tx_ecomglossary/settings/a; type=string; label=Short Description: Append string after crop (List View).
+		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Short Description Max Chars.: Max characters until crop (List View).
+		shortDescMaxChars = 200
+		# cat=plugin.tx_ecomglossary/settings/a; type=string; label=Short Description Appendix: Append custom string after crop (List View).
 		shortDescAppend = ...
 	}
 }
