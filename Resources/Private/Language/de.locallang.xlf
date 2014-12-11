@@ -89,6 +89,10 @@
 			<source>Learn more</source>
 			<target>Erfahren Sie mehr</target>
 		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
+			<source>Related Terms</source>
+			<target>Themenverwandte Begriffe</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

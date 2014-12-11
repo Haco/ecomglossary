@@ -6,22 +6,37 @@
 			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></span>
 		</f:if>
 		<f:if condition="{term.shortDescription}">
-			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
+			<br><span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
 		</f:if>
 	</header>
 	<hr>
 	<div class="tx_ecomglossary-term-description">
 		<f:format.html>{term.description}</f:format.html>
 	</div>
-	<f:if condition="{term.sources}">
-		<hr>
-		<div class="tx_ecomglossary-term-sources">
-			<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
+	<hr>
+	<div class="row-fluid">
+		<f:if condition="{term.sources}">
+			<div class="span6 tx_ecomglossary-term-sources">
+				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
+				<ul class="list">
+					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
+						<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
+					</f:for>
+				</ul>
+			</div>
+		</f:if>
+		<f:if condition="{term.relatedTerms}">
+			<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" /></strong></p>
 			<ul class="list">
-				<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
-					<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
+				<f:for each="{term.relatedTerms}" as="relatedTerm">
+					<li>
+						<f:if condition="{relatedTerm.externalLink}">
+							<f:then><ecomvh:link.typolink configuration="{parameter: relatedTerm.externalLink, title: '{relatedTerm.title}'}">{relatedTerm.title} </ecomvh:link.typolink> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
+							<f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
+						</f:if>
+					</li>
 				</f:for>
 			</ul>
-		</div>
-	</f:if>
+		</f:if>
+	</div>
 </article>

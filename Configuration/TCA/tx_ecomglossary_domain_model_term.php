@@ -24,14 +24,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,term_type,short_description,external_link,description,sources',
+		'searchFields' => 'title,term_type,short_description,external_link,description,sources,related_terms',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('ecomglossary') . 'Resources/Public/Icons/tx_ecomglossary_domain_model_term.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources,related_terms',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links], sources, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links], sources, related_terms, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'header_palette' => array('showitem' => 'title, external_link,--linebreak--,term_type', 'canNotCollapse' => 1),
@@ -221,6 +221,47 @@ return array(
 					),
 				),
 				'softref' => 'typolink',
+			),
+		),
+		'related_terms' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.related_terms',
+			'l10n_mode' => 'exclude',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_ecomglossary_domain_model_term',
+				'foreign_table_where' => 'AND l10n_parent = 0 ORDER BY title',
+				'MM' => 'tx_ecomglossary_term_term_mm',
+				'size' => 10,
+				'autoSizeMax' => 30,
+				'maxitems' => 9999,
+				'multiple' => 0,
+				'wizards' => array(
+					'_PADDING' => 1,
+					'_VERTICAL' => 1,
+					'edit' => array(
+						'type' => 'popup',
+						'title' => 'Edit',
+						'script' => 'wizard_edit.php',
+						'icon' => 'edit2.gif',
+						'popup_onlyOpenIfSelected' => 1,
+						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+					),
+					'add' => Array(
+						'type' => 'script',
+						'title' => 'Create new',
+						'icon' => 'add.gif',
+						'params' => array(
+							'table' => 'tx_ecomglossary_domain_model_term',
+							'pid' => '###CURRENT_PID###',
+							'setValue' => 'prepend'
+						),
+						'script' => 'wizard_add.php',
+					),
+					'suggest' => array(
+						'type' => 'suggest',
+					),
+				),
 			),
 		),
 	),

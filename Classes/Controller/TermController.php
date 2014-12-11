@@ -100,6 +100,22 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 			$this->redirectToUri($linkToExternalDescription);
 		}
+
+		/**
+		 * Finds all terms where the current term is set as related term.
+		 */
+		$termsRelatedToThisTerm = $this->termRepository->containsInRelatedTerms($term);
+
+		/**
+		 * Merges the related terms of this term
+		 * 		with the terms where the current term is set as related term.
+		 */
+		/** @var \Ecom\Ecomglossary\Domain\Model\Term $termObject */
+		foreach($termsRelatedToThisTerm as $termObject) {
+			if($term->getRelatedTerms()->contains($termObject)) continue;
+			$term->addRelatedTerm($termObject);
+		}
+
 		$this->view->assign('term', $term);
 	}
 

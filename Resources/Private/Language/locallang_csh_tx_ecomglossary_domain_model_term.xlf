@@ -21,6 +21,9 @@
 			<trans-unit id="sources.description">
 				<source>Here you can add links as sources. Generates a link list of references. (Line separated)</source>
 			</trans-unit>
+			<trans-unit id="related_terms.description">
+				<source>Related terms.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
