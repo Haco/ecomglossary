@@ -75,6 +75,13 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sources = '';
 
 	/**
+	 * Visits
+	 *
+	 * @var integer
+	 */
+	protected $visits = 0;
+
+	/**
 	 * Related terms.
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ecom\Ecomglossary\Domain\Model\Term>
@@ -213,6 +220,25 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSources($sources) {
 		$this->sources = $sources;
+	}
+
+	/**
+	 * Returns the visits
+	 *
+	 * @return integer $visits
+	 */
+	public function getVisits() {
+		return $this->visits;
+	}
+
+	/**
+	 * Sets the visits
+	 *
+	 * @param integer $visits
+	 * @return void
+	 */
+	public function setVisits($visits) {
+		$this->visits = $visits;
 	}
 
 	/**

@@ -91,14 +91,35 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function showAction(\Ecom\Ecomglossary\Domain\Model\Term $term) {
+		// Handle term visits by session vars
+		//		for unique visits
+		if ($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms')) {
+			$visitedTermsFromSession = unserialize($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms'));
+
+			if ($visitedTermsFromSession[$term->getUid()] !== true) {
+				$visitedTermsFromSession[$term->getUid()] = true;
+
+				$GLOBALS['TSFE']->fe_user->setAndSaveSessionData($this->extensionName . '_visitedTerms', serialize($visitedTermsFromSession));
+
+				$term->setVisits($term->getVisits() + 1);
+				$this->updateAction($term);
+			}
+		} else {
+			$newVisitedTermsArray[$term->getUid()] = true;
+			$GLOBALS['TSFE']->fe_user->setAndSaveSessionData($this->extensionName . '_visitedTerms', serialize($newVisitedTermsArray));
+
+			$term->setVisits($term->getVisits() + 1);
+			$this->updateAction($term);
+		}
+
 		// Prevent access to a single term (show action) if
 		// the term uses an external Link as description. Redirects directly to the external Link
-		if ($term->getExternalLink() != '') {
+		if (is_string($term->getExternalLink()) && $term->getExternalLink()) {
 			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
 			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
-
 			$this->redirectToUri($linkToExternalDescription);
+			return;
 		}
 
 		/**
@@ -115,8 +136,17 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			if($term->getRelatedTerms()->contains($termObject)) continue;
 			$term->addRelatedTerm($termObject);
 		}
-
 		$this->view->assign('term', $term);
+	}
+
+	/**
+	 * update action
+	 *
+	 * @param \Ecom\Ecomglossary\Domain\Model\Term $term
+	 * @return void
+	 */
+	public function updateAction(\Ecom\Ecomglossary\Domain\Model\Term $term) {
+		$this->termRepository->update($term);
 	}
 
 	/**

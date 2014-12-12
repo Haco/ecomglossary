@@ -43,13 +43,9 @@
 							<f:for each="{paginatedTerms}" as="term">
 								<li>
 									<h3>
+										<f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
 										<f:if condition="{term.externalLink}">
-											<f:then>
-												<ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">{term.title} </ecomvh:link.typolink> <span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
-											</f:then>
-											<f:else>
-												<f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
-											</f:else>
+											<span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
 										</f:if>
 										<f:if condition="{term.termType}">
 											<br>
@@ -59,10 +55,7 @@
 									<f:if condition="{term.shortDescription}">
 										<f:then>
 											<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}
-												<f:if condition="{term.externalLink}">
-													<f:then><ecomvh:link.typolink configuration="{parameter: term.externalLink, title: '{term.title}'}">[<f:translate key="learnMore" default="Learn more" />]</ecomvh:link.typolink></f:then>
-													<f:else><f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action></f:else>
-												</f:if>
+												&nbsp;<f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action>
 											</p>
 										</f:then>
 										<f:else>

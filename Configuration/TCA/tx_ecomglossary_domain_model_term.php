@@ -24,17 +24,19 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,term_type,short_description,external_link,description,sources,related_terms',
+		'searchFields' => 'title,term_type,short_description,external_link,description,sources,related_terms,visits',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('ecomglossary') . 'Resources/Public/Icons/tx_ecomglossary_domain_model_term.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources,related_terms',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources,related_terms,visits',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links], sources, related_terms, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, --palette--;;top_palette, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links],--palette--;Relations;bottom_palette, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
+		'top_palette' => array('showitem' => 'hidden;;1,visits', 'canNotCollapse' => 1),
 		'header_palette' => array('showitem' => 'title, external_link,--linebreak--,term_type', 'canNotCollapse' => 1),
+		'bottom_palette' => array('showitem' => 'sources,--linebreak--, related_terms', 'canNotCollapse' => 1),
 	),
 	'columns' => array(
 
@@ -159,6 +161,7 @@ return array(
 		),
 		'description' => array(
 			'exclude' => 1,
+			'l10n_mode' => 'prefixLangTitle',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.description',
 			'config' => array(
 				'type' => 'text',
@@ -223,6 +226,19 @@ return array(
 				'softref' => 'typolink',
 			),
 		),
+		'visits' => array(
+			'exclude' => 1,
+			'label' => 'Visits',
+			'l10n_display' => 'hideDiff',
+			'config' => array(
+				'foreign_table' => 'tx_ecomglossary_domain_model_term',
+				'foreign_field' => 'visits',
+				'readOnly' => 1,
+				'type' => 'input',
+				'size' => 11,
+				'eval' => 'trim'
+			),
+		),
 		'related_terms' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.related_terms',
@@ -237,7 +253,7 @@ return array(
 				'maxitems' => 9999,
 				'multiple' => 0,
 				'wizards' => array(
-					'_PADDING' => 1,
+					'_PADDING' => 3,
 					'_VERTICAL' => 1,
 					'edit' => array(
 						'type' => 'popup',

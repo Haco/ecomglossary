@@ -31,7 +31,7 @@
 				<f:for each="{term.relatedTerms}" as="relatedTerm">
 					<li>
 						<f:if condition="{relatedTerm.externalLink}">
-							<f:then><ecomvh:link.typolink configuration="{parameter: relatedTerm.externalLink, title: '{relatedTerm.title}'}">{relatedTerm.title} </ecomvh:link.typolink> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
+							<f:then><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
 							<f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
 						</f:if>
 					</li>

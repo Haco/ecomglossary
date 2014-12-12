@@ -13,6 +13,7 @@ CREATE TABLE tx_ecomglossary_domain_model_term (
 	description text NOT NULL,
 	external_link varchar(255) DEFAULT '' NOT NULL,
 	related_terms int(11) unsigned DEFAULT '0' NOT NULL,
+	visits int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
