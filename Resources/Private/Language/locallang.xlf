@@ -20,6 +20,9 @@
 		<trans-unit id="error.searchResult" xml:space="preserve">
 			<source>Search Result</source>
 		</trans-unit>
+		<trans-unit id="form.search" xml:space="preserve">
+			<source>Search</source>
+		</trans-unit>
 		<trans-unit id="filterBy" xml:space="preserve">
 			<source>Active filter:</source>
 		</trans-unit>

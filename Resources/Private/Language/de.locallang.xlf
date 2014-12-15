@@ -25,6 +25,10 @@
 			<source>Search Result</source>
 			<target>Suchergebnis</target>
 		</trans-unit>
+		<trans-unit id="form.search" approved="yes" xml:space="preserve">
+			<source>Search</source>
+			<target>Suchen</target>
+		</trans-unit>
 		<trans-unit id="filterBy" approved="yes" xml:space="preserve">
 			<source>Active filter:</source>
 			<target>Aktiver Filter:</target>

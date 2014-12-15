@@ -9,7 +9,8 @@
 			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true">
 				<div>
 					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
-					<f:form.submit class="btn submit" value="Search" />
+					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
+					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
 				</div>
 			</f:form>
 			<f:if condition="{letterList}">

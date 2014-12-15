@@ -29,7 +29,6 @@ namespace Ecom\Ecomglossary\Controller;
 
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * TermController
@@ -78,7 +77,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		}
 
 		$this->view->assignMultiple(array(
-			'terms' => $terms,
+			'terms' => $terms, // Can vary => By search or sorting
+			'allTerms' => $this->termRepository->findAll(), // Always complete list
 			'filterByLetter' => $filterByLetter,
 			'letterList' => $availableLetters
 		));
@@ -136,6 +136,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			if($term->getRelatedTerms()->contains($termObject)) continue;
 			$term->addRelatedTerm($termObject);
 		}
+
 		$this->view->assign('term', $term);
 	}
 
