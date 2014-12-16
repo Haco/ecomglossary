@@ -15,16 +15,6 @@
 	</div>
 	<hr>
 	<div class="row-fluid">
-		<f:if condition="{term.sources}">
-			<div class="span6 tx_ecomglossary-term-sources">
-				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
-				<ul class="list">
-					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
-						<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
-					</f:for>
-				</ul>
-			</div>
-		</f:if>
 		<f:if condition="{term.relatedTerms}">
 			<div class="span6 tx_ecomglossary-term-related">
 				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" />:</strong></p>
@@ -38,6 +28,16 @@
 								</f:if>
 							</li>
 						</f:if>
+					</f:for>
+				</ul>
+			</div>
+		</f:if>
+		<f:if condition="{term.sources}">
+			<div class="span6 tx_ecomglossary-term-sources">
+				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
+				<ul class="list">
+					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
+						<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
 					</f:for>
 				</ul>
 			</div>
