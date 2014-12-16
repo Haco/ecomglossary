@@ -75,6 +75,40 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sources = '';
 
 	/**
+	 * Visits
+	 *
+	 * @var integer
+	 */
+	protected $visits = 0;
+
+	/**
+	 * Related terms.
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ecom\Ecomglossary\Domain\Model\Term>
+	 */
+	protected $relatedTerms = NULL;
+
+	/**
+	 * __construct
+	 */
+	public function __construct() {
+		//Do not remove the next line: It would break the functionality
+		$this->initStorageObjects();
+	}
+
+	/**
+	 * Initializes all ObjectStorage properties
+	 * Do not modify this method!
+	 * It will be rewritten on each save in the extension builder
+	 * You may modify the constructor of this class instead
+	 *
+	 * @return void
+	 */
+	protected function initStorageObjects() {
+		$this->relatedTerms = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -188,4 +222,61 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->sources = $sources;
 	}
 
+	/**
+	 * Returns the visits
+	 *
+	 * @return integer $visits
+	 */
+	public function getVisits() {
+		return $this->visits;
+	}
+
+	/**
+	 * Sets the visits
+	 *
+	 * @param integer $visits
+	 * @return void
+	 */
+	public function setVisits($visits) {
+		$this->visits = $visits;
+	}
+
+	/**
+	 * Adds a Term
+	 *
+	 * @param \Ecom\Ecomglossary\Domain\Model\Term $relatedTerm
+	 * @return void
+	 */
+	public function addRelatedTerm(\Ecom\Ecomglossary\Domain\Model\Term $relatedTerm) {
+		$this->relatedTerms->attach($relatedTerm);
+	}
+
+	/**
+	 * Removes a Term
+	 *
+	 * @param \Ecom\Ecomglossary\Domain\Model\Term $relatedTermToRemove The Term to be removed
+	 * @return void
+	 */
+	public function removeRelatedTerm(\Ecom\Ecomglossary\Domain\Model\Term $relatedTermToRemove) {
+		$this->relatedTerms->detach($relatedTermToRemove);
+	}
+
+	/**
+	 * Returns the relatedTerms
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ecom\Ecomglossary\Domain\Model\Term> $relatedTerms
+	 */
+	public function getRelatedTerms() {
+		return $this->relatedTerms;
+	}
+
+	/**
+	 * Sets the relatedTerms
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Ecom\Ecomglossary\Domain\Model\Term> $relatedTerms
+	 * @return void
+	 */
+	public function setRelatedTerms(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedTerms) {
+		$this->relatedTerms = $relatedTerms;
+	}
 }

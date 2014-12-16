@@ -24,6 +24,9 @@
 			<trans-unit id="tx_ecomglossary_domain_model_term.sources">
 				<source>Link to Sources (Separated by line)</source>
 			</trans-unit>
+			<trans-unit id="tx_ecomglossary_domain_model_term.related_terms">
+				<source>Related Terms</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

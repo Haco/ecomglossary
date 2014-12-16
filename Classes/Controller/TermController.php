@@ -29,7 +29,6 @@ namespace Ecom\Ecomglossary\Controller;
 
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * TermController
@@ -43,6 +42,25 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @inject
 	 */
 	protected $termRepository = NULL;
+
+	/**
+	 * Is the current client IP-Address in the exclude list?
+	 */
+	protected $isExcludedIp = FALSE;
+
+	/**
+	 * Initializes the controller before invoking an action method.
+	 *
+	 * Override this method to solve tasks which all actions have in
+	 * common.
+	 *
+	 * @return void
+	 */
+	protected function initializeAction() {
+		// Explodes the developer IPs.
+		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], TRUE) : array();
+		if($GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray) ? TRUE : FALSE;
+	}
 
 	/**
 	 * action list
@@ -65,6 +83,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
 		}
+
 		// Filter by letter navigation
 		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter) ) {
 			// Find by single leading letter
@@ -78,7 +97,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		}
 
 		$this->view->assignMultiple(array(
-			'terms' => $terms,
+			'terms' => $terms, // Can vary => By search or sorting
+			'allTerms' => $this->termRepository->findAll(), // Always complete list
 			'filterByLetter' => $filterByLetter,
 			'letterList' => $availableLetters
 		));
@@ -91,16 +111,64 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function showAction(\Ecom\Ecomglossary\Domain\Model\Term $term) {
-		// Prevent access to a single term (show action) if
-		// the term uses an external Link as description. Redirects directly to the external Link
-		if ($term->getExternalLink() != '') {
-			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
-			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
-			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
+		// Handle term visits by session vars
+		//		for unique visits
+		//		if ip is not in exclude list
+		if(!$this->isExcludedIp) {
+			if ($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms')) {
+				$visitedTermsFromSession = unserialize($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms'));
+				if ($visitedTermsFromSession[$term->getUid()] !== true) {
+					$visitedTermsFromSession[$term->getUid()] = true;
 
-			$this->redirectToUri($linkToExternalDescription);
+					$GLOBALS['TSFE']->fe_user->setAndSaveSessionData($this->extensionName . '_visitedTerms', serialize($visitedTermsFromSession));
+
+					$term->setVisits($term->getVisits() + 1);
+					$this->updateAction($term);
+				}
+			} else {
+				$newVisitedTermsArray[$term->getUid()] = true;
+				$GLOBALS['TSFE']->fe_user->setAndSaveSessionData($this->extensionName . '_visitedTerms', serialize($newVisitedTermsArray));
+
+				$term->setVisits($term->getVisits() + 1);
+				$this->updateAction($term);
+			}
+
+			// Prevent access to a single term (show action) if
+			// the term uses an external Link as description. Redirects directly to the external Link
+			if (is_string($term->getExternalLink()) && $term->getExternalLink()) {
+				/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
+				$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
+				$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
+				$this->redirectToUri($linkToExternalDescription);
+				return;
+			}
+		}
+
+		/**
+		 * Finds all terms where the current term is set as related term.
+		 */
+		$termsRelatedToThisTerm = $this->termRepository->containsInRelatedTerms($term);
+
+		/**
+		 * Merges the related terms of this term
+		 * 		with the terms where the current term is set as related term.
+		 */
+		/** @var \Ecom\Ecomglossary\Domain\Model\Term $termObject */
+		foreach($termsRelatedToThisTerm as $termObject) {
+			if($term->getRelatedTerms()->contains($termObject)) continue;
+			$term->addRelatedTerm($termObject);
 		}
 		$this->view->assign('term', $term);
+	}
+
+	/**
+	 * update action
+	 *
+	 * @param \Ecom\Ecomglossary\Domain\Model\Term $term
+	 * @return void
+	 */
+	public function updateAction(\Ecom\Ecomglossary\Domain\Model\Term $term) {
+		$this->termRepository->update($term);
 	}
 
 	/**

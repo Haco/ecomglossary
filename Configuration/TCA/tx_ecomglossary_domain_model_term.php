@@ -10,6 +10,7 @@ return array(
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
+		'default_sortby' => 'ORDER BY title',
 		'dividers2tabs' => TRUE,
 		'hideAtCopy' => TRUE,
 		'versioningWS' => 2,
@@ -24,17 +25,19 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,term_type,short_description,external_link,description,sources',
+		'searchFields' => 'title,term_type,short_description,external_link,description,sources,related_terms,visits',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('ecomglossary') . 'Resources/Public/Icons/tx_ecomglossary_domain_model_term.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources,related_terms,visits',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links], sources, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, --palette--;;top_palette, --palette--;Header Options;header_palette, short_description, description;;;richtext:rte_transform[mode=ts_links],--palette--;Relations;bottom_palette, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
+		'top_palette' => array('showitem' => 'hidden;;1,visits', 'canNotCollapse' => 1),
 		'header_palette' => array('showitem' => 'title, external_link,--linebreak--,term_type', 'canNotCollapse' => 1),
+		'bottom_palette' => array('showitem' => 'sources,--linebreak--, related_terms', 'canNotCollapse' => 1),
 	),
 	'columns' => array(
 
@@ -159,6 +162,7 @@ return array(
 		),
 		'description' => array(
 			'exclude' => 1,
+			'l10n_mode' => 'prefixLangTitle',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.description',
 			'config' => array(
 				'type' => 'text',
@@ -221,6 +225,60 @@ return array(
 					),
 				),
 				'softref' => 'typolink',
+			),
+		),
+		'visits' => array(
+			'exclude' => 1,
+			'label' => 'Visits',
+			'l10n_display' => 'hideDiff',
+			'config' => array(
+				'foreign_table' => 'tx_ecomglossary_domain_model_term',
+				'foreign_field' => 'visits',
+				'readOnly' => 1,
+				'type' => 'input',
+				'size' => 11,
+				'eval' => 'trim'
+			),
+		),
+		'related_terms' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.related_terms',
+			'l10n_mode' => 'exclude',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_ecomglossary_domain_model_term',
+				'foreign_table_where' => 'AND l10n_parent = 0 AND tx_ecomglossary_domain_model_term.uid != ###THIS_UID### ORDER BY title',
+				'MM' => 'tx_ecomglossary_term_term_mm',
+				'size' => 10,
+				'autoSizeMax' => 30,
+				'maxitems' => 9999,
+				'multiple' => 0,
+				'wizards' => array(
+					'_PADDING' => 3,
+					'_VERTICAL' => 1,
+					'edit' => array(
+						'type' => 'popup',
+						'title' => 'Edit',
+						'script' => 'wizard_edit.php',
+						'icon' => 'edit2.gif',
+						'popup_onlyOpenIfSelected' => 1,
+						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+					),
+					'add' => Array(
+						'type' => 'script',
+						'title' => 'Create new',
+						'icon' => 'add.gif',
+						'params' => array(
+							'table' => 'tx_ecomglossary_domain_model_term',
+							'pid' => '###CURRENT_PID###',
+							'setValue' => 'prepend'
+						),
+						'script' => 'wizard_add.php',
+					),
+					'suggest' => array(
+						'type' => 'suggest',
+					),
+				),
 			),
 		),
 	),

@@ -104,4 +104,19 @@ class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			)
 		)->execute();
 	}
+
+	/**
+	 * @param string $term
+	 *
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function containsInRelatedTerms($term = '') {
+		$query = $this->createQuery();
+
+		return $query->matching(
+			$query->logicalOr(
+				$query->contains('relatedTerms', $term)
+			)
+		)->execute();
+	}
 }

@@ -25,6 +25,10 @@
 			<source>Search Result</source>
 			<target>Suchergebnis</target>
 		</trans-unit>
+		<trans-unit id="form.search" approved="yes" xml:space="preserve">
+			<source>Search</source>
+			<target>Suchen</target>
+		</trans-unit>
 		<trans-unit id="filterBy" approved="yes" xml:space="preserve">
 			<source>Active filter:</source>
 			<target>Aktiver Filter:</target>
@@ -58,8 +62,8 @@
 			<target>Kurzbeschreibung</target>
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.sources" approved="yes" xml:space="preserve">
-			<source>List of references:</source>
-			<target>Quellenangabe:</target>
+			<source>List of references</source>
+			<target>Quellenangabe</target>
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.term_type" approved="yes" xml:space="preserve">
 			<source>Type</source>
@@ -88,6 +92,10 @@
 		<trans-unit id="learnMore" approved="yes" xml:space="preserve">
 			<source>Learn more</source>
 			<target>Erfahren Sie mehr</target>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
+			<source>Related Terms</source>
+			<target>Themenverwandte Begriffe</target>
 		</trans-unit>
 		</body>
 	</file>

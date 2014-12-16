@@ -123,6 +123,10 @@
 	font-size: 1.8em;
 }
 
+.tx_ecomglossary-show-view a.morelink-btn:last-child {
+	margin-left: 1em;
+}
+
 .tx_ecomglossary-term-listing ul.f3-widget-paginator {
 	margin: 2em 0;
 }
@@ -188,7 +192,6 @@
 .pagination li.last {
 	display: none;
 }
-
 
 .typo3-message {
 	margin-bottom: 4px;
@@ -261,3 +264,18 @@
 
 .message-error a {
 	color: #aa0225; }
+
+
+ul.ui-autocomplete {
+	background: white;
+	width: 229px;
+	box-shadow: 0 0 6px #999;
+}
+ul.ui-autocomplete > li {
+	color: #555;
+	border-bottom: 1px solid #DDD;
+}
+ul.ui-autocomplete > li:hover {
+	background: #0083cb;
+	color: white;
+}
