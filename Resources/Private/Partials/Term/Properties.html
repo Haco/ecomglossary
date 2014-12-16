@@ -26,17 +26,21 @@
 			</div>
 		</f:if>
 		<f:if condition="{term.relatedTerms}">
-			<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" /></strong></p>
-			<ul class="list">
-				<f:for each="{term.relatedTerms}" as="relatedTerm">
-					<li>
-						<f:if condition="{relatedTerm.externalLink}">
-							<f:then><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
-							<f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
+			<div class="span6 tx_ecomglossary-term-related">
+				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" /></strong></p>
+				<ul class="list">
+					<f:for each="{term.relatedTerms}" as="relatedTerm">
+						<f:if condition="{term.uid} != {relatedTerm.uid}">
+							<li>
+								<f:if condition="{relatedTerm.externalLink}">
+									<f:then><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
+									<f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
+								</f:if>
+							</li>
 						</f:if>
-					</li>
-				</f:for>
-			</ul>
+					</f:for>
+				</ul>
+			</div>
 		</f:if>
 	</div>
 </article>

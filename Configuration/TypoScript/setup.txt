@@ -1,4 +1,3 @@
-
 plugin.tx_ecomglossary {
 	view {
 		templateRootPath = {$plugin.tx_ecomglossary.view.templateRootPath}
@@ -13,13 +12,13 @@ plugin.tx_ecomglossary {
 		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
 		shortDescMaxChars = {$plugin.tx_ecomglossary.settings.shortDescMaxChars}
 		shortDescAppend = {$plugin.tx_ecomglossary.settings.shortDescAppend}
+		excludeIpsForVisits = {$plugin.tx_ecomglossary.settings.excludeIpsForVisits}
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
 		# rewrittenPropertyMapper = 1
 	}
 }
-
 
 page.includeCSS {
 	ecomglossaryCss = EXT:ecomglossary/Resources/Public/Stylesheets/Application.css

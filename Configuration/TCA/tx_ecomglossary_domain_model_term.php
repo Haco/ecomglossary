@@ -247,7 +247,7 @@ return array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_ecomglossary_domain_model_term',
-				'foreign_table_where' => 'AND l10n_parent = 0 ORDER BY title',
+				'foreign_table_where' => 'AND l10n_parent = 0 AND tx_ecomglossary_domain_model_term.uid != ###THIS_UID### ORDER BY title',
 				'MM' => 'tx_ecomglossary_term_term_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
