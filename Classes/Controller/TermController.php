@@ -77,7 +77,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		if ( $this->request->hasArgument('searchTerm') ) {
 			$searchTerm = $this->request->getArgument('searchTerm');
 			// Delete non-word chars
-			$searchTerm = preg_replace('/[^A-z0-9\-\/ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
+			$searchTerm = preg_replace('/[^A-z0-9\-\/\s\.\,ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
 			// Get Results by searchTerm
 			$terms = $this->termRepository->findBySearchTerm($searchTerm)->count() ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
