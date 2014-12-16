@@ -58,8 +58,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 */
 	protected function initializeAction() {
 		// Explodes the developer IPs.
-		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], TRUE) : '';
-		$this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray) ? TRUE : FALSE;
+		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], TRUE) : array();
+		if($GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray) ? TRUE : FALSE;
 	}
 
 	/**
