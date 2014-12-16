@@ -268,11 +268,13 @@
 
 ul.ui-autocomplete {
 	background: white;
-	width: 229px;
+	width: 350px;
 	box-shadow: 0 0 6px #999;
 }
 ul.ui-autocomplete > li {
 	color: #555;
+	cursor: pointer;
+	padding: 4px 10px;
 	border-bottom: 1px solid #DDD;
 }
 ul.ui-autocomplete > li:hover {
