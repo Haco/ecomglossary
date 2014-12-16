@@ -27,7 +27,7 @@
 		</f:if>
 		<f:if condition="{term.relatedTerms}">
 			<div class="span6 tx_ecomglossary-term-related">
-				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" /></strong></p>
+				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" />:</strong></p>
 				<ul class="list">
 					<f:for each="{term.relatedTerms}" as="relatedTerm">
 						<f:if condition="{term.uid} != {relatedTerm.uid}">
