@@ -34,7 +34,7 @@
 		</f:if>
 		<f:if condition="{term.sources}">
 			<div class="span6 tx_ecomglossary-term-sources">
-				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" /></strong></p>
+				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" />:</strong></p>
 				<ul class="list">
 					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
 						<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
