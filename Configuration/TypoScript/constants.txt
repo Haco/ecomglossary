@@ -16,9 +16,13 @@ plugin.tx_ecomglossary {
 	settings {
 		# cat=plugin.tx_ecomglossary/enable/a; type=boolean; label=Empty Letter Navigation: Even show the letters without term results.
 		showEmptyLetters = 1
-		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Pagebrowser terms per page: Sets the number of term entries per page.
+		# cat=plugin.tx_ecomglossary/enable/b; type=boolean; label=Pagebrowser Result Range: Displays the result range of the Paginator. (Display terms X to Y of Z)
+		displayResultRange = 1
+		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Pagebrowser maximum Page Links: Sets the maximum number of visible page links (at once) in the Paginator-Navigation. Leftover links replaced by "...".
+		maximumNumberOfLinks = 5
+		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Pagebrowser terms per page: Sets the number of term entries per page.
 		termsPerPage = 15
-		# cat=plugin.tx_ecomglossary/settings/a; type=int; label=Short Description Max Chars.: Max characters until crop (List View).
+		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Short Description Max Chars.: Max characters until crop (List View).
 		shortDescMaxChars = 200
 		# cat=plugin.tx_ecomglossary/settings/a; type=string; label=Short Description Appendix: Append custom string after crop (List View).
 		shortDescAppend = ...

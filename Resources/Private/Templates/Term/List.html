@@ -19,10 +19,10 @@
 					<f:for each="{letterList}" as="result" key="letter">
 						<f:if condition="{0: result, 1:settings.showEmptyLetters} == {0: 'empty', 1: '1'}">
 							<f:then>
-								<span class="tx_ecomglossary-empty-letter">{letter}</span>
+								<span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true">{letter}</f:link.action>
+								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
@@ -39,7 +39,7 @@
 					<f:if condition="{0: filterByLetter} != {0: ''}">
 						<strong><f:translate key="filterBy" /> {filterByLetter}</strong>
 					</f:if>
-					<f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: settings.termsPerPage, insertAbove: 1, insertBelow: 1}">
+					<ecomvh:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks, displayResultRange: settings.displayResultRange}">
 						<ul class="tx_ecomglossary-term-listing-terms">
 							<f:for each="{paginatedTerms}" as="term">
 								<li>
@@ -70,7 +70,7 @@
 								</li>
 							</f:for>
 						</ul>
-					</f:widget.paginate>
+					</ecomvh:widget.paginate>
 				</div>
 			</f:then>
 			<f:else>

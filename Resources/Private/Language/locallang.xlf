@@ -74,6 +74,9 @@
 		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms">
 			<source>Related Terms</source>
 		</trans-unit>
+		<trans-unit id="paginator.showResultRange">
+			<source>Showing terms %1$s to %2$s of %3$s.</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

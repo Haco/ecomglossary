@@ -69,6 +69,29 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function listAction($filterByLetter = '') {
+		/**
+		 * Session Handling for letter filter
+		 */
+		if($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '') {
+			$filterByLetter = $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter');
+		}
+		// Set session for letter if letter is selected
+		if($filterByLetter != '') $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
+
+		/**
+		 * Get items per page by form select from paginator (Index View)
+		 *
+		 * @see \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController;
+		 */
+		if(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '') {
+			$itemsPerPage = (int) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'];
+			$GLOBALS['TSFE']->fe_user->setAndSaveSessionData('itemsPerPage', $itemsPerPage);
+		}
+
+		if($GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage') != '') {
+			$itemsPerPage = $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage');
+		}
+
 		$terms = $this->termRepository->findAll();
 		// All available letters (for letter navigation)
 		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
@@ -100,7 +123,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			'terms' => $terms, // Can vary => By search or sorting
 			'allTerms' => $this->termRepository->findAll(), // Always complete list
 			'filterByLetter' => $filterByLetter,
-			'letterList' => $availableLetters
+			'letterList' => $availableLetters,
+			'termsPerPage' => $itemsPerPage = ($itemsPerPage) ? $itemsPerPage : $this->settings['termsPerPage'],
 		));
 	}
 

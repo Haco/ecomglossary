@@ -87,7 +87,7 @@ return array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
-				'default' => 1
+				'default' => 0
 			),
 		),
 		'starttime' => array(

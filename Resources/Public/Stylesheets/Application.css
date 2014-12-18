@@ -188,9 +188,9 @@
 	color: #fff;
 }
 
-.tx_ecomglossary-term-listing ul.f3-widget-paginator li.first,
-.pagination li.last {
-	display: none;
+.tx_ecomglossary-term-listing ul.f3-widget-paginator li.paginator-extendto {
+	background: none;
+	color: grey;
 }
 
 .typo3-message {
