@@ -6,7 +6,7 @@
 
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
-			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true">
+			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true" arguments="{resetSearch:1}">
 				<div>
 					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
@@ -27,7 +27,7 @@
 						</f:if>
 					</f:for>
 					<div class="tx_ecomglossary-view-all-btn">
-						<f:link.action action="list" class="btn" noCacheHash="true" noCache="true"><f:translate key="showAllEntries" /></f:link.action>
+						<f:link.action action="list" class="btn" arguments="{resetFilter:1}" noCacheHash="true" noCache="true"><f:translate key="showAllEntries" /></f:link.action>
 					</div>
 				</div>
 			</f:if>
@@ -74,7 +74,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="list" class="morelink-btn" noCache="true" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
+				<f:link.action action="list" class="morelink-btn" noCache="true" arguments="{resetFilter:1}" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>

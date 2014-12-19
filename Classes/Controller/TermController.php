@@ -53,7 +53,6 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 *
 	 * Override this method to solve tasks which all actions have in
 	 * common.
-	 *
 	 * @return void
 	 */
 	protected function initializeAction() {
@@ -66,49 +65,62 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * action list
 	 *
 	 * @param string $filterByLetter
+	 * @param boolean $resetFilter
+	 * @param boolean $resetSearch
 	 * @return void
 	 */
-	public function listAction($filterByLetter = '') {
-		/**
-		 * Session Handling for letter filter
-		 */
-		if($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '') {
-			$filterByLetter = $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter');
+	public function listAction($filterByLetter = '', $resetFilter = false, $resetSearch = false) {
+		// Get searchterm from session
+		$searchTermFromSession = $filterByLetter ? false : $GLOBALS['TSFE']->fe_user->getSessionData('searchTerm');
+		// Reset filter (removesSessionData)
+		if($resetFilter || $resetSearch) {
+			if(!$resetSearch) {
+				$GLOBALS['TSFE']->fe_user->setKey('ses','searchTerm','');
+				$searchTermFromSession = false;
+			}
+			$GLOBALS['TSFE']->fe_user->setKey('ses','filterByLetter','');
+			$filterByLetter = false;
 		}
+
+		// Session handling for letter filter
+		if($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '' && !$resetFilter) $filterByLetter = $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter');
 		// Set session for letter if letter is selected
 		if($filterByLetter != '') $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
 
 		/**
 		 * Get items per page by form select from paginator (Index View)
-		 *
 		 * @see \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController;
 		 */
 		if(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '') {
 			$itemsPerPage = (int) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'];
 			$GLOBALS['TSFE']->fe_user->setAndSaveSessionData('itemsPerPage', $itemsPerPage);
 		}
+		if($GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage') != '') $itemsPerPage = $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage');
 
-		if($GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage') != '') {
-			$itemsPerPage = $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage');
-		}
 
+
+		////
+		// Repository Handling
+		///
 		$terms = $this->termRepository->findAll();
+
 		// All available letters (for letter navigation)
 		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
 
 		// Search for term
-		if ( $this->request->hasArgument('searchTerm') ) {
-			$searchTerm = $this->request->getArgument('searchTerm');
+		if ($this->request->hasArgument('searchTerm') || $searchTermFromSession) {
+			$searchTerm = $this->request->hasArgument('searchTerm') ? $this->request->getArgument('searchTerm') : $searchTermFromSession;
 			// Delete non-word chars
 			$searchTerm = preg_replace('/[^A-z0-9\-\/\s\.\,ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
 			// Get Results by searchTerm
+			$GLOBALS['TSFE']->fe_user->setAndSaveSessionData('searchTerm', $searchTerm);
 			$terms = $this->termRepository->findBySearchTerm($searchTerm)->count() ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
 		}
 
 		// Filter by letter navigation
-		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter) ) {
+		if (is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter)) {
 			// Find by single leading letter
 			$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
 		} elseif( $filterByLetter === '0-9' ) {
