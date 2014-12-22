@@ -127,8 +127,32 @@
 	margin-left: 1em;
 }
 
-.tx_ecomglossary-term-listing ul.f3-widget-paginator {
+.tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
+	float: right;
+}
+
+.tx-ecomglossary #ecomglossary-paginator-items-per-page-form label {
+	margin-right: 0.5em;
+	display: inline;
+}
+
+.tx-ecomglossary form#ecomglossary-paginator-items-per-page-form select {
+	border: 1px solid #B0B4B7;
+	background: url('../Icons/selectArrow.png') no-repeat top right white;
+	height: 29px;
+	padding-right: 30px;
+	margin: 0;
+	width: 125px;
+}
+
+.tx-ecomglossary-paginator-wrap {
 	margin: 2em 0;
+}
+
+.tx_ecomglossary-term-listing ul.f3-widget-paginator {
+	display: inline-block;
+	*display: inline;
+	margin: 0;
 }
 
 .tx_ecomglossary-term-listing ul.f3-widget-paginator:after {
@@ -280,4 +304,12 @@ ul.ui-autocomplete > li {
 ul.ui-autocomplete > li:hover {
 	background: #0083cb;
 	color: white;
+}
+
+@media only screen and (max-width: 760px) {
+	.tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
+		margin-top: 1em;
+		float: none;
+		display: block;
+	}
 }

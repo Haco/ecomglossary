@@ -8,11 +8,9 @@ if (!defined('TYPO3_MODE')) {
 	'Ecomglossary',
 	array(
 		'Term' => 'list, show',
-		
 	),
 	// non-cacheable actions
 	array(
 		'Term' => '',
-		
 	)
 );

@@ -70,9 +70,9 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function listAction($filterByLetter = '', $resetFilter = false, $resetSearch = false) {
-		// Get searchterm from session
+		// Get search term from session
 		$searchTermFromSession = $filterByLetter ? false : $GLOBALS['TSFE']->fe_user->getSessionData('searchTerm');
-		// Reset filter (removesSessionData)
+		// Reset filter (removes SessionData)
 		if($resetFilter || $resetSearch) {
 			if(!$resetSearch) {
 				$GLOBALS['TSFE']->fe_user->setKey('ses','searchTerm','');
