@@ -18,13 +18,15 @@ plugin.tx_ecomglossary {
 		showEmptyLetters = 1
 		# cat=plugin.tx_ecomglossary/enable/b; type=boolean; label=Pagebrowser Result Range: Displays the result range of the Paginator. (Display terms X to Y of Z)
 		displayResultRange = 1
-		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Pagebrowser maximum Page Links: Sets the maximum number of visible page links (at once) in the Paginator-Navigation. Leftover links replaced by "...".
+		# cat=plugin.tx_ecomglossary/settings/c; type=int+; label=Pagebrowser maximum Page Links: Sets the maximum number of visible page links (at once) in the Paginator-Navigation. Leftover links replaced by "...".
 		maximumNumberOfLinks = 5
-		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Pagebrowser terms per page: Sets the number of term entries per page.
+		# cat=plugin.tx_ecomglossary/settings/d; type=int+; label=Pagebrowser terms per page: Sets the default number of term entries per page.
 		termsPerPage = 15
-		# cat=plugin.tx_ecomglossary/settings/a; type=int+; label=Short Description Max Chars.: Max characters until crop (List View).
+		# cat=plugin.tx_ecomglossary/settings/e; type=boolean; label=Force TermsPerPage: Forces the number of term entries per page. Always overrides FE user input.
+		forceTermsPerPage = 0
+		# cat=plugin.tx_ecomglossary/settings/z; type=int+; label=Short Description Max Chars.: Max characters until crop (List View).
 		shortDescMaxChars = 200
-		# cat=plugin.tx_ecomglossary/settings/a; type=string; label=Short Description Appendix: Append custom string after crop (List View).
+		# cat=plugin.tx_ecomglossary/settings/z; type=string; label=Short Description Appendix: Append custom string after crop (List View).
 		shortDescAppend = ...
 		# cat=plugin.tx_ecomglossary/settings/z; type=string; label=Exclude Dev. IPs: Comma separated list of IPs to exclude from counting the term visits.
 		excludeIpsForVisits =

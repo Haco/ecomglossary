@@ -136,7 +136,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			'allTerms' => $this->termRepository->findAll(), // Always complete list
 			'filterByLetter' => $filterByLetter,
 			'letterList' => $availableLetters,
-			'termsPerPage' => $itemsPerPage = ($itemsPerPage) ? $itemsPerPage : $this->settings['termsPerPage'],
+			'termsPerPage' => $itemsPerPage = $this->settings['forceTermsPerPage'] ? $itemsPerPage = $this->settings['termsPerPage'] : (($itemsPerPage) ? $itemsPerPage : $this->settings['termsPerPage']),
 		));
 	}
 

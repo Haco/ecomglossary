@@ -9,6 +9,7 @@ plugin.tx_ecomglossary {
 	}
 	settings {
 		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
+		forceTermsPerPage = {$plugin.tx_ecomglossary.settings.forceTermsPerPage}
 		displayResultRange = {$plugin.tx_ecomglossary.settings.displayResultRange}
 		maximumNumberOfLinks = {$plugin.tx_ecomglossary.settings.maximumNumberOfLinks}
 		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}

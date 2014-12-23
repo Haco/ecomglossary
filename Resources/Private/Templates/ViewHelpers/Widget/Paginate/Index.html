@@ -4,10 +4,12 @@
 <f:if condition="{configuration.insertAbove}">
 	<div class="tx-ecomglossary-paginator-wrap">
 		<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration}" />
-		<f:form id="ecomglossary-paginator-items-per-page-form" method="post">
-			<label for="ecomglossary-select-items-per-page">Items per page</label>
-			<f:form.select additionalAttributes="{onchange: 'this.form.submit()'}" id="ecomglossary-select-items-per-page" value="{f:if(condition: '{itemsPerPage} == {settings.termsPerPage}', then: 0, else: itemsPerPage)}" name="tx_ecomglossary_ecomglossary[itemsPerPage]" options="{0: '', 5:5, 15:15, 25:25, 50:50}" />
-		</f:form>
+		<f:if condition="{settings.forceTermsPerPage} != 1">
+			<f:form id="ecomglossary-paginator-items-per-page-form" method="post">
+				<label for="ecomglossary-select-items-per-page">Items per page</label>
+				<f:form.select additionalAttributes="{onchange: 'this.form.submit()'}" id="ecomglossary-select-items-per-page" value="{f:if(condition: '{itemsPerPage} == {settings.termsPerPage}', then: 0, else: itemsPerPage)}" name="tx_ecomglossary_ecomglossary[itemsPerPage]" options="{0: '', 5:5, 15:15, 25:25, 50:50}" />
+			</f:form>
+		</f:if>
 	</div>
 </f:if>
 <f:renderChildren arguments="{contentArguments}" />
