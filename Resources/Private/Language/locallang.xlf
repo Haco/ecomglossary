@@ -77,6 +77,12 @@
 		<trans-unit id="paginator.showResultRange">
 			<source>Showing terms %1$s to %2$s of %3$s.</source>
 		</trans-unit>
+		<trans-unit id="paginator.itemsPerPage">
+			<source>Items per page</source>
+		</trans-unit>
+		<trans-unit id="label.default">
+			<source>[Default]</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

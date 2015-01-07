@@ -168,16 +168,16 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 				$term->setVisits($term->getVisits() + 1);
 				$this->updateAction($term);
 			}
+		}
 
-			// Prevent access to a single term (show action) if
-			// the term uses an external Link as description. Redirects directly to the external Link
-			if (is_string($term->getExternalLink()) && $term->getExternalLink()) {
-				/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
-				$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
-				$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
-				$this->redirectToUri($linkToExternalDescription);
-				return;
-			}
+		// Prevent access to a single term (show action) if
+		// the term uses an external Link as description. Redirects directly to the external Link
+		if (is_string($term->getExternalLink()) && $term->getExternalLink()) {
+			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
+			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
+			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
+			$this->redirectToUri($linkToExternalDescription);
+			return;
 		}
 
 		/**

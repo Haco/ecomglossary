@@ -101,6 +101,14 @@
 			<source>Showing terms %1$s to %2$s of %3$s.</source>
 			<target>Zeige Begriffe %1$s bis %2$s von %3$s.</target>
 		</trans-unit>
+		<trans-unit id="paginator.itemsPerPage" approved="yes" xml:space="preserve">
+			<source>Items per page</source>
+			<target>Einträge pro Seite</target>
+		</trans-unit>
+		<trans-unit id="label.default" approved="yes" xml:space="preserve">
+			<source>[Default]</source>
+			<target>[Standard]</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

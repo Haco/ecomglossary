@@ -22,7 +22,7 @@
 				<source>Here you can add links as sources. Generates a link list of references. (Line separated)</source>
 			</trans-unit>
 			<trans-unit id="related_terms.description">
-				<source>Related terms.</source>
+				<source>Related terms will be listed as reference. But also the current term will be listed as reference in every selected term below.</source>
 			</trans-unit>
 		</body>
 	</file>
