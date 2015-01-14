@@ -301,7 +301,8 @@ ul.ui-autocomplete > li {
 	padding: 4px 10px;
 	border-bottom: 1px solid #DDD;
 }
-ul.ui-autocomplete > li:hover {
+ul.ui-autocomplete > li:hover,
+ul.ui-autocomplete > li:focus {
 	background: #0083cb;
 	color: white;
 }

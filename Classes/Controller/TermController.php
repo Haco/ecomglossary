@@ -1,7 +1,6 @@
 <?php
 namespace Ecom\Ecomglossary\Controller;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -58,7 +57,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	protected function initializeAction() {
 		// Explodes the developer IPs.
 		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], TRUE) : array();
-		if($GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray) ? TRUE : FALSE;
+		if ( $GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray ) ? TRUE : FALSE;
 	}
 
 	/**
@@ -73,8 +72,8 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		// Get search term from session
 		$searchTermFromSession = $filterByLetter ? false : $GLOBALS['TSFE']->fe_user->getSessionData('searchTerm');
 		// Reset filter (removes SessionData)
-		if($resetFilter || $resetSearch) {
-			if(!$resetSearch) {
+		if ( $resetFilter || $resetSearch ) {
+			if ( !$resetSearch ) {
 				$GLOBALS['TSFE']->fe_user->setKey('ses','searchTerm','');
 				$searchTermFromSession = false;
 			}
@@ -83,20 +82,19 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		}
 
 		// Session handling for letter filter
-		if($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '' && !$resetFilter) $filterByLetter = $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter');
+		if ( $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '' && !$resetFilter ) $filterByLetter = $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter');
 		// Set session for letter if letter is selected
-		if($filterByLetter != '') $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
+		if ( $filterByLetter != '' ) $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
 
 		/**
 		 * Get items per page by form select from paginator (Index View)
 		 * @see \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController;
 		 */
-		if(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '') {
+		if ( \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '' ) {
 			$itemsPerPage = (int) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'];
 			$GLOBALS['TSFE']->fe_user->setAndSaveSessionData('itemsPerPage', $itemsPerPage);
 		}
-		if($GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage') != '') $itemsPerPage = $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage');
-
+		if ( $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage') != '' ) $itemsPerPage = $GLOBALS['TSFE']->fe_user->getSessionData('itemsPerPage');
 
 
 		////
@@ -108,7 +106,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
 
 		// Search for term
-		if ($this->request->hasArgument('searchTerm') || $searchTermFromSession) {
+		if ( $this->request->hasArgument('searchTerm') || $searchTermFromSession ) {
 			$searchTerm = $this->request->hasArgument('searchTerm') ? $this->request->getArgument('searchTerm') : $searchTermFromSession;
 			// Delete non-word chars
 			$searchTerm = preg_replace('/[^A-z0-9\-\/\s\.\,ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
@@ -120,13 +118,13 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		}
 
 		// Filter by letter navigation
-		if (is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter)) {
+		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter) ) {
 			// Find by single leading letter
 			$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
-		} elseif( $filterByLetter === '0-9' ) {
+		} elseif ( $filterByLetter === '0-9' ) {
 			// Find all in 0-9 range
 			$terms = $this->termRepository->findAllWithLeadingNumber();
-		} elseif($filterByLetter != '') {
+		} elseif ( $filterByLetter != '' ) {
 			$this->addFlashMessage(LocalizationUtility::translate('error.forbiddenFilter','ecomglossary'), LocalizationUtility::translate('error.forbiddenFilter.heading','ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 			$filterByLetter = '';
 		}
@@ -150,10 +148,10 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		// Handle term visits by session vars
 		//		for unique visits
 		//		if ip is not in exclude list
-		if(!$this->isExcludedIp) {
-			if ($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms')) {
+		if ( !$this->isExcludedIp ) {
+			if ( $GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms') ) {
 				$visitedTermsFromSession = unserialize($GLOBALS['TSFE']->fe_user->getSessionData($this->extensionName . '_visitedTerms'));
-				if ($visitedTermsFromSession[$term->getUid()] !== true) {
+				if ( $visitedTermsFromSession[$term->getUid()] !== true ) {
 					$visitedTermsFromSession[$term->getUid()] = true;
 
 					$GLOBALS['TSFE']->fe_user->setAndSaveSessionData($this->extensionName . '_visitedTerms', serialize($visitedTermsFromSession));
@@ -172,7 +170,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 		// Prevent access to a single term (show action) if
 		// the term uses an external Link as description. Redirects directly to the external Link
-		if (is_string($term->getExternalLink()) && $term->getExternalLink()) {
+		if ( is_string($term->getExternalLink()) && $term->getExternalLink() ) {
 			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObjectRenderer */
 			$contentObjectRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 			$linkToExternalDescription = $contentObjectRenderer->typoLink_URL(array('parameter' => $term->getExternalLink()));
@@ -191,7 +189,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		 */
 		/** @var \Ecom\Ecomglossary\Domain\Model\Term $termObject */
 		foreach($termsRelatedToThisTerm as $termObject) {
-			if($term->getRelatedTerms()->contains($termObject)) continue;
+			if ( $term->getRelatedTerms()->contains($termObject) ) continue;
 			$term->addRelatedTerm($termObject);
 		}
 		$this->view->assign('term', $term);
@@ -222,7 +220,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			$title = $object->getTitle();
 			$firstLetter = ucfirst(substr($this->convertUTF8toASCII($title),0,1));
 			if ( preg_match('/[^A-Za-z]/', $firstLetter) || array_key_exists($firstLetter, $letterList) ) {
-				if ( preg_match('/[0-9]/', $firstLetter) && !array_key_exists('0-9', $letterList)) {
+				if ( preg_match('/[0-9]/', $firstLetter) && !array_key_exists('0-9', $letterList) ) {
 					$letterList['0-9'] = 'hasResult';
 				}
 				continue;
@@ -242,7 +240,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 				$letterList[$value] = 'empty';
 			}
 			// Add the empty 0-9 range if not already exists
-			if (!array_key_exists('0-9', $letterList)) {
+			if ( !array_key_exists('0-9', $letterList) ) {
 				$letterList['0-9'] = 'empty';
 			}
 		}

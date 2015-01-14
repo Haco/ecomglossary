@@ -42,14 +42,14 @@ class ExplodeViewhelper extends  \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
 	 * @return array Exploded parts
 	 */
 	public function render($subject = NULL, $delimiter = ',', $removeEmpty = TRUE) {
-		if ($subject === NULL) {
+		if ( $subject === NULL ) {
 			$subject = $this->renderChildren();
 		}
 
-		if ($delimiter == '\n') { $delimiter = "\n"; }
-		if ($delimiter == '\r') { $delimiter = "\r"; }
-		if ($delimiter == '\r\n') { $delimiter = "\r\n"; }
-		if ($delimiter == '\t') { $delimiter = "\t"; }
+		if ( $delimiter == '\n' ) { $delimiter = "\n"; }
+		if ( $delimiter == '\r' ) { $delimiter = "\r"; }
+		if ( $delimiter == '\r\n' ) { $delimiter = "\r\n"; }
+		if ( $delimiter == '\t' ) { $delimiter = "\t"; }
 
 		return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiter, $subject, $removeEmpty);
 	}
