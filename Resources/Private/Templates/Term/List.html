@@ -6,7 +6,7 @@
 
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
-			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true" arguments="{resetSearch:1}">
+			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true">
 				<div>
 					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
@@ -22,12 +22,12 @@
 								<span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true" noCache="true"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
+								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
 					<div class="tx_ecomglossary-view-all-btn">
-						<f:link.action action="list" class="btn" arguments="{resetFilter:1}" noCacheHash="true" noCache="true"><f:translate key="showAllEntries" /></f:link.action>
+						<f:link.action action="reset" class="btn" noCacheHash="true"><f:translate key="showAllEntries" /></f:link.action>
 					</div>
 				</div>
 			</f:if>
@@ -74,7 +74,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="list" class="morelink-btn" noCache="true" arguments="{resetFilter:1}" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
+				<f:link.action action="reset" class="morelink-btn" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>

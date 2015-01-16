@@ -7,10 +7,10 @@ if (!defined('TYPO3_MODE')) {
 	'Ecom.' . $_EXTKEY,
 	'Ecomglossary',
 	array(
-		'Term' => 'list, show',
+		'Term' => 'list, show, reset',
 	),
 	// non-cacheable actions
 	array(
-		'Term' => '',
+		'Term' => 'reset',
 	)
 );
