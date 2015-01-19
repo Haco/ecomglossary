@@ -8,6 +8,7 @@ plugin.tx_ecomglossary {
 		storagePid = {$plugin.tx_ecomglossary.persistence.storagePid}
 	}
 	settings {
+		termsPerPageOptionSets = {$plugin.tx_ecomglossary.settings.termsPerPageOptionSets}
 		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
 		forceTermsPerPage = {$plugin.tx_ecomglossary.settings.forceTermsPerPage}
 		displayResultRange = {$plugin.tx_ecomglossary.settings.displayResultRange}

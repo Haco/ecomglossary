@@ -35,6 +35,25 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 	protected $objects;
 
 	/**
+	 * Override ItemsPerPage Selectbox:
+	 * "NumberOfItems:Label" Option sets for the "Items per Page" Select-Box.
+	 *
+	 * ===========================
+	 * E.g:
+	 * 		array(
+	 *			0 => 'Default',
+	 * 			5 => 5,
+	 * 			10 => 10,
+	 * 		);
+	 *=============================
+	 *
+	 * "0" is always the default value.
+	 *
+	 * @var array $itemsPerPageOptionSets
+	 */
+	protected $itemsPerPageOptionSets;
+
+	/**
 	 * @var integer $totalAmountOfObjects
 	 */
 	protected $totalAmountOfObjects;
@@ -63,6 +82,22 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 		\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'], FALSE);
 		$this->numberOfPages = ceil(count($this->objects) / (int)$this->configuration['itemsPerPage']);
 		$this->maximumNumberOfLinks = (int)$this->configuration['maximumNumberOfLinks'];
+		// Sets the itemsperpage options
+
+		$itemsPerPageOptionSets = $this->widgetConfiguration['configuration']['itemsPerPageOptionSets'];
+		// Generates OptionSet for ItemsPerPage Selector-Box
+		if (!empty($itemsPerPageOptionSets) && is_array($itemsPerPageOptionSets)) {
+			$this->itemsPerPageOptionSets = $itemsPerPageOptionSets;
+		} else {
+			// Generates the default OptionSet for ItemsPerPage
+			$this->itemsPerPageOptionSets = array(
+				0 => 'Default',
+				5 => 5,
+				15 => 15,
+				25 => 25,
+				50 => 50
+			);
+		}
 	}
 
 	/**
@@ -97,6 +132,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 			$displayRangeResults = false;
 		}
 
+		$this->view->assign('itemsPerPageOptionSets', $this->itemsPerPageOptionSets);
 		$this->view->assign('itemsPerPage', $itemsPerPage);
 		$this->view->assign('displayRange', $displayRangeResults);
 		$this->view->assign('totalAmount', $this->totalAmountOfObjects);

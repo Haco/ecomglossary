@@ -49,9 +49,15 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 	/**
 	 * Pagination
-	 * 		Holds the Items Per Page from session or postVars
+	 * 		Holds the number of ItemsPerPage from session or postVars
 	 */
 	protected $itemsPerPage = NULL;
+
+	/**
+	 * Pagination
+	 * 		Holds the options for the itemsPerPage select box
+	 */
+	protected $itemsPerPageOptionSets = NULL;
 
 	/**
 	 * Initializes the controller before invoking an action method.
@@ -64,6 +70,24 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		// Explodes the developer IPs.
 		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], TRUE) : array();
 		if ( $GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray ) ? TRUE : FALSE;
+
+		// Generates OptionSet for ItemsPerPage Selector-Box
+		if (!empty($this->settings['termsPerPageOptionSets'])) {
+			foreach(GeneralUtility::trimExplode(',', $this->settings['termsPerPageOptionSets'], true) as $option) {
+				$tempArray = GeneralUtility::trimExplode(':', $option);
+				$itemsPerPageOptionsArray[$tempArray[0]] = $tempArray[1];
+			}
+			$this->itemsPerPageOptionSets = $itemsPerPageOptionsArray;
+		} else {
+			// Generates the default OptionSet for ItemsPerPage
+			$this->itemsPerPageOptionSets = array(
+				0 => LocalizationUtility::translate('label.default', 'ecomglossary'),
+				5 => 5,
+				15 => 15,
+				25 => 25,
+				50 => 50
+			);
+		}
 
 		/**
 		 * Get items per page by form select from paginator (Index View)
@@ -97,7 +121,6 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		$filterByLetter = ($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '') ? $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') : $filterByLetter;
 		// Set session for letter if letter is selected
 		if ( $filterByLetter != '' ) $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
-
 
 
 		////
@@ -143,6 +166,7 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			'filterByLetter' => $filterByLetter,
 			'letterList' => $availableLetters,
 			'termsPerPage' => $itemsPerPage = $this->settings['forceTermsPerPage'] ? $itemsPerPage = $this->settings['termsPerPage'] : (($this->itemsPerPage) ? $this->itemsPerPage : $this->settings['termsPerPage']),
+			'itemsPerPageOptionSets' => $this->itemsPerPageOptionSets,
 		));
 	}
 
