@@ -6,7 +6,7 @@
 
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
-			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" absolute="1" noCache="true">
+			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true" noCache="true">
 				<div>
 					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
