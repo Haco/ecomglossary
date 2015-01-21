@@ -9,7 +9,6 @@
 #tx_ecomglossary-searchform {
 	margin-bottom: 2em;
 }
-
 #tx_ecomglossary-searchform input#tx_ecomglossary-searchTerm {
 	background: none repeat scroll 0% 0% #FFF;
 	color: #888 !important;
@@ -69,7 +68,7 @@
 	*display: inline;
 	zoom: 1;
 	text-align: center;
-	margin: 0px 0px 0px 5px;
+	margin: 0;
 	padding: 0;
 	background: #0083cb;
 }
@@ -95,10 +94,11 @@
 .tx_ecomglossary-term-listing ul li h3 {
 	font-size: 1.9em;
 	color: black;
+	margin-bottom: 0.4em;
 }
 
-.tx_ecomglossary-term-listing ul li h3 small {
-	font-size: 0.5em;
+.tx_ecomglossary-term-listing-terms small {
+	color: #999999;
 }
 
 .tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc {

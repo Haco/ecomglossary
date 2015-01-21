@@ -7,7 +7,7 @@
 		<div class="tx_ecomglossary-header">
 			<f:form id="tx_ecomglossary-searchform" method="POST">
 				<div>
-					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/>
+					<span class="input-span-wrap"><f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/></span>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
 					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
 				</div>
@@ -47,11 +47,11 @@
 										<f:if condition="{term.externalLink}">
 											<span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
 										</f:if>
-										<f:if condition="{term.termType}">
-											<br>
-											<small><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></small>
-										</f:if>
 									</h3>
+									<f:if condition="{term.termType}">
+										<small><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></small>
+										<br/><br/>
+									</f:if>
 									<f:if condition="{term.shortDescription}">
 										<f:then>
 											<p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}
