@@ -86,6 +86,9 @@
 		<trans-unit id="label.lastModified">
 			<source>Last modified</source>
 		</trans-unit>
+		<trans-unit id="label.reset">
+			<source>Reset Search</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

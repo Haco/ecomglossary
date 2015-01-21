@@ -113,6 +113,10 @@
 			<source>Last modified</source>
 			<target>Letzte Änderung</target>
 		</trans-unit>
+		<trans-unit id="label.reset" approved="yes" xml:space="preserve">
+			<source>Reset Search</source>
+			<target>Zurücksetzen</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

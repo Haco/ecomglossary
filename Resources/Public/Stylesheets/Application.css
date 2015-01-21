@@ -22,6 +22,18 @@
 	color: #0083cb !important;
 }
 
+#tx_ecomglossary-searchform a.tx_ecomglossary-search-reset {
+	background: #B3B3B3;
+	color: white;
+	float: left;
+	font-size: 0.8em;
+	padding: 0 5px;
+}
+
+#tx_ecomglossary-searchform a.tx_ecomglossary-search-reset:hover {
+	background: #999999;
+}
+
 #tx_ecomglossary-searchform input.btn.submit {
 	background: none repeat scroll 0% 0% #0083CB;
 	color: #FFF;

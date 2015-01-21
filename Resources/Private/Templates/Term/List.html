@@ -11,6 +11,10 @@
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
 					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
 				</div>
+				<f:if condition="{searchTerm}">
+					<f:link.action action="reset" class="tx_ecomglossary-search-reset"><f:translate key="label.reset" /></f:link.action>
+					<div class="clearfix"></div>
+				</f:if>
 			</f:form>
 			<f:if condition="{letterList}">
 				<strong><f:translate key="filterTerms" /></strong>
