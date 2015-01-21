@@ -13,10 +13,14 @@
 #tx_ecomglossary-searchform input#tx_ecomglossary-searchTerm {
 	background: none repeat scroll 0% 0% #FFF;
 	color: #888 !important;
-	font-size: 11px;
-	padding: 9px 12px;
+	padding: 8px 12px;
 	border: 1px solid #D7D7D7 !important;
 	margin: 0px;
+}
+
+#tx_ecomglossary-searchform input#tx_ecomglossary-searchTerm.active-searchterm {
+	border-color: #0083cb !important;
+	color: #0083cb !important;
 }
 
 #tx_ecomglossary-searchform input.btn.submit {
@@ -27,6 +31,10 @@
 	border: medium none;
 	position: relative;
 	margin-left: -4px;
+}
+
+#tx_ecomglossary-searchform input.btn.submit:hover {
+	background: #006aa3;
 }
 
 .tx_ecomglossary-letter-navigation {
@@ -73,7 +81,10 @@
 }
 
 .tx_ecomglossary-view-all-btn:hover a,
-.tx_ecomglossary-view-all-btn a:hover {
+.tx_ecomglossary-view-all-btn:focus a,
+.tx_ecomglossary-view-all-btn a:hover,
+.tx_ecomglossary-view-all-btn a:focus {
+	background: #006aa3;
 	color: white !important;
 }
 
@@ -117,7 +128,15 @@
 .tx_ecomglossary-show-view article {
 	margin-top: 1.5em;
 }
-
+.tx_ecomglossary-show-view span.term-revision {
+	float: right;
+}
+.tx_ecomglossary-show-view span.term-revision small {
+	font-size: smaller;
+}
+.tx_ecomglossary-show-view article header {
+	margin-left: 0 !important;
+}
 .tx_ecomglossary-show-view article header h2 {
 	color: #0083cb;
 	font-size: 1.8em;
@@ -302,8 +321,9 @@ ul.ui-autocomplete > li {
 	border-bottom: 1px solid #DDD;
 }
 ul.ui-autocomplete > li:hover,
-ul.ui-autocomplete > li:focus {
-	background: #0083cb;
+ul.ui-autocomplete > li:focus,
+ul.ui-autocomplete > li.ui-state-focus {
+	background: #0083cb !important;
 	color: white;
 }
 

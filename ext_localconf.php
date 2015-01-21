@@ -11,6 +11,6 @@ if (!defined('TYPO3_MODE')) {
 	),
 	// non-cacheable actions
 	array(
-		'Term' => 'reset',
+		'Term' => 'list, show, reset',
 	)
 );

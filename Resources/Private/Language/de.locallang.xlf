@@ -109,6 +109,10 @@
 			<source>[Default]</source>
 			<target>[Standard]</target>
 		</trans-unit>
+		<trans-unit id="label.lastModified" approved="yes" xml:space="preserve">
+			<source>Last modified</source>
+			<target>Letzte Änderung</target>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

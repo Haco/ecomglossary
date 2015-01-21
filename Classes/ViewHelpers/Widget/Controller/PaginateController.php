@@ -78,26 +78,11 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 	 */
 	public function initializeAction() {
 		$this->objects = $this->widgetConfiguration['objects'];
+		$this->itemsPerPageOptionSets = $this->widgetConfiguration['itemsPerPageOptionSets'];
 		$this->totalAmountOfObjects = $this->objects->count();
 		\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'], FALSE);
 		$this->numberOfPages = ceil(count($this->objects) / (int)$this->configuration['itemsPerPage']);
 		$this->maximumNumberOfLinks = (int)$this->configuration['maximumNumberOfLinks'];
-		// Sets the itemsperpage options
-
-		$itemsPerPageOptionSets = $this->widgetConfiguration['configuration']['itemsPerPageOptionSets'];
-		// Generates OptionSet for ItemsPerPage Selector-Box
-		if (!empty($itemsPerPageOptionSets) && is_array($itemsPerPageOptionSets)) {
-			$this->itemsPerPageOptionSets = $itemsPerPageOptionSets;
-		} else {
-			// Generates the default OptionSet for ItemsPerPage
-			$this->itemsPerPageOptionSets = array(
-				0 => 'Default',
-				5 => 5,
-				15 => 15,
-				25 => 25,
-				50 => 50
-			);
-		}
 	}
 
 	/**
@@ -105,11 +90,15 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 	 * @return void
 	 */
 	public function indexAction($currentPage = 1) {
+		if ($currentPage > $this->numberOfPages) {
+			$currentPage = 1;
+		}
 		// set current page
 		$this->currentPage = (int)$currentPage;
 		if ($this->currentPage < 1) {
 			$this->currentPage = 1;
 		}
+
 		if ($this->currentPage > $this->numberOfPages) {
 			// set $modifiedObjects to NULL if the page does not exist
 			$modifiedObjects = NULL;
@@ -191,7 +180,11 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
 			$pagination['nextPage'] = $this->currentPage + 1;
 		}
 		if ($this->currentPage > 1) {
-			$pagination['previousPage'] = $this->currentPage - 1;
+			if ($this->currentPage > $this->numberOfPages) {
+				$pagination['previousPage'] = 0;
+			} else {
+				$pagination['previousPage'] = $this->currentPage - 1;
+			}
 		}
 		return $pagination;
 	}

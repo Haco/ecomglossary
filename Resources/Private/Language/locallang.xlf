@@ -83,6 +83,9 @@
 		<trans-unit id="label.default">
 			<source>[Default]</source>
 		</trans-unit>
+		<trans-unit id="label.lastModified">
+			<source>Last modified</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

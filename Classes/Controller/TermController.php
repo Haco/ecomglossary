@@ -48,13 +48,13 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	protected $isExcludedIp = FALSE;
 
 	/**
-	 * Pagination
+	 * Pagination Items Per Page
 	 * 		Holds the number of ItemsPerPage from session or postVars
 	 */
 	protected $itemsPerPage = NULL;
 
 	/**
-	 * Pagination
+	 * Pagination Option Set
 	 * 		Holds the options for the itemsPerPage select box
 	 */
 	protected $itemsPerPageOptionSets = NULL;
@@ -73,9 +73,9 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 
 		// Generates OptionSet for ItemsPerPage Selector-Box
 		if (!empty($this->settings['termsPerPageOptionSets'])) {
+			$itemsPerPageOptionsArray = array();
 			foreach(GeneralUtility::trimExplode(',', $this->settings['termsPerPageOptionSets'], true) as $option) {
-				$tempArray = GeneralUtility::trimExplode(':', $option);
-				$itemsPerPageOptionsArray[$tempArray[0]] = $tempArray[1];
+				$itemsPerPageOptionsArray[GeneralUtility::trimExplode(':', $option)[0]] = GeneralUtility::trimExplode(':', $option)[1];
 			}
 			$this->itemsPerPageOptionSets = $itemsPerPageOptionsArray;
 		} else {
@@ -107,31 +107,27 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @param string $filterByLetter
 	 * @return void
 	 */
-	public function listAction($filterByLetter = '') {
+	public function listAction($filterByLetter = NULL) {
 		// Reset Search when filtered by letter
-		$searchTermFromSession = $filterByLetter ? false : $GLOBALS['TSFE']->fe_user->getSessionData('searchTerm');
+		$searchTermFromSession = $filterByLetter ? NULL : $GLOBALS['TSFE']->fe_user->getSessionData('searchTerm');
 
-		// Reset Letter Filter
-		if ( ($filterByLetter == '' || $this->request->hasArgument('searchTerm'))) {
-			$GLOBALS['TSFE']->fe_user->setKey('ses','filterByLetter','');
-			$filterByLetter = false;
+		// Reset Letter Filter after search request
+		if ( ($filterByLetter == NULL || $this->request->hasArgument('searchTerm')) ) {
+			$GLOBALS['TSFE']->fe_user->setKey('ses','filterByLetter', NULL);
+			$filterByLetter = NULL;
 		}
 
-		// Session handling for letter filter
-		$filterByLetter = ($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == '') ? $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') : $filterByLetter;
-		// Set session for letter if letter is selected
-		if ( $filterByLetter != '' ) $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
-
-
-		////
-		// Repository Handling
-		///
+		/**
+		 * Repository Handling
+		 */
 		$terms = $this->termRepository->findAll();
+		// Generate Letter Navigation (all available terms / not modified)
+		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : NULL;
 
-		// All available letters (for letter navigation)
-		$availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : '';
-
-		// Search for term
+		/**
+		 * Search Request Handling
+		 */
+		// Search by term
 		if ( $this->request->hasArgument('searchTerm') || $searchTermFromSession ) {
 			$searchTerm = $this->request->hasArgument('searchTerm') ? $this->request->getArgument('searchTerm') : $searchTermFromSession;
 			// Delete non-word chars
@@ -143,23 +139,35 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			$this->view->assign('searchTerm', $searchTerm);
 		}
 
-		// Filter by letter navigation
+		/**
+		 * Letter Filter Handling
+		 */
+		// Get the letter from session if available
+		$filterByLetter = ($GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') && $filterByLetter == NULL) ? $GLOBALS['TSFE']->fe_user->getSessionData('filterByLetter') : $filterByLetter;
+
+		// Filter terms by letter
 		if ( is_string($filterByLetter) && strlen($filterByLetter) === 1 && preg_match('/[A-Za-z0-9]/', $filterByLetter) ) {
 			$filterByLetter = ucfirst($filterByLetter);
 			// Find by single leading letter
 			if($this->termRepository->findByLeadingLetter($filterByLetter)->count()) {
 				$terms = $this->termRepository->findByLeadingLetter($filterByLetter);
 			} else {
-				unset($filterByLetter);
+				$filterByLetter = NULL;
 			}
 		} elseif ( $filterByLetter === '0-9' ) {
-			// Find all in 0-9 range
+			// Find terms in 0-9 range
 			$terms = $this->termRepository->findAllWithLeadingNumber();
-		} elseif ( $filterByLetter != '' ) {
+		} elseif ( $filterByLetter != NULL) {
+			// Error if pattern matching fails
 			$this->addFlashMessage(LocalizationUtility::translate('error.forbiddenFilter','ecomglossary'), LocalizationUtility::translate('error.forbiddenFilter.heading','ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-			$filterByLetter = '';
+			$filterByLetter = NULL;
 		}
+		// Save the letter or (NULL) in session
+		$GLOBALS['TSFE']->fe_user->setAndSaveSessionData('filterByLetter', $filterByLetter);
 
+		/**
+		 * Pass Variables to view
+		 */
 		$this->view->assignMultiple(array(
 			'terms' => $terms, // Can vary => By search or sorting
 			'allTerms' => $this->termRepository->findAll(), // Always complete list
@@ -227,15 +235,14 @@ class TermController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		$this->view->assign('term', $term);
 	}
 
-
 	/**
 	 * Resets Filters
 	 *
 	 * @return void
 	 */
 	public function resetAction() {
-		$GLOBALS['TSFE']->fe_user->setKey('ses','filterByLetter','');
-		$GLOBALS['TSFE']->fe_user->setKey('ses','searchTerm','');
+		$GLOBALS['TSFE']->fe_user->setKey('ses','filterByLetter', NULL);
+		$GLOBALS['TSFE']->fe_user->setKey('ses','searchTerm', NULL);
 		$this->redirect('list');
 	}
 

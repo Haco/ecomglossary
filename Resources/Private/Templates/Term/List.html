@@ -1,14 +1,13 @@
 {namespace ecomvh=Ecom\Ecomglossary\ViewHelpers}
 <f:layout name="Default" />
-
 <f:section name="main">
-	<f:flashMessages renderMode="div" />
 
+	<f:flashMessages renderMode="div" />
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
-			<f:form id="tx_ecomglossary-searchform" method="POST" noCacheHash="true">
+			<f:form id="tx_ecomglossary-searchform" method="POST">
 				<div>
-					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}"/>
+					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
 					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
 				</div>
@@ -22,12 +21,12 @@
 								<span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}" noCacheHash="true"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
+								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
 					<div class="tx_ecomglossary-view-all-btn">
-						<f:link.action action="reset" class="btn" noCacheHash="true"><f:translate key="showAllEntries" /></f:link.action>
+						<f:link.action action="reset" class="btn"><f:translate key="showAllEntries" /></f:link.action>
 					</div>
 				</div>
 			</f:if>
@@ -39,7 +38,7 @@
 					<f:if condition="{0: filterByLetter} != {0: ''}">
 						<strong><f:translate key="filterBy" /> {filterByLetter}</strong>
 					</f:if>
-					<ecomvh:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPageOptionSets:itemsPerPageOptionSets, itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks, displayResultRange: settings.displayResultRange}">
+					<ecomvh:widget.paginate objects="{terms}" as="paginatedTerms" itemsPerPageOptionSets="{itemsPerPageOptionSets}" configuration="{itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks, displayResultRange: settings.displayResultRange}">
 						<ul class="tx_ecomglossary-term-listing-terms">
 							<f:for each="{paginatedTerms}" as="term">
 								<li>
@@ -74,7 +73,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="reset" class="morelink-btn" noCacheHash="true"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
+				<f:link.action action="reset" class="morelink-btn"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>

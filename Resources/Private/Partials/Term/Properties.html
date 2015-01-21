@@ -8,6 +8,9 @@
 		<f:if condition="{term.shortDescription}">
 			<br><span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
 		</f:if>
+		<f:if condition="{term.timestamp}">
+			<br><span><strong><f:translate key="label.lastModified" />: </strong> <f:format.date format="Y-m-d">{term.timestamp}</f:format.date></span>
+		</f:if>
 	</header>
 	<hr>
 	<div class="tx_ecomglossary-term-description">

@@ -1,3 +1,13 @@
+config.tx_extbase.persistence.classes {
+	Ecom\Ecomglossary\Domain\Model\Term {
+		mapping {
+			columns {
+				tstamp.mapOnProperty = timestamp
+			}
+		}
+	}
+}
+
 plugin.tx_ecomglossary {
 	view {
 		templateRootPath = {$plugin.tx_ecomglossary.view.templateRootPath}
