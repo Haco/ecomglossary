@@ -106,11 +106,13 @@
 .tx_ecomglossary-term-listing ul li h3 {
 	font-size: 1.9em;
 	color: black;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.3em;
 }
 
-.tx_ecomglossary-term-listing-terms small {
+.tx_ecomglossary-term-listing-terms small.tx_ecomglossary-term-listing-type {
 	color: #999999;
+	display: block;
+	margin-bottom: 0.8em;
 }
 
 .tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc {
