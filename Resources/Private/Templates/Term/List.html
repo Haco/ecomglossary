@@ -7,7 +7,7 @@
 		<div class="tx_ecomglossary-header">
 			<f:form id="tx_ecomglossary-searchform" method="POST">
 				<div>
-					<span class="input-span-wrap"><f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/></span>
+					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/>
 					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
 					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
 				</div>
