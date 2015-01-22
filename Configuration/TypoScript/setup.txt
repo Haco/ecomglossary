@@ -1,3 +1,13 @@
+config.tx_extbase.persistence.classes {
+	Ecom\Ecomglossary\Domain\Model\Term {
+		mapping {
+			columns {
+				tstamp.mapOnProperty = timestamp
+			}
+		}
+	}
+}
+
 plugin.tx_ecomglossary {
 	view {
 		templateRootPath = {$plugin.tx_ecomglossary.view.templateRootPath}
@@ -8,7 +18,11 @@ plugin.tx_ecomglossary {
 		storagePid = {$plugin.tx_ecomglossary.persistence.storagePid}
 	}
 	settings {
+		termsPerPageOptionSets = {$plugin.tx_ecomglossary.settings.termsPerPageOptionSets}
 		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
+		forceTermsPerPage = {$plugin.tx_ecomglossary.settings.forceTermsPerPage}
+		displayResultRange = {$plugin.tx_ecomglossary.settings.displayResultRange}
+		maximumNumberOfLinks = {$plugin.tx_ecomglossary.settings.maximumNumberOfLinks}
 		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
 		shortDescMaxChars = {$plugin.tx_ecomglossary.settings.shortDescMaxChars}
 		shortDescAppend = {$plugin.tx_ecomglossary.settings.shortDescAppend}

@@ -74,6 +74,21 @@
 		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms">
 			<source>Related Terms</source>
 		</trans-unit>
+		<trans-unit id="paginator.showResultRange">
+			<source>Showing terms %1$s to %2$s of %3$s.</source>
+		</trans-unit>
+		<trans-unit id="paginator.itemsPerPage">
+			<source>Items per page</source>
+		</trans-unit>
+		<trans-unit id="label.default">
+			<source>[Default]</source>
+		</trans-unit>
+		<trans-unit id="label.lastModified">
+			<source>Last modified</source>
+		</trans-unit>
+		<trans-unit id="label.reset">
+			<source>Reset Search</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

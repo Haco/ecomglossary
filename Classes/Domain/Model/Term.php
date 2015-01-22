@@ -33,6 +33,13 @@ namespace Ecom\Ecomglossary\Domain\Model;
 class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
+	 * Timestamp (Last Edit)
+	 *
+	 * @var int
+	 */
+	protected $timestamp = '';
+
+	/**
 	 * title
 	 *
 	 * @var string
@@ -106,6 +113,15 @@ class Term extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected function initStorageObjects() {
 		$this->relatedTerms = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
+	/**
+	 * Returns the timestamp
+	 *
+	 * @return int $timestamp
+	 */
+	public function getTimestamp() {
+		return $this->timestamp;
 	}
 
 	/**

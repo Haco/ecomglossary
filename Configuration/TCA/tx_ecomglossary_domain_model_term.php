@@ -26,7 +26,8 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'title,term_type,short_description,external_link,description,sources,related_terms,visits',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('ecomglossary') . 'Resources/Public/Icons/tx_ecomglossary_domain_model_term.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('ecomglossary') . 'Resources/Public/Icons/tx_ecomglossary_domain_model_term.gif',
+		'requestUpdate' => 'external_link'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, term_type, short_description,external_link,description,sources,related_terms,visits',
@@ -72,7 +73,6 @@ return array(
 				'type' => 'passthrough',
 			),
 		),
-
 		't3ver_label' => array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 			'config' => array(
@@ -81,13 +81,12 @@ return array(
 				'max' => 255,
 			)
 		),
-
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
-				'default' => 1
+				'default' => 0
 			),
 		),
 		'starttime' => array(
@@ -122,7 +121,6 @@ return array(
 				),
 			),
 		),
-
 		'title' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.title',
@@ -161,6 +159,7 @@ return array(
 			)
 		),
 		'description' => array(
+			'displayCond' => 'FIELD:external_link:REQ:false',
 			'exclude' => 1,
 			'l10n_mode' => 'prefixLangTitle',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.description',
@@ -206,6 +205,7 @@ return array(
 			),
 		),
 		'sources' => array(
+			'displayCond' => 'FIELD:external_link:REQ:false',
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:ecomglossary/Resources/Private/Language/locallang_db.xlf:tx_ecomglossary_domain_model_term.sources',
