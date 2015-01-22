@@ -25,7 +25,7 @@
 								<span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
 							</f:then>
 							<f:else>
-								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}"><span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
+								<f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
 							</f:else>
 						</f:if>
 					</f:for>
