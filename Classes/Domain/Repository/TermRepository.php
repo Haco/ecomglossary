@@ -100,6 +100,7 @@ class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				$query->like('title', $term, FALSE),
 				$query->like('title', '%' . $term, FALSE),
 				$query->like('title', $term . '%', FALSE),
+				$query->like('title', '%' . $term . '%', FALSE),
 				$query->equals('title', $term, FALSE)
 			)
 		)->execute();
