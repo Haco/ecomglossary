@@ -187,6 +187,7 @@
 }
 
 .tx_ecomglossary-term-listing ul.f3-widget-paginator {
+	float: left;
 	display: inline-block;
 	*display: inline;
 	margin: 0;
@@ -345,7 +346,11 @@ ul.ui-autocomplete > li.ui-state-focus {
 	color: white;
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 767px) {
+	.tx_ecomglossary-term-listing ul.f3-widget-paginator {
+		clear: both;
+		float: none;
+	}
 	.tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
 		margin-top: 1em;
 		float: none;
