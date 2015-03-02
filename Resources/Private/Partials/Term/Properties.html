@@ -17,9 +17,9 @@
 		<f:format.html>{term.description}</f:format.html>
 	</div>
 	<hr>
-	<div class="row-fluid">
+	<div class="row">
 		<f:if condition="{term.relatedTerms}">
-			<div class="span6 tx_ecomglossary-term-related">
+			<div class="col-md-6 tx_ecomglossary-term-related">
 				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" />:</strong></p>
 				<ul class="list">
 					<f:for each="{term.relatedTerms}" as="relatedTerm">
@@ -36,7 +36,7 @@
 			</div>
 		</f:if>
 		<f:if condition="{term.sources}">
-			<div class="span6 tx_ecomglossary-term-sources">
+			<div class="col-md-6 tx_ecomglossary-term-sources">
 				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" />:</strong></p>
 				<ul class="list">
 					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">

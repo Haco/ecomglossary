@@ -6,15 +6,21 @@
 	<div class="tx_ecomglossary-list-view">
 		<div class="tx_ecomglossary-header">
 			<f:form id="tx_ecomglossary-searchform" method="POST">
-				<div>
-					<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')}"/>
-					<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
-					<f:form.submit class="btn submit" value="{f:translate(key: 'form.search')}" />
+				<div class="row">
+					<div class="col-md-6 col-sm-7 col-xs-12">
+						<div class="input-group">
+							<f:form.textfield type="search" name="searchTerm" id="tx_ecomglossary-searchTerm" placeholder="{f:translate(key: 'search.placeholder')}" value="{searchTerm}" class="{f:if(condition: searchTerm, then: 'active-searchterm')} form-control"/>
+							<f:widget.autocomplete for="tx_ecomglossary-searchTerm" objects="{allTerms}" searchProperty="title" />
+							<span class="input-group-btn">
+								<f:form.submit class="btn btn-primary" value="{f:translate(key: 'form.search')}" />
+							</span>
+						</div>
+						<f:if condition="{searchTerm}">
+							<f:link.action action="reset" class="tx_ecomglossary-search-reset"><f:translate key="label.reset" /></f:link.action>
+							<div class="clearfix"></div>
+						</f:if>
+					</div>
 				</div>
-				<f:if condition="{searchTerm}">
-					<f:link.action action="reset" class="tx_ecomglossary-search-reset"><f:translate key="label.reset" /></f:link.action>
-					<div class="clearfix"></div>
-				</f:if>
 			</f:form>
 			<f:if condition="{letterList}">
 				<strong><f:translate key="filterTerms" /></strong>
@@ -76,7 +82,7 @@
 				</div>
 			</f:then>
 			<f:else>
-				<f:link.action action="reset" class="morelink-btn"><i class="fa fa-align-justify"></i> <f:translate key="showAllEntries" /></f:link.action>
+				<f:link.action action="reset" class="btn btn-default"><i class="fa fa-align-justify fa-fw"></i> <f:translate key="showAllEntries" /></f:link.action>
 			</f:else>
 		</f:if>
 	</div>
