@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-12-09T10:15:05Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-03-09T08:27:23Z">
 		<header>
 			<generator>LFEditor</generator>
+			<authorName>Nicolas Scheidler</authorName>
+			<authorEmail>nicolas.scheidler@ecom-ex.com</authorEmail>
 		</header>
 		<body>
 		<trans-unit id="back" approved="yes" xml:space="preserve">
@@ -25,10 +27,6 @@
 			<source>Search Result</source>
 			<target>Suchergebnis</target>
 		</trans-unit>
-		<trans-unit id="form.search" approved="yes" xml:space="preserve">
-			<source>Search</source>
-			<target>Suchen</target>
-		</trans-unit>
 		<trans-unit id="filterBy" approved="yes" xml:space="preserve">
 			<source>Active filter:</source>
 			<target>Aktiver Filter:</target>
@@ -36,6 +34,34 @@
 		<trans-unit id="filterTerms" approved="yes" xml:space="preserve">
 			<source>Filter terms by character:</source>
 			<target>Begriffe nach Zeichen filtern:</target>
+		</trans-unit>
+		<trans-unit id="form.search" approved="yes" xml:space="preserve">
+			<source>Search</source>
+			<target>Suchen</target>
+		</trans-unit>
+		<trans-unit id="label.default" approved="yes" xml:space="preserve">
+			<source>[Default]</source>
+			<target>[Standard]</target>
+		</trans-unit>
+		<trans-unit id="label.lastModified" approved="yes" xml:space="preserve">
+			<source>Last modified</source>
+			<target>Letzte Änderung</target>
+		</trans-unit>
+		<trans-unit id="label.reset" approved="yes" xml:space="preserve">
+			<source>Reset Search</source>
+			<target>Zurücksetzen</target>
+		</trans-unit>
+		<trans-unit id="learnMore" approved="yes" xml:space="preserve">
+			<source>Learn more</source>
+			<target>Erfahren Sie mehr</target>
+		</trans-unit>
+		<trans-unit id="paginator.itemsPerPage" approved="yes" xml:space="preserve">
+			<source>Items per page</source>
+			<target>Einträge pro Seite</target>
+		</trans-unit>
+		<trans-unit id="paginator.showResultRange" approved="yes" xml:space="preserve">
+			<source>Showing terms %1$s to %2$s of %3$s.</source>
+			<target>Zeige Begriffe %1$s bis %2$s von %3$s.</target>
 		</trans-unit>
 		<trans-unit id="search.placeholder" approved="yes" xml:space="preserve">
 			<source>Enter your search term...</source>
@@ -56,6 +82,10 @@
 		<trans-unit id="tx_ecomglossary_domain_model_term.external_link" approved="yes" xml:space="preserve">
 			<source>External Link</source>
 			<target>Externer Link</target>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
+			<source>Related Terms</source>
+			<target>Themenverwandte Begriffe</target>
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.short_description" approved="yes" xml:space="preserve">
 			<source>Short Description</source>
@@ -88,34 +118,6 @@
 		<trans-unit id="tx_ecomglossary_domain_model_term.title" approved="yes" xml:space="preserve">
 			<source>Title</source>
 			<target>Titel</target>
-		</trans-unit>
-		<trans-unit id="learnMore" approved="yes" xml:space="preserve">
-			<source>Learn more</source>
-			<target>Erfahren Sie mehr</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
-			<source>Related Terms</source>
-			<target>Themenverwandte Begriffe</target>
-		</trans-unit>
-		<trans-unit id="paginator.showResultRange" approved="yes" xml:space="preserve">
-			<source>Showing terms %1$s to %2$s of %3$s.</source>
-			<target>Zeige Begriffe %1$s bis %2$s von %3$s.</target>
-		</trans-unit>
-		<trans-unit id="paginator.itemsPerPage" approved="yes" xml:space="preserve">
-			<source>Items per page</source>
-			<target>Einträge pro Seite</target>
-		</trans-unit>
-		<trans-unit id="label.default" approved="yes" xml:space="preserve">
-			<source>[Default]</source>
-			<target>[Standard]</target>
-		</trans-unit>
-		<trans-unit id="label.lastModified" approved="yes" xml:space="preserve">
-			<source>Last modified</source>
-			<target>Letzte Änderung</target>
-		</trans-unit>
-		<trans-unit id="label.reset" approved="yes" xml:space="preserve">
-			<source>Reset Search</source>
-			<target>Zurücksetzen</target>
 		</trans-unit>
 		</body>
 	</file>

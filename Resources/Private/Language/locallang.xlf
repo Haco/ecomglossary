@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-12-09T10:15:05Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-03-09T08:27:23Z">
 		<header>
 			<generator>LFEditor</generator>
+			<authorName>Nicolas Scheidler</authorName>
+			<authorEmail>nicolas.scheidler@ecom-ex.com</authorEmail>
 		</header>
 		<body>
 		<trans-unit id="back" xml:space="preserve">
@@ -20,14 +22,32 @@
 		<trans-unit id="error.searchResult" xml:space="preserve">
 			<source>Search Result</source>
 		</trans-unit>
-		<trans-unit id="form.search" xml:space="preserve">
-			<source>Search</source>
-		</trans-unit>
 		<trans-unit id="filterBy" xml:space="preserve">
 			<source>Active filter:</source>
 		</trans-unit>
 		<trans-unit id="filterTerms" xml:space="preserve">
 			<source>Filter terms by character:</source>
+		</trans-unit>
+		<trans-unit id="form.search" xml:space="preserve">
+			<source>Search</source>
+		</trans-unit>
+		<trans-unit id="label.default" xml:space="preserve">
+			<source>[Default]</source>
+		</trans-unit>
+		<trans-unit id="label.lastModified" xml:space="preserve">
+			<source>Last modified</source>
+		</trans-unit>
+		<trans-unit id="label.reset" xml:space="preserve">
+			<source>Reset Search</source>
+		</trans-unit>
+		<trans-unit id="learnMore" xml:space="preserve">
+			<source>Learn more</source>
+		</trans-unit>
+		<trans-unit id="paginator.itemsPerPage" xml:space="preserve">
+			<source>Items per page</source>
+		</trans-unit>
+		<trans-unit id="paginator.showResultRange" xml:space="preserve">
+			<source>Showing terms %1$s to %2$s of %3$s.</source>
 		</trans-unit>
 		<trans-unit id="search.placeholder" xml:space="preserve">
 			<source>Enter your search term...</source>
@@ -43,6 +63,9 @@
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.external_link" xml:space="preserve">
 			<source>External Link</source>
+		</trans-unit>
+		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" xml:space="preserve">
+			<source>Related Terms</source>
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.short_description" xml:space="preserve">
 			<source>Short Description</source>
@@ -67,27 +90,6 @@
 		</trans-unit>
 		<trans-unit id="tx_ecomglossary_domain_model_term.title" xml:space="preserve">
 			<source>Title</source>
-		</trans-unit>
-		<trans-unit id="learnMore" xml:space="preserve">
-			<source>Learn more</source>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms">
-			<source>Related Terms</source>
-		</trans-unit>
-		<trans-unit id="paginator.showResultRange">
-			<source>Showing terms %1$s to %2$s of %3$s.</source>
-		</trans-unit>
-		<trans-unit id="paginator.itemsPerPage">
-			<source>Items per page</source>
-		</trans-unit>
-		<trans-unit id="label.default">
-			<source>[Default]</source>
-		</trans-unit>
-		<trans-unit id="label.lastModified">
-			<source>Last modified</source>
-		</trans-unit>
-		<trans-unit id="label.reset">
-			<source>Reset Search</source>
 		</trans-unit>
 		</body>
 	</file>
