@@ -39,8 +39,8 @@
 			<div class="col-md-6 tx_ecomglossary-term-sources">
 				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" />:</strong></p>
 				<ul class="list">
-					<f:for each="{term.sources -> ecomvh:utility.explode(delimiter:'\n')}" as="source">
-						<li><ecomvh:link.typolink configuration="{parameter: source}" /></li>
+					<f:for each="{term.sources -> f:ecom.explode(delimiter:'\n')}" as="source">
+						<li><f:link.typolink parameter="{source}" target="_blank" /></li>
 					</f:for>
 				</ul>
 			</div>
