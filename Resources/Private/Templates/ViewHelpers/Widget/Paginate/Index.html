@@ -5,9 +5,9 @@
 	<div class="tx-ecomglossary-paginator-wrap">
 		<f:render section="paginator" arguments="{pagination: pagination, configuration: configuration}" />
 		<f:if condition="{settings.forceTermsPerPage} != 1">
-			<f:form id="ecomglossary-paginator-items-per-page-form" method="post" addQueryString="true" controller="Term">
+			<f:form id="ecomglossary-paginator-items-per-page-form" method="post" addQueryString="true" pluginName="ecomglossary" controller="Term">
 				<label for="ecomglossary-select-items-per-page"><f:translate key="paginator.itemsPerPage" /></label>
-				<f:form.select additionalAttributes="{onchange: 'this.form.submit()'}" id="ecomglossary-select-items-per-page" value="{f:if(condition: '{itemsPerPage} == {settings.termsPerPage}', then: 0, else: itemsPerPage)}" name="tx_ecomglossary_ecomglossary[itemsPerPage]" options="{itemsPerPageOptionSets}" />
+				<f:form.select additionalAttributes="{onchange: 'this.form.submit()'}" id="ecomglossary-select-items-per-page" value="{f:if(condition: '{itemsPerPage} == {settings.termsPerPage}', then: 0, else: itemsPerPage)}" name="itemsPerPage" options="{itemsPerPageOptionSets}" />
 			</f:form>
 		</f:if>
 	</div>
