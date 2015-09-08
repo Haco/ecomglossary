@@ -1,0 +1,11 @@
+<f:flashMessages as="flashMessages">
+    <ul>
+        <f:for each="{flashMessages}" as="flashMessage">
+            <li class="alert {flashMessage.class} {f:if(condition:dismiss, then: 'alert-dismissable fade in')}" role="alert">
+                <f:if condition="{dismiss}"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></button></f:if>
+                <strong>{flashMessage.title}</strong><br>
+                {flashMessage.message}
+            </li>
+        </f:for>
+    </ul>
+</f:flashMessages>

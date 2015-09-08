@@ -1,8 +1,7 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<f:flashMessages dismiss="true" />
-
+	<f:render partial="Messaging/FlashMessage" arguments="{dismiss:1}" />
 	<div class="tx_ecomglossary-show-view">
 		<f:render partial="Term/Properties" arguments="{term:term}" />
 		<br>
