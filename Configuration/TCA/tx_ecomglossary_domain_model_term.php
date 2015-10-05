@@ -191,7 +191,6 @@ return array(
 				'size' => 15,
 				'eval' => 'trim',
 				'wizards' => array(
-					'_PADDING' => 2,
 					'link' => array(
 						'type' => 'popup',
 						'title' => 'LLL:EXT:cms/locallang_ttc.xml:header_link_formlabel',
@@ -222,7 +221,6 @@ return array(
 				'cols' => 50,
 				'eval' => 'trim',
 				'wizards' => array(
-					'_PADDING' => 5,
 					'link' => array(
 						'type' => 'popup',
 						'title' => 'LLL:EXT:cms/locallang_ttc.xml:header_link_formlabel',
@@ -266,8 +264,6 @@ return array(
 				'maxitems' => 9999,
 				'multiple' => 0,
 				'wizards' => array(
-					'_PADDING' => 3,
-					'_VERTICAL' => 1,
 					'edit' => array(
 						'type' => 'popup',
 						'title' => 'Edit',
