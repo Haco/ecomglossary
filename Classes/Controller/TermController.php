@@ -78,6 +78,7 @@ class TermController extends ActionController {
 	 */
 	protected function initializeAction() {
 		$this->feSession->setStorageKey($this->extensionName);
+
 		// Explodes the developer IPs.
 		$excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], true) : array();
 		if ( $GLOBALS['_SERVER']['REMOTE_ADDR']) $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray ) ? true : false;
@@ -106,9 +107,9 @@ class TermController extends ActionController {
 		 */
 		if ( GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '' ) {
 			$itemsPerPage = (int) GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'];
-			$this->feSession->store($this->extensionName . '_itemsPerPage', $itemsPerPage);
+			$this->feSession->store('itemsPerPage', $itemsPerPage);
 		}
-		if ( $this->feSession->get($this->extensionName . '_itemsPerPage') != '' ) $itemsPerPage = $this->feSession->get($this->extensionName . '_itemsPerPage');
+		if ( $this->feSession->get('itemsPerPage') != '' ) $itemsPerPage = $this->feSession->get('itemsPerPage');
 		$this->itemsPerPage = $itemsPerPage;
 	}
 
@@ -120,7 +121,7 @@ class TermController extends ActionController {
 	 */
 	public function listAction($filterByLetter = null) {
 		// Reset Search when filtered by letter
-		$searchTermFromSession = $filterByLetter ? null : $this->feSession->get($this->extensionName . '_searchTerm');
+		$searchTermFromSession = $filterByLetter ? null : $this->feSession->get('searchTerm');
 
 		// Reset Letter Filter after search request
 		if ( $this->request->hasArgument('searchTerm') ) {
@@ -143,7 +144,7 @@ class TermController extends ActionController {
 			// Delete non-word chars
 			$searchTerm = preg_replace('/[^A-z0-9\-\/\s\.\,ßÄäÜüÖöŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ]/', '', $searchTerm);
 			// Get Results by searchTerm
-			$this->feSession->store($this->extensionName . '_searchTerm', $searchTerm);
+			$this->feSession->store('searchTerm', $searchTerm);
 			$terms = $this->termRepository->findBySearchTerm($searchTerm)->count() ? $this->termRepository->findBySearchTerm($searchTerm) : $this->addFlashMessage(LocalizationUtility::translate('error.noTerms', 'ecomglossary') . ' ' . $searchTerm, LocalizationUtility::translate('error.searchResult', 'ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
 			// Send entered searchTerm back to view
 			$this->view->assign('searchTerm', $searchTerm);
@@ -169,7 +170,7 @@ class TermController extends ActionController {
 			$this->addFlashMessage(LocalizationUtility::translate('error.forbiddenFilter','ecomglossary'), LocalizationUtility::translate('error.forbiddenFilter.heading','ecomglossary'), \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 			$filterByLetter = null;
 		}
-
+        
 		/**
 		 * Pass Variables to view
 		 */
@@ -193,10 +194,10 @@ class TermController extends ActionController {
 		// Handle term visits by session vars
 		//		for unique visits
 		//		if ip is not in exclude list
-		$visitedTermsFromSession = $this->feSession->get($this->extensionName . '_visitedTerms');
+		$visitedTermsFromSession = $this->feSession->get('visitedTerms');
 		if ( (!is_array($visitedTermsFromSession) || (is_array($visitedTermsFromSession) && !in_array($term->getUid(), $visitedTermsFromSession))) && !$this->isExcludedIp ) {
 			$visitedTermsFromSession[] = $term->getUid();
-			$this->feSession->store($this->extensionName . '_visitedTerms', $visitedTermsFromSession);
+			$this->feSession->store('visitedTerms', $visitedTermsFromSession);
 			$term->setVisits($term->getVisits() + 1);
 			$this->updateAction($term);
 		}
@@ -234,7 +235,7 @@ class TermController extends ActionController {
 	 * @return void
 	 */
 	public function resetAction() {
-		$this->feSession->store($this->extensionName . '_searchTerm', null);
+		$this->feSession->store('searchTerm', null);
 		$this->redirect('list');
 	}
 
