@@ -1,39 +1,39 @@
 config.tx_extbase.persistence.classes {
-	Ecom\Ecomglossary\Domain\Model\Term {
-		mapping {
-			columns {
-				tstamp.mapOnProperty = timestamp
-			}
-		}
-	}
+    Ecom\Ecomglossary\Domain\Model\Term {
+        mapping {
+            columns {
+                tstamp.mapOnProperty = timestamp
+            }
+        }
+    }
 }
 
 plugin.tx_ecomglossary {
-	view {
-		templateRootPath = {$plugin.tx_ecomglossary.view.templateRootPath}
-		partialRootPath = {$plugin.tx_ecomglossary.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_ecomglossary.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_ecomglossary.persistence.storagePid}
-	}
-	settings {
-		termsPerPageOptionSets = {$plugin.tx_ecomglossary.settings.termsPerPageOptionSets}
-		termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
-		forceTermsPerPage = {$plugin.tx_ecomglossary.settings.forceTermsPerPage}
-		displayResultRange = {$plugin.tx_ecomglossary.settings.displayResultRange}
-		maximumNumberOfLinks = {$plugin.tx_ecomglossary.settings.maximumNumberOfLinks}
-		showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
-		shortDescMaxChars = {$plugin.tx_ecomglossary.settings.shortDescMaxChars}
-		shortDescAppend = {$plugin.tx_ecomglossary.settings.shortDescAppend}
-		excludeIpsForVisits = {$plugin.tx_ecomglossary.settings.excludeIpsForVisits}
-	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
-	}
+    view {
+        templateRootPath = {$plugin.tx_ecomglossary.view.templateRootPath}
+        partialRootPath = {$plugin.tx_ecomglossary.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_ecomglossary.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_ecomglossary.persistence.storagePid}
+    }
+    settings {
+        termsPerPageOptionSets = {$plugin.tx_ecomglossary.settings.termsPerPageOptionSets}
+        termsPerPage = {$plugin.tx_ecomglossary.settings.termsPerPage}
+        forceTermsPerPage = {$plugin.tx_ecomglossary.settings.forceTermsPerPage}
+        displayResultRange = {$plugin.tx_ecomglossary.settings.displayResultRange}
+        maximumNumberOfLinks = {$plugin.tx_ecomglossary.settings.maximumNumberOfLinks}
+        showEmptyLetters = {$plugin.tx_ecomglossary.settings.showEmptyLetters}
+        shortDescMaxChars = {$plugin.tx_ecomglossary.settings.shortDescMaxChars}
+        shortDescAppend = {$plugin.tx_ecomglossary.settings.shortDescAppend}
+        excludeIpsForVisits = {$plugin.tx_ecomglossary.settings.excludeIpsForVisits}
+    }
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        # rewrittenPropertyMapper = 1
+    }
 }
 
 page.includeCSS {
-	ecomglossaryCss = EXT:ecomglossary/Resources/Public/Stylesheets/Application.css
+    ecomglossaryCss = EXT:ecomglossary/Resources/Public/Stylesheets/Application.css
 }

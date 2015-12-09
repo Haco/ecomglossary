@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-12-04T09:53:27Z" product-name="ecomglossary">
-		<header/>
-		<body>
-			<trans-unit id="title.description">
-				<source>The term titel</source>
-			</trans-unit>
-			<trans-unit id="term_type.description">
-				<source>Term Type</source>
-			</trans-unit>
-			<trans-unit id="short_description.description">
-				<source>Visible in the list view.</source>
-			</trans-unit>
-			<trans-unit id="description.description">
-				<source>The term description. For the detail page of the selected term.</source>
-			</trans-unit>
-			<trans-unit id="external_link.description">
-				<source>Overrides the description. It redirects to an external webpage.</source>
-			</trans-unit>
-			<trans-unit id="sources.description">
-				<source>Here you can add links as sources. Generates a link list of references. (Line separated)</source>
-			</trans-unit>
-			<trans-unit id="related_terms.description">
-				<source>Related terms will be listed as reference. But also the current term will be listed as reference in every selected term below.</source>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-12-04T09:53:27Z" product-name="ecomglossary">
+        <header/>
+        <body>
+            <trans-unit id="title.description">
+                <source>The term titel</source>
+            </trans-unit>
+            <trans-unit id="term_type.description">
+                <source>Term Type</source>
+            </trans-unit>
+            <trans-unit id="short_description.description">
+                <source>Visible in the list view.</source>
+            </trans-unit>
+            <trans-unit id="description.description">
+                <source>The term description. For the detail page of the selected term.</source>
+            </trans-unit>
+            <trans-unit id="external_link.description">
+                <source>Overrides the description. It redirects to an external webpage.</source>
+            </trans-unit>
+            <trans-unit id="sources.description">
+                <source>Here you can add links as sources. Generates a link list of references. (Line separated)</source>
+            </trans-unit>
+            <trans-unit id="related_terms.description">
+                <source>Related terms will be listed as reference. But also the current term will be listed as reference in every selected term below.</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

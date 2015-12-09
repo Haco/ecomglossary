@@ -1,206 +1,206 @@
 /* ecom Glossary Application.css */
 .tx-ecomglossary hr {
-	margin: 1em 0;
-	display: block;
-	clear: both;
+    margin: 1em 0;
+    display: block;
+    clear: both;
 }
 #tx_ecomglossary-searchform {
-	margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 #tx_ecomglossary-searchform input#tx_ecomglossary-searchTerm.active-searchterm {
-	border-color: #0083cb !important;
-	color: #0083cb !important;
+    border-color: #0083cb !important;
+    color: #0083cb !important;
 }
 #tx_ecomglossary-searchform a.tx_ecomglossary-search-reset {
-	background: #B3B3B3;
-	color: white;
-	float: left;
-	font-size: 0.8em;
-	padding: 0 5px;
+    background: #B3B3B3;
+    color: white;
+    float: left;
+    font-size: 0.8em;
+    padding: 0 5px;
 }
 #tx_ecomglossary-searchform a.tx_ecomglossary-search-reset:hover {
-	background: #999999;
+    background: #999999;
 }
 .tx_ecomglossary-letter-navigation {
-	margin-top: 0.5em;
+    margin-top: 0.5em;
 }
 .tx_ecomglossary-letter-navigation > a {
-	color: #0083cb;
+    color: #0083cb;
 }
 .tx_ecomglossary-letter-navigation > a.active {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 .tx_ecomglossary-letter-navigation > a:hover {
-	color: black !important;
+    color: black !important;
 }
 .tx_ecomglossary-letter-navigation > a,
 .tx_ecomglossary-letter-navigation > span.tx_ecomglossary-empty-letter {
-	font-size: 1.2em;
-	margin-right: 0.6em;
-	word-wrap: break-word;
+    font-size: 1.2em;
+    margin-right: 0.6em;
+    word-wrap: break-word;
 }
 .tx_ecomglossary-letter-navigation > span.tx_ecomglossary-empty-letter {
-	color: #BBB;
-	cursor: not-allowed;
+    color: #BBB;
+    cursor: not-allowed;
 }
 .tx_ecomglossary-view-all-btn {
-	display: inline-block;
-	*display: inline;
-	zoom: 1;
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	background: #0083cb;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: #0083cb;
 }
 .tx_ecomglossary-view-all-btn a {
-	color: white;
-	display: block;
-	padding: 3px;
+    color: white;
+    display: block;
+    padding: 3px;
 }
 .tx_ecomglossary-view-all-btn:hover a,
 .tx_ecomglossary-view-all-btn:focus a,
 .tx_ecomglossary-view-all-btn a:hover,
 .tx_ecomglossary-view-all-btn a:focus {
-	background: #006aa3;
-	color: white !important;
+    background: #006aa3;
+    color: white !important;
 }
 .tx-ecomglossary a.morelink-btn i {
-	margin-right: 0.2em;
+    margin-right: 0.2em;
 }
 .tx_ecomglossary-term-listing ul li h3 {
-	font-size: 1.9em;
-	color: black;
-	margin-bottom: 0.3em;
+    font-size: 1.9em;
+    color: black;
+    margin-bottom: 0.3em;
 }
 .tx_ecomglossary-term-listing-terms small.tx_ecomglossary-term-listing-type {
-	color: #999999;
-	display: block;
-	margin-bottom: 0.8em;
+    color: #999999;
+    display: block;
+    margin-bottom: 0.8em;
 }
 .tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc {
-	color: #888;
-	margin-left: 0.3em;
-	font-size: 0.5em;
+    color: #888;
+    margin-left: 0.3em;
+    font-size: 0.5em;
 }
 .tx_ecomglossary-term-listing .tx_ecomglossary-term-external-desc i {
-	margin-left: 0.3em;
+    margin-left: 0.3em;
 }
 .tx_ecomglossary-term-listing ul.tx_ecomglossary-term-listing-terms li {
-	margin: 1em 0px;
-	display: block;
-	clear: both;
-	border-bottom: 1px solid #D4D6D8;
-	box-shadow: 0px 1px 0px #FFF;
-	padding: 0.8em 0;
+    margin: 1em 0px;
+    display: block;
+    clear: both;
+    border-bottom: 1px solid #D4D6D8;
+    box-shadow: 0px 1px 0px #FFF;
+    padding: 0.8em 0;
 }
 .tx_ecomglossary-term-listing ul.tx_ecomglossary-term-listing-terms li:last-child {
-	border-bottom: none;
-	box-shadow: none;
-	padding-bottom: 0.3em;
+    border-bottom: none;
+    box-shadow: none;
+    padding-bottom: 0.3em;
 }
 .tx_ecomglossary-show-view article {
-	margin-top: 1.5em;
+    margin-top: 1.5em;
 }
 .tx_ecomglossary-show-view span.term-revision {
-	float: right;
+    float: right;
 }
 .tx_ecomglossary-show-view span.term-revision small {
-	font-size: smaller;
+    font-size: smaller;
 }
 .tx_ecomglossary-show-view article header {
-	margin-left: 0 !important;
+    margin-left: 0 !important;
 }
 .tx_ecomglossary-show-view article header h2 {
-	color: #0083cb;
-	font-size: 1.8em;
+    color: #0083cb;
+    font-size: 1.8em;
 }
 .tx_ecomglossary-show-view a.morelink-btn:last-child {
-	margin-left: 1em;
+    margin-left: 1em;
 }
 .tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
-	float: right;
+    float: right;
 }
 .tx-ecomglossary #ecomglossary-paginator-items-per-page-form label {
-	margin-right: 0.5em;
-	display: inline;
+    margin-right: 0.5em;
+    display: inline;
 }
 .tx-ecomglossary form#ecomglossary-paginator-items-per-page-form select {
-	border: 1px solid #B0B4B7;
-	background: url('../Icons/selectArrow.png') no-repeat top right white;
-	height: 29px;
-	padding-right: 30px;
-	margin: 0;
-	width: 125px;
+    border: 1px solid #B0B4B7;
+    background: url('../Icons/selectArrow.png') no-repeat top right white;
+    height: 29px;
+    padding-right: 30px;
+    margin: 0;
+    width: 125px;
 }
 .tx-ecomglossary-paginator-wrap {
-	margin: 2em 0;
+    margin: 2em 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator {
-	float: left;
-	display: inline-block;
-	*display: inline;
-	margin: 0;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    margin: 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator:after {
-	content: "";
-	display: block;
-	width: 100%;
-	clear: both;
+    content: "";
+    display: block;
+    width: 100%;
+    clear: both;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li {
-	float: left;
-	line-height: 30px;
-	width: 30px;
-	background: #E7E9E8;
-	text-align: center;
-	margin-right: 0.5em;
-	padding: 0;
+    float: left;
+    line-height: 30px;
+    width: 30px;
+    background: #E7E9E8;
+    text-align: center;
+    margin-right: 0.5em;
+    padding: 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.next,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous {
-	text-indent: -100px;
-	overflow: hidden;
-	background: url(../Icons/sliderArrows.png);
-	background-position: -32px 0;
+    text-indent: -100px;
+    overflow: hidden;
+    background: url(../Icons/sliderArrows.png);
+    background-position: -32px 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous {
-	background-position: -2px 0;
+    background-position: -2px 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.next:hover {
-	background: url(../Icons/sliderArrows.png);
-	background-position: -32px 0;
+    background: url(../Icons/sliderArrows.png);
+    background-position: -32px 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.prev:hover,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.previous:hover {
-	background-image: url(../Icons/sliderArrows.png);
-	background-position: -2px 0;
+    background-image: url(../Icons/sliderArrows.png);
+    background-position: -2px 0;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li a {
-	display: block;
+    display: block;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li:hover,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.current {
-	background: #0083CB;
-	color: white;
+    background: #0083CB;
+    color: white;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li:hover a,
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.current a {
-	color: #fff;
+    color: #fff;
 }
 .tx_ecomglossary-term-listing ul.f3-widget-paginator li.paginator-extendto {
-	background: none;
-	color: grey;
+    background: none;
+    color: grey;
 }
 @media only screen and (max-width: 767px) {
-	.tx_ecomglossary-term-listing ul.f3-widget-paginator {
-		clear: both;
-		float: none;
-	}
-	.tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
-		margin-top: 1em;
-		float: none;
-		display: block;
-	}
+    .tx_ecomglossary-term-listing ul.f3-widget-paginator {
+        clear: both;
+        float: none;
+    }
+    .tx-ecomglossary #ecomglossary-paginator-items-per-page-form {
+        margin-top: 1em;
+        float: none;
+        display: block;
+    }
 }

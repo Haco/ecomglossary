@@ -1,7 +1,6 @@
 <?php
 namespace Ecom\Ecomglossary\Domain\Repository;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -27,97 +26,103 @@ namespace Ecom\Ecomglossary\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /**
  * The repository for Terms
  */
-class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class TermRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
+    /**
+     * Default Ordering
+     *
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'title' => QueryInterface::ORDER_ASCENDING,
+        'term_type' => QueryInterface::ORDER_DESCENDING
+    );
 
-	/**
-	 * Default Ordering
-	 *
-	 * @var array
-	 */
-	protected $defaultOrderings = array(
-		'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-		'term_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-	);
+    /**
+     * @param string $letter
+     *
+     * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByLeadingLetter($letter = '')
+    {
+        if (!preg_match('/^\w$/is', $letter)) {
+            return null;
+        }
 
-	/**
-	 * @param string $letter
-	 *
-	 * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function findByLeadingLetter($letter = '') {
-		if ( !preg_match('/^\w$/is', $letter) ) {
-			return NULL;
-		}
+        $query = $this->createQuery();
 
-		$query = $this->createQuery();
+        return $query->matching(
+            $query->like('title', $letter . '%', false)
+        )->execute();
+    }
 
-		return $query->matching(
-			$query->like('title', $letter . '%', FALSE)
-		)->execute();
-	}
+    /**
+     * Find all terms starting with a leading number (Range: 0-9)
+     *
+     * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAllWithLeadingNumber()
+    {
+        $query = $this->createQuery();
 
-	/**
-	 * Find all terms starting with a leading number (Range: 0-9)
-	 *
-	 * @return array|null|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function findAllWithLeadingNumber() {
-		$query = $this->createQuery();
+        return $query->matching(
+            $query->logicalOr(
+                $query->like('title', '0%', false),
+                $query->like('title', '1%', false),
+                $query->like('title', '2%', false),
+                $query->like('title', '3%', false),
+                $query->like('title', '4%', false),
+                $query->like('title', '5%', false),
+                $query->like('title', '6%', false),
+                $query->like('title', '7%', false),
+                $query->like('title', '8%', false),
+                $query->like('title', '9%', false)
+            )
+        )->execute();
+    }
 
-		return $query->matching(
-			$query->logicalOr(
-				$query->like('title', '0%', FALSE),
-				$query->like('title', '1%', FALSE),
-				$query->like('title', '2%', FALSE),
-				$query->like('title', '3%', FALSE),
-				$query->like('title', '4%', FALSE),
-				$query->like('title', '5%', FALSE),
-				$query->like('title', '6%', FALSE),
-				$query->like('title', '7%', FALSE),
-				$query->like('title', '8%', FALSE),
-				$query->like('title', '9%', FALSE)
-			)
-		)->execute();
-	}
+    /**
+     * @param string $term
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findBySearchTerm($term = '')
+    {
+        if (!is_string($term) || trim($term) === '') {
+            return $this->findAll();
+        }
 
-	/**
-	 * @param string $term
-	 *
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function findBySearchTerm($term = '') {
-		if ( !is_string($term) || trim($term) === '' ) {
-			return $this->findAll();
-		}
+        $query = $this->createQuery();
 
-		$query = $this->createQuery();
+        return $query->matching(
+            $query->logicalOr(
+                $query->like('title', $term, false),
+                $query->like('title', '%' . $term, false),
+                $query->like('title', $term . '%', false),
+                $query->like('title', '%' . $term . '%', false),
+                $query->equals('title', $term, false)
+            )
+        )->execute();
+    }
 
-		return $query->matching(
-			$query->logicalOr(
-				$query->like('title', $term, FALSE),
-				$query->like('title', '%' . $term, FALSE),
-				$query->like('title', $term . '%', FALSE),
-				$query->like('title', '%' . $term . '%', FALSE),
-				$query->equals('title', $term, FALSE)
-			)
-		)->execute();
-	}
+    /**
+     * @param string $term
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function containsInRelatedTerms($term = '')
+    {
+        $query = $this->createQuery();
 
-	/**
-	 * @param string $term
-	 *
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	public function containsInRelatedTerms($term = '') {
-		$query = $this->createQuery();
-
-		return $query->matching(
-			$query->logicalOr(
-				$query->contains('relatedTerms', $term)
-			)
-		)->execute();
-	}
+        return $query->matching(
+            $query->logicalOr(
+                $query->contains('relatedTerms', $term)
+            )
+        )->execute();
+    }
 }

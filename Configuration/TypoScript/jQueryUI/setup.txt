@@ -1,4 +1,4 @@
 #### EXT ecomglossary jQuery-UI includes
 page.includeJS {
-	glossaryJQueryUI = EXT:ecomglossary/Resources/Public/Javascripts/jquery-ui.min.js
+    glossaryJQueryUI = EXT:ecomglossary/Resources/Public/Javascripts/jquery-ui.min.js
 }

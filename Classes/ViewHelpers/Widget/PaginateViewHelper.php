@@ -2,24 +2,25 @@
 namespace Ecom\Ecomglossary\ViewHelpers\Widget;
 
 /*                                                                        *
- * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- *  of the License, or (at your option) any later version.                *
- *                                                                        *
- *                                                                        *
- * This script is distributed in the hope that it will be useful, but     *
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
- * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
- * General Public License for more details.                               *
- *                                                                        *
- * You should have received a copy of the GNU Lesser General Public       *
- * License along with the script.                                         *
- * If not, see http://www.gnu.org/licenses/lgpl.html                      *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
+* This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
+*                                                                        *
+* It is free software; you can redistribute it and/or modify it under    *
+* the terms of the GNU Lesser General Public License, either version 3   *
+*  of the License, or (at your option) any later version.                *
+*                                                                        *
+*                                                                        *
+* This script is distributed in the hope that it will be useful, but     *
+* WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+* TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
+* General Public License for more details.                               *
+*                                                                        *
+* You should have received a copy of the GNU Lesser General Public       *
+* License along with the script.                                         *
+* If not, see http://www.gnu.org/licenses/lgpl.html                      *
+*                                                                        *
+* The TYPO3 project - inspiring people to share!                         *
+*                                                                        */
+
 /**
  * This ViewHelper renders a Pagination of objects.
  *
@@ -50,21 +51,33 @@ namespace Ecom\Ecomglossary\ViewHelpers\Widget;
  *
  * @api
  */
-class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper {
 
-	/**
-	 * @var \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController
-	 * @inject
-	 */
-	protected $controller;
+class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper
+{
+    /**
+     * @var \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController
+     * @inject
+     */
+    protected $controller;
 
-	/**
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
-	 * @param string $as
-	 * @param array $configuration
-	 * @return string
-	 */
-	public function render(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects, $as, $itemsPerPageOptionSets, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99, 'displayResultRange' => TRUE)) {
-		return $this->initiateSubRequest();
-	}
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
+     * @param string $as
+     * @param array $configuration
+     * @return string
+     */
+    public function render(
+        \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects,
+        $as,
+        $itemsPerPageOptionSets,
+        array $configuration = array(
+            'itemsPerPage' => 10,
+            'insertAbove' => false,
+            'insertBelow' => true,
+            'maximumNumberOfLinks' => 99,
+            'displayResultRange' => true
+        )
+    ) {
+        return $this->initiateSubRequest();
+    }
 }

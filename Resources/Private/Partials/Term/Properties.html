@@ -1,49 +1,49 @@
 {namespace ecomvh=Ecom\Ecomglossary\ViewHelpers}
 <article>
-	<header>
-		<h2>{term.title}</h2>
-		<f:if condition="{term.termType}">
-			<span><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></span>
-		</f:if>
-		<f:if condition="{term.shortDescription}">
-			<br><span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
-		</f:if>
-		<f:if condition="{term.timestamp}">
-			<br><span><strong><f:translate key="label.lastModified" />: </strong> <f:format.date format="Y-m-d">{term.timestamp}</f:format.date></span>
-		</f:if>
-	</header>
-	<hr>
-	<div class="tx_ecomglossary-term-description">
-		<f:format.html>{term.description}</f:format.html>
-	</div>
-	<hr>
-	<div class="row">
-		<f:if condition="{term.relatedTerms}">
-			<div class="col-md-6 tx_ecomglossary-term-related">
-				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" />:</strong></p>
-				<ul class="list">
-					<f:for each="{term.relatedTerms}" as="relatedTerm">
-						<f:if condition="{term.uid} != {relatedTerm.uid}">
-							<li>
-								<f:if condition="{relatedTerm.externalLink}">
-									<f:then><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
-									<f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
-								</f:if>
-							</li>
-						</f:if>
-					</f:for>
-				</ul>
-			</div>
-		</f:if>
-		<f:if condition="{term.sources}">
-			<div class="col-md-6 tx_ecomglossary-term-sources">
-				<p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" />:</strong></p>
-				<ul class="list">
-					<f:for each="{term.sources -> f:ecom.explode(delimiter:'\n')}" as="source">
-						<li><f:link.typolink parameter="{source}" target="_blank" /></li>
-					</f:for>
-				</ul>
-			</div>
-		</f:if>
-	</div>
+    <header>
+        <h2>{term.title}</h2>
+        <f:if condition="{term.termType}">
+            <span><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></span>
+        </f:if>
+        <f:if condition="{term.shortDescription}">
+            <br><span><strong><f:translate key="tx_ecomglossary_domain_model_term.short_description" />: </strong>{term.shortDescription}</span>
+        </f:if>
+        <f:if condition="{term.timestamp}">
+            <br><span><strong><f:translate key="label.lastModified" />: </strong> <f:format.date format="Y-m-d">{term.timestamp}</f:format.date></span>
+        </f:if>
+    </header>
+    <hr>
+    <div class="tx_ecomglossary-term-description">
+        <f:format.html>{term.description}</f:format.html>
+    </div>
+    <hr>
+    <div class="row">
+        <f:if condition="{term.relatedTerms}">
+            <div class="col-md-6 tx_ecomglossary-term-related">
+                <p><strong><f:translate key="tx_ecomglossary_domain_model_term.related_terms" />:</strong></p>
+                <ul class="list">
+                    <f:for each="{term.relatedTerms}" as="relatedTerm">
+                        <f:if condition="{term.uid} != {relatedTerm.uid}">
+                            <li>
+                                <f:if condition="{relatedTerm.externalLink}">
+                                    <f:then><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action> <small>[<f:translate key="tx_ecomglossary_domain_model_term.external_link" />]</small></f:then>
+                                    <f:else><f:link.action action="show" arguments="{term : relatedTerm}">{relatedTerm.title}</f:link.action></f:else>
+                                </f:if>
+                            </li>
+                        </f:if>
+                    </f:for>
+                </ul>
+            </div>
+        </f:if>
+        <f:if condition="{term.sources}">
+            <div class="col-md-6 tx_ecomglossary-term-sources">
+                <p><strong><f:translate key="tx_ecomglossary_domain_model_term.sources" />:</strong></p>
+                <ul class="list">
+                    <f:for each="{term.sources -> f:ecom.explode(delimiter:'\n')}" as="source">
+                        <li><f:link.typolink parameter="{source}" target="_blank" /></li>
+                    </f:for>
+                </ul>
+            </div>
+        </f:if>
+    </div>
 </article>

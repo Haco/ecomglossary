@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="es" datatype="plaintext" original="messages" date="2015-03-09T08:27:23Z">
-		<header>
-			<generator>LFEditor</generator>
-			<authorName>Nicolas Scheidler</authorName>
-			<authorEmail>nicolas.scheidler@ecom-ex.com</authorEmail>
-		</header>
-		<body>
-		<trans-unit id="back" approved="yes" xml:space="preserve">
-			<source>Back</source>
-			<target>Atrás</target>
-		</trans-unit>
-		<trans-unit id="error.forbiddenFilter" approved="yes" xml:space="preserve">
-			<source>Only the characters [A-z] or [0-9] are allowed for the filter.</source>
-			<target>El filtro solo acepta los caracteres [A-z] o [0-9].</target>
-		</trans-unit>
-		<trans-unit id="error.forbiddenFilter.heading" approved="yes" xml:space="preserve">
-			<source>Nice Try.</source>
-			<target>Nice Try.</target>
-		</trans-unit>
-		<trans-unit id="error.noTerms" approved="yes" xml:space="preserve">
-			<source>No terms found. You searched for:</source>
-			<target>No se encontraron términos. Usted buscó:</target>
-		</trans-unit>
-		<trans-unit id="error.searchResult" approved="yes" xml:space="preserve">
-			<source>Search Result</source>
-			<target>Resultados de búsqueda</target>
-		</trans-unit>
-		<trans-unit id="filterBy" approved="yes" xml:space="preserve">
-			<source>Active filter:</source>
-			<target>Filtro activo:</target>
-		</trans-unit>
-		<trans-unit id="filterTerms" approved="yes" xml:space="preserve">
-			<source>Filter terms by character:</source>
-			<target>Filtrar términos por carácter:</target>
-		</trans-unit>
-		<trans-unit id="form.search" approved="yes" xml:space="preserve">
-			<source>Search</source>
-			<target>Buscar</target>
-		</trans-unit>
-		<trans-unit id="label.default" approved="yes" xml:space="preserve">
-			<source>[Default]</source>
-			<target>[Valor predeterminado]</target>
-		</trans-unit>
-		<trans-unit id="label.lastModified" approved="yes" xml:space="preserve">
-			<source>Last modified</source>
-			<target>Última modificación</target>
-		</trans-unit>
-		<trans-unit id="label.reset" approved="yes" xml:space="preserve">
-			<source>Reset Search</source>
-			<target>Restablecer búsqueda</target>
-		</trans-unit>
-		<trans-unit id="learnMore" approved="yes" xml:space="preserve">
-			<source>Learn more</source>
-			<target>Más información</target>
-		</trans-unit>
-		<trans-unit id="paginator.itemsPerPage" approved="yes" xml:space="preserve">
-			<source>Items per page</source>
-			<target>Elementos por página</target>
-		</trans-unit>
-		<trans-unit id="paginator.showResultRange" approved="yes" xml:space="preserve">
-			<source>Showing terms %1$s to %2$s of %3$s.</source>
-			<target>Se muestran %1$s a %2$s términos de %3$s.</target>
-		</trans-unit>
-		<trans-unit id="search.placeholder" approved="yes" xml:space="preserve">
-			<source>Enter your search term...</source>
-			<target>Introduzca el término de búsqueda...</target>
-		</trans-unit>
-		<trans-unit id="showAllEntries" approved="yes" xml:space="preserve">
-			<source>Show all entries</source>
-			<target>Mostrar todas las entradas</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term" approved="yes" xml:space="preserve">
-			<source>Term</source>
-			<target>Término</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.description" approved="yes" xml:space="preserve">
-			<source>Description</source>
-			<target>Descripción</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.external_link" approved="yes" xml:space="preserve">
-			<source>External Link</source>
-			<target>Enlace externo</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
-			<source>Related Terms</source>
-			<target>Términos relacionados</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.short_description" approved="yes" xml:space="preserve">
-			<source>Short Description</source>
-			<target>Breve descripción</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.sources" approved="yes" xml:space="preserve">
-			<source>List of references</source>
-			<target>Lista de referencias</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.term_type" approved="yes" xml:space="preserve">
-			<source>Type</source>
-			<target>Tipo</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.1" approved="yes" xml:space="preserve">
-			<source>Language</source>
-			<target>Idioma</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.2" approved="yes" xml:space="preserve">
-			<source>Definition</source>
-			<target>Definición</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.3" approved="yes" xml:space="preserve">
-			<source>Acronym</source>
-			<target>Acrónimo</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.term_type.4" approved="yes" xml:space="preserve">
-			<source>Abbreviation</source>
-			<target>Abreviatura</target>
-		</trans-unit>
-		<trans-unit id="tx_ecomglossary_domain_model_term.title" approved="yes" xml:space="preserve">
-			<source>Title</source>
-			<target>Título</target>
-		</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" target-language="es" datatype="plaintext" original="messages" date="2015-03-09T08:27:23Z">
+        <header>
+            <generator>LFEditor</generator>
+            <authorName>Nicolas Scheidler</authorName>
+            <authorEmail>nicolas.scheidler@ecom-ex.com</authorEmail>
+        </header>
+        <body>
+        <trans-unit id="back" approved="yes" xml:space="preserve">
+            <source>Back</source>
+            <target>Atrás</target>
+        </trans-unit>
+        <trans-unit id="error.forbiddenFilter" approved="yes" xml:space="preserve">
+            <source>Only the characters [A-z] or [0-9] are allowed for the filter.</source>
+            <target>El filtro solo acepta los caracteres [A-z] o [0-9].</target>
+        </trans-unit>
+        <trans-unit id="error.forbiddenFilter.heading" approved="yes" xml:space="preserve">
+            <source>Nice Try.</source>
+            <target>Nice Try.</target>
+        </trans-unit>
+        <trans-unit id="error.noTerms" approved="yes" xml:space="preserve">
+            <source>No terms found. You searched for:</source>
+            <target>No se encontraron términos. Usted buscó:</target>
+        </trans-unit>
+        <trans-unit id="error.searchResult" approved="yes" xml:space="preserve">
+            <source>Search Result</source>
+            <target>Resultados de búsqueda</target>
+        </trans-unit>
+        <trans-unit id="filterBy" approved="yes" xml:space="preserve">
+            <source>Active filter:</source>
+            <target>Filtro activo:</target>
+        </trans-unit>
+        <trans-unit id="filterTerms" approved="yes" xml:space="preserve">
+            <source>Filter terms by character:</source>
+            <target>Filtrar términos por carácter:</target>
+        </trans-unit>
+        <trans-unit id="form.search" approved="yes" xml:space="preserve">
+            <source>Search</source>
+            <target>Buscar</target>
+        </trans-unit>
+        <trans-unit id="label.default" approved="yes" xml:space="preserve">
+            <source>[Default]</source>
+            <target>[Valor predeterminado]</target>
+        </trans-unit>
+        <trans-unit id="label.lastModified" approved="yes" xml:space="preserve">
+            <source>Last modified</source>
+            <target>Última modificación</target>
+        </trans-unit>
+        <trans-unit id="label.reset" approved="yes" xml:space="preserve">
+            <source>Reset Search</source>
+            <target>Restablecer búsqueda</target>
+        </trans-unit>
+        <trans-unit id="learnMore" approved="yes" xml:space="preserve">
+            <source>Learn more</source>
+            <target>Más información</target>
+        </trans-unit>
+        <trans-unit id="paginator.itemsPerPage" approved="yes" xml:space="preserve">
+            <source>Items per page</source>
+            <target>Elementos por página</target>
+        </trans-unit>
+        <trans-unit id="paginator.showResultRange" approved="yes" xml:space="preserve">
+            <source>Showing terms %1$s to %2$s of %3$s.</source>
+            <target>Se muestran %1$s a %2$s términos de %3$s.</target>
+        </trans-unit>
+        <trans-unit id="search.placeholder" approved="yes" xml:space="preserve">
+            <source>Enter your search term...</source>
+            <target>Introduzca el término de búsqueda...</target>
+        </trans-unit>
+        <trans-unit id="showAllEntries" approved="yes" xml:space="preserve">
+            <source>Show all entries</source>
+            <target>Mostrar todas las entradas</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term" approved="yes" xml:space="preserve">
+            <source>Term</source>
+            <target>Término</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.description" approved="yes" xml:space="preserve">
+            <source>Description</source>
+            <target>Descripción</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.external_link" approved="yes" xml:space="preserve">
+            <source>External Link</source>
+            <target>Enlace externo</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.related_terms" approved="yes" xml:space="preserve">
+            <source>Related Terms</source>
+            <target>Términos relacionados</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.short_description" approved="yes" xml:space="preserve">
+            <source>Short Description</source>
+            <target>Breve descripción</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.sources" approved="yes" xml:space="preserve">
+            <source>List of references</source>
+            <target>Lista de referencias</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.term_type" approved="yes" xml:space="preserve">
+            <source>Type</source>
+            <target>Tipo</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.term_type.1" approved="yes" xml:space="preserve">
+            <source>Language</source>
+            <target>Idioma</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.term_type.2" approved="yes" xml:space="preserve">
+            <source>Definition</source>
+            <target>Definición</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.term_type.3" approved="yes" xml:space="preserve">
+            <source>Acronym</source>
+            <target>Acrónimo</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.term_type.4" approved="yes" xml:space="preserve">
+            <source>Abbreviation</source>
+            <target>Abreviatura</target>
+        </trans-unit>
+        <trans-unit id="tx_ecomglossary_domain_model_term.title" approved="yes" xml:space="preserve">
+            <source>Title</source>
+            <target>Título</target>
+        </trans-unit>
+        </body>
+    </file>
 </xliff>
