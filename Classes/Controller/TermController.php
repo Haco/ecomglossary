@@ -215,8 +215,12 @@ class TermController extends ActionController
      * @param \Ecom\Ecomglossary\Domain\Model\Term $term
      * @return void
      */
-    public function showAction(\Ecom\Ecomglossary\Domain\Model\Term $term)
+    public function showAction(\Ecom\Ecomglossary\Domain\Model\Term $term = null)
     {
+        // Redirect to default action if no valid object is given
+        if (!$term instanceof \Ecom\Ecomglossary\Domain\Model\Term) {
+            $this->redirectToUri($this->uriBuilder->reset()->build());
+        }
         //  Handle term visits by session (unique & not excluded IPs)
         $visitedTermsFromSession = $this->feSession->get('visitedTerms');
         if ((!is_array($visitedTermsFromSession) || (is_array($visitedTermsFromSession) && !in_array($term->getUid(), $visitedTermsFromSession))) && !$this->isExcludedIp) {
