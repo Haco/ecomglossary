@@ -14,6 +14,9 @@ CREATE TABLE tx_ecomglossary_domain_model_term (
   external_link varchar(255) DEFAULT '' NOT NULL,
   related_terms int(11) unsigned DEFAULT '0' NOT NULL,
   visits int(11) unsigned DEFAULT '0' NOT NULL,
+  tx_realurl_pathsegment VARCHAR(255) DEFAULT '' NOT NULL,
+  meta_description text NOT NULL,
+  meta_title varchar(255) DEFAULT '' NOT NULL,
 
   tstamp int(11) unsigned DEFAULT '0' NOT NULL,
   crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -33,7 +36,6 @@ CREATE TABLE tx_ecomglossary_domain_model_term (
   t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
   t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 
-  sorting int(11) unsigned DEFAULT '0' NOT NULL,
   sys_language_uid int(11) DEFAULT '0' NOT NULL,
   l10n_parent int(11) DEFAULT '0' NOT NULL,
   l10n_diffsource mediumblob,
@@ -51,8 +53,7 @@ CREATE TABLE tx_ecomglossary_domain_model_term (
 CREATE TABLE tx_ecomglossary_term_term_mm (
   uid_local int(11) unsigned DEFAULT '0' NOT NULL,
   uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-  sorting int(11) unsigned DEFAULT '0' NOT NULL,
-  sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+  sorting int(11) DEFAULT '0' NOT NULL,
 
   KEY uid_local (uid_local),
   KEY uid_foreign (uid_foreign)

@@ -16,14 +16,10 @@ plugin.tx_ecomglossary {
     settings {
         # cat=plugin.tx_ecomglossary/enable/a; type=boolean; label=Empty Letter Navigation: Even show the letters without term results.
         showEmptyLetters = 1
-        # cat=plugin.tx_ecomglossary/enable/b; type=boolean; label=Pagebrowser Result Range: Displays the result range of the Paginator. (Display terms X to Y of Z)
-        displayResultRange = 1
         # cat=plugin.tx_ecomglossary/settings/c; type=int+; label=Pagebrowser maximum Page Links: Sets the maximum number of visible page links (at once) in the Paginator-Navigation. Leftover links replaced by "...".
         maximumNumberOfLinks = 5
-        # cat=plugin.tx_ecomglossary/settings/d; type=string; label=Override "TermsPerPage" Selectbox: Overrides "NumberOfTerms:Label" Option sets for the "Terms per Page" Select-Box. (e.g.: 0:Default,5:5,10:10,25:25). "0" is always the default value.
-        termsPerPageOptionSets =
         # cat=plugin.tx_ecomglossary/settings/e; type=int+; label=Pagebrowser Terms per page: Sets the default number of term entries per page.
-        termsPerPage = 15
+        termsPerPage = 10
         # cat=plugin.tx_ecomglossary/settings/f; type=boolean; label=Force TermsPerPage: Forces the number of term entries per page. Always overrides FE user input.
         forceTermsPerPage = 0
         # cat=plugin.tx_ecomglossary/settings/z; type=int+; label=Short Description Max Chars.: Max characters until crop (List View).

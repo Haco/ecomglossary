@@ -26,6 +26,10 @@ namespace Ecom\Ecomglossary\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+require \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('ecom_toolbox') . 'vendor/autoload.php';
+
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -57,12 +61,6 @@ class TermController extends ActionController
     protected $itemsPerPage = null;
 
     /**
-     * Pagination Option Set
-     * Holds the options for the itemsPerPage select box
-     */
-    protected $itemsPerPageOptionSets = null;
-
-    /**
      * feSession
      *
      * @var \Ecom\EcomToolbox\Domain\Session\FrontendSessionHandler
@@ -82,42 +80,20 @@ class TermController extends ActionController
         $this->feSession->setStorageKey($this->extensionName);
 
         // Explodes the developer IPs.
-        $excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], true) : array();
+        $excludedIpsArray = $this->settings['excludeIpsForVisits'] ? GeneralUtility::trimExplode(',', $this->settings['excludeIpsForVisits'], true) : [];
         if ($GLOBALS['_SERVER']['REMOTE_ADDR']) {
             $this->isExcludedIp = in_array($GLOBALS['_SERVER']['REMOTE_ADDR'], $excludedIpsArray) ? true : false;
         }
 
-        // Generates OptionSet for ItemsPerPage Selector-Box
-        if (!empty($this->settings['termsPerPageOptionSets'])) {
-            $itemsPerPageOptionsArray = array();
-
-            foreach (GeneralUtility::trimExplode(',', $this->settings['termsPerPageOptionSets'], true) as $option) {
-                $itemsPerPageOptionsArray[GeneralUtility::trimExplode(':', $option)[0]] = GeneralUtility::trimExplode(':', $option)[1];
-            }
-
-            $this->itemsPerPageOptionSets = $itemsPerPageOptionsArray;
-        } else {
-            // Generates the default OptionSet for ItemsPerPage
-            $this->itemsPerPageOptionSets = array(
-                0 => LocalizationUtility::translate('label.default', 'ecomglossary'),
-                5 => 5,
-                15 => 15,
-                25 => 25,
-                50 => 50
-            );
-        }
-
-        /**
-         * Get items per page by form select from paginator (Index View)
-         * @see \Ecom\Ecomglossary\ViewHelpers\Widget\Controller\PaginateController;
-         */
-        if (GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'] != '') {
-            $itemsPerPage = (int)GeneralUtility::_GP('tx_ecomglossary_ecomglossary')['itemsPerPage'];
+        // Items per Page
+        if ($this->request->hasArgument('termsPerPage') && ($itemsPerPage = (int)$this->request->getArgument('termsPerPage'))) {
             $this->feSession->store('itemsPerPage', $itemsPerPage);
-        }
-        if ($this->feSession->get('itemsPerPage') != '') {
+        } elseif ($this->feSession->get('itemsPerPage')) {
             $itemsPerPage = $this->feSession->get('itemsPerPage');
+        } else {
+            $itemsPerPage = $this->settings['termsPerPage'];
         }
+
         $this->itemsPerPage = $itemsPerPage;
     }
 
@@ -142,7 +118,7 @@ class TermController extends ActionController
          */
         $terms = $this->termRepository->findAll();
         // Generate Letter Navigation (all available terms / not modified)
-        $availableLetters = $terms->count() ? $this->generateLetterArrayFromList($terms, $this->settings['showEmptyLetters']) : null;
+        $availableLetters = $terms->count() ? $this->generateLetterArrayFromList($this->settings['showEmptyLetters']) : null;
 
         /**
          * Search Request Handling
@@ -203,8 +179,7 @@ class TermController extends ActionController
                 'allTerms' => $this->termRepository->findAll(), // Always complete list
                 'filterByLetter' => $filterByLetter,
                 'letterList' => $availableLetters,
-                'termsPerPage' => $itemsPerPage = $this->settings['forceTermsPerPage'] ? $itemsPerPage = $this->settings['termsPerPage'] : (($this->itemsPerPage) ? $this->itemsPerPage : $this->settings['termsPerPage']),
-                'itemsPerPageOptionSets' => $this->itemsPerPageOptionSets
+                'termsPerPage' => $this->itemsPerPage
             )
         );
     }
@@ -219,16 +194,11 @@ class TermController extends ActionController
     {
         // Redirect to default action if no valid object is given
         if (!$term instanceof \Ecom\Ecomglossary\Domain\Model\Term) {
-            $this->redirectToUri($this->uriBuilder->reset()->build());
+            $this->redirectToUri($this->uriBuilder->setUseCacheHash(false)->reset()->build());
         }
-        //  Handle term visits by session (unique & not excluded IPs)
-        $visitedTermsFromSession = $this->feSession->get('visitedTerms');
-        if ((!is_array($visitedTermsFromSession) || (is_array($visitedTermsFromSession) && !in_array($term->getUid(), $visitedTermsFromSession))) && !$this->isExcludedIp) {
-            $visitedTermsFromSession[] = $term->getUid();
-            $this->feSession->store('visitedTerms', $visitedTermsFromSession);
-            $term->setVisits($term->getVisits() + 1);
-            $this->updateAction($term);
-        }
+
+        // Increase Views / Visits
+        $this->updateViews($term);
 
         // Prevent access to a single term (show action)
         // if the term uses an external link as description. Redirects directly to the external link
@@ -263,65 +233,69 @@ class TermController extends ActionController
     public function resetAction()
     {
         $this->feSession->store('searchTerm', null);
-        $this->redirect('list');
+        $this->redirectToUri($this->uriBuilder->setUseCacheHash(false)->uriFor('list'));
     }
 
     /**
-     * Update action
+     * Update Term Views/Visits
      *
      * @param \Ecom\Ecomglossary\Domain\Model\Term $term
      * @return void
      */
-    public function updateAction(\Ecom\Ecomglossary\Domain\Model\Term $term)
+    public function updateViews(\Ecom\Ecomglossary\Domain\Model\Term $term)
     {
-        $this->termRepository->update($term);
+        $crawlerDetect = new CrawlerDetect();
+        if (!$crawlerDetect->isCrawler()) {
+            //  Handle term visits by session (unique & not excluded IPs)
+            $visitedTermsFromSession = $this->feSession->get('visitedTerms');
+
+            if ((!is_array($visitedTermsFromSession) || (is_array($visitedTermsFromSession) && !in_array($term->getUid(), $visitedTermsFromSession))) && !$this->isExcludedIp) {
+                $visitedTermsFromSession[] = $term->getUid();
+                $this->feSession->store('visitedTerms', $visitedTermsFromSession);
+                $term->setVisits($term->getVisits() + 1);
+                $this->termRepository->update($term);
+
+                /** @var PersistenceManager $persistenceManager */
+                $persistenceManager = $this->objectManager->get(PersistenceManager::class);
+                $persistenceManager->persistAll();
+            }
+        } else {
+            $this->feSession->delete('visitedTerms');
+        }
     }
 
     /**
      * Generates a letter list from A-Z 0-9 out of the term repository
      *
-     * @param \Ecom\Ecomglossary\Domain\Model\Term $domainModelObject
-     * @param bool $mergeWithEmptyLetters
+     * @param bool $showEmptyLetters
      * @return array
      */
-    public function generateLetterArrayFromList($domainModelObject, $mergeWithEmptyLetters = true)
+    public function generateLetterArrayFromList($showEmptyLetters = true)
     {
+        // Umlaute are automatically respected by RepositoryQuery
         $letterList = array();
+        $alphas = range('A', 'Z');
 
-        // Generate list with already available letters
-        foreach ($domainModelObject as $object) {
-            /** @var \Ecom\Ecomglossary\Domain\Model\Term $object */
-            $title = $object->getTitle();
-            $firstLetter = ucfirst(substr($this->convertUTF8toASCII($title), 0, 1));
-            if (preg_match('/[^A-Za-z]/', $firstLetter) || array_key_exists($firstLetter, $letterList)) {
-                if (preg_match('/[0-9]/', $firstLetter) && !array_key_exists('0-9', $letterList)) {
-                    $letterList['0-9'] = 'hasResult';
+        foreach ($alphas as $alpha) {
+            if (($amount = $this->termRepository->findByLeadingLetter($alpha)->count())) {
+                $letterList[$alpha] = 'hasResult';
+            } else {
+                if ($showEmptyLetters) {
+                    $letterList[$alpha] = 'empty';
                 }
-                continue;
             }
-            $letterList[$firstLetter] = 'hasResult';
         }
 
-        // Fill up array with the empty letters which are not currently used in DB
-        // For different styling via CSS, it adds the "empty"-value. (Editable in FLUID Condition => List view)
-        if ($mergeWithEmptyLetters) {
-            // Generate the complete alphabeth
-            // And merge with array of already available letters
-            $alphas = range('A', 'Z');
-            foreach ($alphas as $value) {
-                if (array_key_exists($value, $letterList)) continue;
-                $letterList[$value] = 'empty';
-            }
-
-            // Add the empty 0-9 range if not already exists
-            if (!array_key_exists('0-9', $letterList)) {
+        if ($this->termRepository->findAllWithLeadingNumber()->count()) {
+            $letterList['0-9'] = 'hasResult';
+        } else {
+            if ($showEmptyLetters) {
                 $letterList['0-9'] = 'empty';
             }
         }
 
         // Sort array A-Z
         ksort($letterList);
-
         return $letterList;
     }
 

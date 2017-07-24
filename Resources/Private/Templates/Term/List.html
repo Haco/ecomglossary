@@ -1,11 +1,11 @@
-{namespace ecomvh=Ecom\Ecomglossary\ViewHelpers}
-<f:layout name="Default" />
+<f:layout name="Default" xmlns:f="http://www.w3.org/1999/html"/>
 <f:section name="main">
 
     <f:render partial="Messaging/FlashMessage" arguments="{dismiss:1}" />
+
     <div class="tx_ecomglossary-list-view">
         <div class="tx_ecomglossary-header">
-            <f:form id="tx_ecomglossary-searchform" method="POST">
+            <f:form id="tx_ecomglossary-searchform" noCacheHash="1">
                 <div class="row">
                     <div class="col-md-6 col-sm-7 col-xs-12">
                         <div class="input-group">
@@ -16,73 +16,110 @@
                             </span>
                         </div>
                         <f:if condition="{searchTerm}">
-                            <f:link.action action="reset" class="tx_ecomglossary-search-reset"><f:translate key="label.reset" /></f:link.action>
+                            <f:link.action noCacheHash="1" action="reset" class="tx_ecomglossary-search-reset"><f:translate key="label.reset" /></f:link.action>
                             <div class="clearfix"></div>
                         </f:if>
                     </div>
-                </div>
-            </f:form>
-            <f:if condition="{letterList}">
-                <strong><f:translate key="filterTerms" /></strong>
-                <div class="tx_ecomglossary-letter-navigation" role="navigation">
-                    <f:for each="{letterList}" as="result" key="letter">
-                        <f:if condition="{0: result, 1:settings.showEmptyLetters} == {0: 'empty', 1: '1'}">
-                            <f:then>
-                                <span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
-                            </f:then>
-                            <f:else>
-                                <f:link.action action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
-                            </f:else>
-                        </f:if>
-                    </f:for>
-                    <div class="tx_ecomglossary-view-all-btn">
-                        <f:link.action action="reset" class="btn"><f:translate key="showAllEntries" /></f:link.action>
+
+                    <f:comment><!-- FILTER BUTTON --></f:comment>
+                    <div class="col-md-6 col-sm-5 col-xs-12">
+                        <div class="dropdown content-dropdown">
+                            <f:if condition="{0: filterByLetter} != {0: ''}">
+                                <f:then>
+                                    <button class="btn btn-success dropdown-toggle" type="button" id="tx_ecomglossary-filter-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span class="fa fa-filter"></span>
+                                        <f:translate key="filterBy" /> <strong>"{filterByLetter}"</strong>
+                                    </button>
+                                </f:then>
+                                <f:else>
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="tx_ecomglossary-filter-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span class="fa fa-filter"></span>
+                                        Filter
+                                    </button>
+                                </f:else>
+                            </f:if>
+
+                            <ul class="dropdown-menu" aria-labelledby="tx_ecomglossary-filter-dropdown-button">
+                                <li>
+                                    <div class="container-fluid">
+                                        <f:if condition="{letterList}">
+                                            <strong><f:translate key="filterTerms" /></strong>
+                                            <div class="tx_ecomglossary-letter-navigation" role="navigation">
+                                                <f:for each="{letterList}" as="result" key="letter">
+                                                    <f:if condition="{0: result, 1:settings.showEmptyLetters} == {0: 'empty', 1: '1'}">
+                                                        <f:then>
+                                                            <span class="tx_ecomglossary-empty-letter">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</span>
+                                                        </f:then>
+                                                        <f:else>
+                                                            <f:link.action noCacheHash="1" action="list" class="{f:if(condition: '{filterByLetter} == {letter}', then: 'active')}" arguments="{filterByLetter:letter}" title="{f:translate(key: 'filterBy')} {letter}">{f:if(condition: '{0: letter} == {0: \'0-9\'}', then: '0&#8209;9', else: letter)}</f:link.action>
+                                                        </f:else>
+                                                    </f:if>
+                                                </f:for>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <f:if condition="{0: filterByLetter} != {0: ''}">
+                                                <br />
+                                                <strong><f:translate key="filterBy" /> {filterByLetter}</strong> | <f:link.action action="reset" noCacheHash="1" class="btn btn-xs btn-default"><f:translate key="showAllEntries" /></f:link.action>
+                                            </f:if>
+                                        </f:if>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </f:if>
+            </f:form>
         </div>
+
         <hr>
+
         <f:if condition="{terms->f:count()} > 0">
             <f:then>
                 <div class="tx_ecomglossary-term-listing">
-                    <f:if condition="{0: filterByLetter} != {0: ''}">
-                        <strong><f:translate key="filterBy" /> {filterByLetter}</strong>
-                    </f:if>
-                    <ecomvh:widget.paginate objects="{terms}" as="paginatedTerms" itemsPerPageOptionSets="{itemsPerPageOptionSets}" configuration="{itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks, displayResultRange: settings.displayResultRange}">
-                        <ul class="tx_ecomglossary-term-listing-terms">
-                            <f:for each="{paginatedTerms}" as="term">
-                                <li>
-                                    <h3>
-                                        <f:link.action action="show" arguments="{term : term}">{term.title}</f:link.action>
-                                        <f:if condition="{term.externalLink}">
-                                            <span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
-                                        </f:if>
-                                    </h3>
-                                    <f:if condition="{term.termType}">
-                                        <small class="tx_ecomglossary-term-listing-type"><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></small>
-                                    </f:if>
-                                    <f:if condition="{term.shortDescription}">
-                                        <f:then>
-                                            <p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}
-                                                &nbsp;<f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action>
-                                            </p>
-                                        </f:then>
-                                        <f:else>
-                                            <f:if condition="{0: term.externalLink} == {0: ''}">
-                                                <f:if condition="{term.description}">
-                                                    <p class="tx_ecomglossary-shortdesc"><f:format.raw>{term.description -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</f:format.raw> <f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action></p>
-                                                </f:if>
+                    <f:form class="tx_ecomglossary-terms-per-page" noCacheHash="1">
+                        <label for="tx_ecomglossary-terms-per-page-select"><f:translate key="paginator.itemsPerPage" /></label>
+                        <f:form.select value="{termsPerPage}" name="termsPerPage" id="tx_ecomglossary-terms-per-page-select" options="{10:10, 30:30, 50:50, 9999:'{f:translate(key:\'showAllEntries\')}'}" additionalAttributes="{onchange: 'this.form.submit();'}" />
+                    </f:form>
+
+                    <div class="overview productGridView">
+                        <f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks}">
+                            <ul class="tx_ecomglossary-term-listing-terms">
+                                <f:for each="{paginatedTerms}" as="term">
+                                    <li>
+                                        <h3>
+                                            <f:link.action noCacheHash="1" action="show" arguments="{term : term}">{term.title}</f:link.action>
+                                            <f:if condition="{term.externalLink}">
+                                                <span class="tx_ecomglossary-term-external-desc"><f:translate key="tx_ecomglossary_domain_model_term.external_link" /> <i class="fa fa-external-link"></i></span>
                                             </f:if>
-                                        </f:else>
-                                    </f:if>
-                                </li>
-                            </f:for>
-                        </ul>
-                    </ecomvh:widget.paginate>
+                                        </h3>
+                                        <f:if condition="{term.termType}">
+                                            <small class="tx_ecomglossary-term-listing-type"><strong><f:translate key="tx_ecomglossary_domain_model_term.term_type" />: </strong><f:translate key="tx_ecomglossary_domain_model_term.term_type.{term.termType}" /></small>
+                                        </f:if>
+                                        <f:if condition="{term.shortDescription}">
+                                            <f:then>
+                                                <p class="tx_ecomglossary-shortdesc">{term.shortDescription -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}
+                                                    &nbsp;<f:link.action noCacheHash="1" action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action>
+                                                </p>
+                                            </f:then>
+                                            <f:else>
+                                                <f:if condition="{0: term.externalLink} == {0: ''}">
+                                                    <f:if condition="{term.description}">
+                                                        <p class="tx_ecomglossary-shortdesc"><f:format.raw>{term.description -> f:format.crop(maxCharacters: settings.shortDescMaxChars, append: settings.shortDescAppend)}</f:format.raw> <f:link.action action="show" arguments="{term : term}">[<f:translate key="learnMore" default="Learn more" />]</f:link.action></p>
+                                                    </f:if>
+                                                </f:if>
+                                            </f:else>
+                                        </f:if>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </f:widget.paginate>
+                    </div>
                 </div>
             </f:then>
             <f:else>
-                <f:link.action action="reset" class="btn btn-default"><i class="fa fa-align-justify fa-fw"></i> <f:translate key="showAllEntries" /></f:link.action>
+                <f:link.action noCacheHash="1" action="reset" class="btn btn-default"><i class="fa fa-align-justify fa-fw"></i> <f:translate key="showAllEntries" /></f:link.action>
             </f:else>
         </f:if>
     </div>
