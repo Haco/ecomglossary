@@ -140,6 +140,62 @@
     width: 400px;
 }
 
+
+
+/** Pagination **/
+/** TODO can be removed after CSS upgrade */
+.glossary-pagination-before-upgrade .f3-widget-paginator {
+    margin-top: 5px;
+    float: right;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li {
+    float: left;
+    line-height: 30px;
+    width: 30px;
+    background: #E7E9E8;
+    text-align: center;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li.next, .pagination li.next,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.prev, .pagination li.prev,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.previous, .pagination li.previous {
+    text-indent: -100px;
+    overflow: hidden;
+    background: url(/fileadmin/templates/images/sliderArrows.png);
+    background-position: -32px 0;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li.prev, .pagination li.prev,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.previous, .pagination li.previous {
+    background-position: -2px 0;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li.next:hover, .pagination li.next:hover {
+    background: url(/fileadmin/templates/images/sliderArrows.png);
+    background-position: -32px 0;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li.prev:hover, .pagination li.prev:hover,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.previous:hover , .pagination li.previous:hover {
+    background-image: url(/fileadmin/templates/images/sliderArrows.png);
+    background-position: -2px 0;
+}
+.f3-widget-paginator li a {
+    display: block;
+    color: #666;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li:hover, .pagination li:hover,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.current, .pagination li.current {
+    background: #0083CB;
+    color: white;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li:hover a, .pagination li:hover a,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.current a, .pagination li.current a {
+    color: #fff;
+}
+.glossary-pagination-before-upgrade .f3-widget-paginator li.first,
+.glossary-pagination-before-upgrade .f3-widget-paginator li.last {
+    display: none;
+}
+
 @media  (max-width: 991px) {
     .tx_ecomglossary-terms-per-page {
         float: none;

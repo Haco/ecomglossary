@@ -83,7 +83,7 @@
                         <f:form.select value="{termsPerPage}" name="termsPerPage" id="tx_ecomglossary-terms-per-page-select" options="{10:10, 30:30, 50:50, 9999:'{f:translate(key:\'showAllEntries\')}'}" additionalAttributes="{onchange: 'this.form.submit();'}" />
                     </f:form>
 
-                    <div class="overview productGridView">
+                    <div class="glossary-pagination-before-upgrade">
                         <f:widget.paginate objects="{terms}" as="paginatedTerms" configuration="{itemsPerPage: termsPerPage, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: settings.maximumNumberOfLinks}">
                             <ul class="tx_ecomglossary-term-listing-terms">
                                 <f:for each="{paginatedTerms}" as="term">
